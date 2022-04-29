@@ -1,0 +1,28 @@
+{
+  "name": "automated-journaling-and-trade-analytics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "16.15.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "build": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubryce/Automated-Journaling-and-Trade-Analytics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ubryce/Automated-Journaling-and-Trade-Analytics/issues"
+  },
+  "homepage": "https://github.com/ubryce/Automated-Journaling-and-Trade-Analytics#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
