@@ -1,10 +1,8 @@
 import React from "react";
-import logo from './logo.svg';
 import './App.css';
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-
-import Header from './header';
-import Footer from './footer';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Homepage from "./Pages/Homepage";
+import Tradespage from "./Pages/Tradespage";
 
 function App() {
 
@@ -17,18 +15,10 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <Header />
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            {!data ? "Loading..." : data}
-          </p>
-        </header>
-      </div>
-      <Footer />
-    </Router>
+    <Routes>
+      <Route path="/" element={<Homepage/>} />
+      <Route path="/trades" element={<Tradespage/>} />
+    </Routes>
   );
 }
 
