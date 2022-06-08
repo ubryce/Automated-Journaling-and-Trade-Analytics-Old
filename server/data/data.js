@@ -1,6 +1,7 @@
 const trades = [
     {
         isOpen: false,
+        tradeName: "btc long",
         user: 
             {
                 name: "Bryce Nguyen",
@@ -10,6 +11,7 @@ const trades = [
     },
     {
         isOpen: true,
+        tradeName: "btc short",
         user: 
             {
                 name: "Bryce Nguyen",

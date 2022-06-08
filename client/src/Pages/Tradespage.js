@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
-const Trades = () => {
+const Tradespage = () => {
+    const [trades, setTrades] = useState([]);
 
     const fetchTrades = async () => {
         const data = await axios.get('/api/trade')
         console.log(data);
+        setTrades(data.data);
     }
 
     // Whenever this component is rendered we call fetchTrades()
@@ -15,9 +17,11 @@ const Trades = () => {
 
     return (
         <div>
-            Trades
+            {trades.map((trade) => (
+                <div key={trade._id}>{trade.tradeName}</div>
+            ))}
         </div>
     )
 }
 
-export default Trades
+export default Tradespage
