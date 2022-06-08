@@ -1,7 +1,11 @@
 const path = require('path');
 const express = require("express");
-const PORT = process.env.PORT || 3001;
+const dotenv = require("dotenv");
 const app = express();
+
+dotenv.config();
+const PORT = process.env.PORT || 3001;
+const { trades } = require("./data/data");
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
@@ -14,10 +18,15 @@ app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
 });
 
-// All other GET requests not handled before will return our React app
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+app.get("/api/trade", (req, res) => {
+  res.send(trades);
 });
+app.get("/api/trade/:id", (req, res) => {
+  //console.log(req.params.id);
+  const singleTrade = trades.find(c=> c._id === req.params.id);
+  res.send(singleTrade);
+});
+
 
 app.listen(PORT, () => {
 console.log(`Server listening on ${PORT}`);
