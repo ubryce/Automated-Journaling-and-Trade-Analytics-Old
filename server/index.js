@@ -6,6 +6,9 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3001;
 const { trades } = require("./data/data");
+const connectDB = require('./config/db');
+
+connectDB()
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
