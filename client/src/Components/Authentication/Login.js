@@ -3,6 +3,9 @@ import { VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input"
 import { FormControl, FormLabel } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from "@chakra-ui/toast";
+import axios from 'axios';
 
 const Login = () => {
     
@@ -11,8 +14,51 @@ const Login = () => {
     const [ password, setPassword ] = useState();
 
     const handleClick = () => setShow(!show);
+    const navigate = useNavigate();
+    const toast = useToast();
 
-    const submitHandler = () => {};
+    const submitHandler = async () => {
+        if (!email || !password) {
+            toast({
+              title: "Please fill all fields",
+              status: "warning",
+              duration: 5000,
+              isClosable: true,
+              position: "bottom",
+            });
+            return;
+        }
+        try {
+            const config = {
+              headers: {
+                "Content-type": "application/json",
+              },
+            };
+            const { data } = await axios.post(
+                "/api/user/login",
+                { email, password },
+                config
+            );
+            toast({
+                title: "Login Successful",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            localStorage.setItem("userInfo", JSON.stringify(data));
+            navigate('/trades');
+        } catch (error) {
+            toast({
+              title: "Error Occured!",
+              description: error.response.data.message,
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+              position: "bottom",
+            });
+          }
+    };
 
     return (
         <VStack spacing="5px">
