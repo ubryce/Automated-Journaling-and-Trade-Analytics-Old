@@ -3,6 +3,9 @@ import { VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input"
 import { FormControl, FormLabel } from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/toast";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
 
@@ -11,10 +14,65 @@ const Signup = () => {
     const [ email, setEmail ] = useState();
     const [ confirmpassword, setConfirmpassword ] = useState();
     const [ password, setPassword ] = useState();
+    const toast = useToast();
+    const navigate = useNavigate();
 
     const handleClick = () => setShow(!show);
 
-    const submitHandler = () => {};
+    const submitHandler = async () => {
+        if (!name || !email || !password || !confirmpassword) {
+            toast({
+                title: "Please fill all fields",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            return;
+        }
+        if (password !== confirmpassword) {
+            toast({
+                title: "Passwords do not match",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            return;
+        }
+
+        try {
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "/api/user", 
+                {name,email,password},
+                config
+            );
+            toast({
+                title: "Registration Successful",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            localStorage.setItem('userInfo', JSON.stringify(data));
+            navigate('/trades')
+        } catch (error) {
+            toast({
+                title: "Error Occured",
+                description: error.response.data.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+        }
+
+    };
 
     return (
         <VStack spacing="5px">
