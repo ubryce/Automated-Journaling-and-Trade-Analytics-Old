@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 
 const tradeModel = mongoose.Schema(
     {
-        user:
-            {
-                type: mongoose.Schema.Types.ObjectId, 
-                ref:"User"
-            },
+        user:{
+            type: mongoose.Schema.Types.ObjectId, 
+            ref:"User"
+        },
+        journal:{
+            type: mongoose.Schema.Types.ObjectId, 
+            ref:"Journal"
+        },
         openDate:{type: Date},
         closeDate:{type: Date},
         side:{type: String},
@@ -22,13 +25,18 @@ const tradeModel = mongoose.Schema(
         plannedRisk:{type: Int16Array},
         finalRisk:{type: Int16Array},
         isOpen:{type: Boolean, default: true},
-        tags:{type: String},
+        tags:[
+            {type: String},
+        ],
         thread:[
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Thread",
+                content: {type: String},
+                picture: {type: String},
             }
         ]
+    },
+    {
+        timestamps: true,
     }
 );
 
