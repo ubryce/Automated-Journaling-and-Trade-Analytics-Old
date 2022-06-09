@@ -10,6 +10,7 @@ const connectDB = require('./config/db');
 connectDB()
 
 const userRoutes = require('./routes/userRoutes');
+const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 
 // To accept JSON data
 app.use(express.json()); 
@@ -23,6 +24,8 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 //      respond (using "res") with our JSON data
 app.use('/api/user', userRoutes)
 
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
 console.log(`Server listening on ${PORT}`);
