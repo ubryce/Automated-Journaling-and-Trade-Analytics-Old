@@ -2,6 +2,9 @@ const asyncHandler = require('express-async-handler');
 const Journal = require('../models/journalModel');
 const User = require('../models/userModel');
 
+// TODO
+// allow user to create a journal alone in accessJournal
+
 // Current user sends their user id
 const accessJournal = asyncHandler(async (req, res) => {
     const { userId } = req.body;
@@ -69,4 +72,36 @@ const fetchJournals = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {accessJournal, fetchJournals};
+const createGroupJournal = asyncHandler(async (req, res) => {
+    if ( !req.body.users || !req.body.name ) {
+        return res.status(400).send({messgae: "Please fill all fields"});
+    }
+    var users = JSON.parse(req.body.users);
+
+    if (users.length < 2) {
+        return res
+            .status(400)
+            .send("More than 2 users are required to form a group chat");
+    }
+
+    users.push(req.user);
+
+    try {
+        const groupJournal = await Journal.create({
+            journalName: req.body.name,
+            users: users,
+            journalAdmin: req.user,
+        });
+
+        const fullGroupJournal = await Journal.findOne({ _id: groupJournal._id })
+            .populate("users", "-password")
+            .populate("journalAdmin", "-password");
+        
+        res.status(200).json(fullGroupJournal);
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    }
+});
+
+module.exports = {accessJournal, fetchJournals, createGroupJournal};
