@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Journal = require('../models/journalModel');
+const { update } = require('../models/userModel');
 const User = require('../models/userModel');
 
 // TODO
@@ -104,4 +105,27 @@ const createGroupJournal = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {accessJournal, fetchJournals, createGroupJournal};
+const renameJournal = asyncHandler(async (req, res) => {
+    const { journalId, journalName } = req.body;
+
+    const updatedJournal = await Journal.findByIdAndUpdate(
+        journalId,
+        {
+            journalName: journalName,
+        },
+        {
+            new: true,
+        }
+    )
+        .populate("users", "-password")
+        .populate("journalAdmin", "-password");
+
+    if (!updatedJournal) {
+        res.status(404);
+        throw new Error("Journal not found");
+    } else {
+        res.json(updatedJournal);
+    }
+});
+
+module.exports = {accessJournal, fetchJournals, createGroupJournal, renameJournal};
