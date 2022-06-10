@@ -49,4 +49,24 @@ const accessJournal = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {accessJournal};
+const fetchJournals = asyncHandler(async (req, res) => {
+    try {
+        Journal.find({users: {$elemMatch: {$eq: req.user._id}}})
+            .populate("users", "-password")
+            .populate("journalAdmin", "-password")
+            .populate("latestTrade")
+            .sort({updatedAt: -1})
+            .then( async (results) => {
+                results = await User.populate(results, {
+                    path: "latestTrade.user",
+                    select: "name email"
+                });
+                res.status(200).send(results);
+            });
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    }
+});
+
+module.exports = {accessJournal, fetchJournals};
