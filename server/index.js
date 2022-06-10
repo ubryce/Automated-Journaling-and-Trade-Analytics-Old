@@ -10,6 +10,7 @@ const connectDB = require('./config/db');
 connectDB()
 
 const userRoutes = require('./routes/userRoutes');
+const tradeRoutes = require('./routes/tradeRoutes');
 const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 
 // To accept JSON data
@@ -22,7 +23,8 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 // creating an end point "api"
 //  If our react app makes a GET request to the route "api"
 //      respond (using "res") with our JSON data
-app.use('/api/user', userRoutes)
+app.use('/api/user', userRoutes);
+app.use('/api/trade', tradeRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
