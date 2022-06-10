@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 
-const journalModel = mongoose.Schema({
-    user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
-    journalName: {type: String},
-    journalDescription: {type: String},
-    journalExchanges:[
-        {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: "Exchange"
-        },
-    ],
+const journalModel = mongoose.Schema(
+    {
+        users: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+        journalName: {type: String},
+        journalDescription: {type: String},
+        journalExchanges:[
+            {
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: "Exchange"
+            },
+        ],
+        latestTrade: {type: mongoose.Schema.Types.ObjectId, ref: "Trade"},
+        journalAdmin: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     },
     {
         timestamps: true,

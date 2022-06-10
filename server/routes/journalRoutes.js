@@ -1,9 +1,9 @@
 const express = require('express');
 const { protect } = require('../middleware/authMiddleware');
-
+const { accessJournal } = require("../controllers/journalControllers")
 const router = express.Router();
 
-//router.route('/').post(protect, accessTrade);
+router.route('/').post(protect, accessJournal);
 //router.route('/').get(protect, fetchTrades);
 //router.route('/journal').post(protect, createJournal);
 //router.route('/rename').put(protect, renameJournal);
