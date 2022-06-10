@@ -128,4 +128,42 @@ const renameJournal = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {accessJournal, fetchJournals, createGroupJournal, renameJournal};
+const addToJournal = asyncHandler(async (req, res) => {
+    const { journalId, userId } = req.body;
+
+    const added = await Journal.findByIdAndUpdate( journalId, { 
+        $push: {users: userId},
+        },
+        { new: true, }
+    )
+        .populate("users", "-password")
+        .populate("journalAdmin", "-password");
+
+    if (!added) {
+        res.status(404);
+        throw new Error("Journal not found");
+    } else {
+        res.json(added);
+    }
+});
+
+const removeFromJournal = asyncHandler(async (req, res) => {
+    const { journalId, userId } = req.body;
+
+    const removed = await Journal.findByIdAndUpdate( journalId, { 
+        $pull: {users: userId},
+        },
+        { new: true, }
+    )
+        .populate("users", "-password")
+        .populate("journalAdmin", "-password");
+
+    if (!removed) {
+        res.status(404);
+        throw new Error("Journal not found");
+    } else {
+        res.json(removed);
+    }
+});
+
+module.exports = {accessJournal, fetchJournals, createGroupJournal, renameJournal, addToJournal, removeFromJournal};
