@@ -60,7 +60,7 @@ const Signup = () => {
                 position: "bottom",
             });
             localStorage.setItem('userInfo', JSON.stringify(data));
-            navigate('/trades')
+            navigate('/journals')
         } catch (error) {
             toast({
                 title: "Error Occured",
