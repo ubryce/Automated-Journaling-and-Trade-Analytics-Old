@@ -2,14 +2,13 @@ import React, { useEffect } from "react"
 import { Container, Box, Text, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import Login from '../Components/Authentication/Login'
 import Signup from '../Components/Authentication/Signup'
+import { useNavigate } from 'react-router-dom';
 
 const Homepage = () => {
-
+    // Check is user is logged in
     const navigate = useNavigate();
-
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("userInfo"));
-
         if (user) navigate('/journals');
     }, [navigate]);
 
