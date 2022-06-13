@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from "react"
 import { JournalState } from "../Context/JournalProvider";
 import SideDrawer from '../Components/misc/SideDrawer';
