@@ -5,6 +5,7 @@ import { Button } from "@chakra-ui/button";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons"
 import { JournalState } from '../../Context/JournalProvider';
 import { Avatar } from "@chakra-ui/avatar";
+import ProfileModal from './ProfileModal';
 
 const SideDrawer = () => {
     const [ search, setSearch ] = useState("");
@@ -49,9 +50,11 @@ const SideDrawer = () => {
                             <Avatar size="sm" cursor="pointer" name={user.name} />
                         </MenuButton>
                         <MenuList>
-                            <MenuItem>Profile</MenuItem>
-                            <MenuDivider></MenuDivider>
-                            <MenuItem>Logout</MenuItem>
+                            <ProfileModal user={user}>
+                                <MenuItem>Profile</MenuItem>
+                            </ProfileModal>
+                                <MenuDivider></MenuDivider>
+                                <MenuItem>Logout</MenuItem>
                         </MenuList>
                     </Menu>
                 </div>
