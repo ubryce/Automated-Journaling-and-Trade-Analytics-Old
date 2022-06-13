@@ -6,6 +6,7 @@ import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons"
 import { JournalState } from '../../Context/JournalProvider';
 import { Avatar } from "@chakra-ui/avatar";
 import ProfileModal from './ProfileModal';
+import { useNavigate } from 'react-router-dom';
 
 const SideDrawer = () => {
     const [ search, setSearch ] = useState("");
@@ -14,6 +15,12 @@ const SideDrawer = () => {
     const [ loadingJournal, setLoadingJournal ] = useState();
 
     const { user } = JournalState();
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        localStorage.removeItem("userInfo");
+        navigate('/');
+    }
 
     return (
         <>
@@ -54,7 +61,7 @@ const SideDrawer = () => {
                                 <MenuItem>Profile</MenuItem>
                             </ProfileModal>
                                 <MenuDivider></MenuDivider>
-                                <MenuItem>Logout</MenuItem>
+                                <MenuItem onClick={logoutHandler}>Logout</MenuItem>
                         </MenuList>
                     </Menu>
                 </div>
