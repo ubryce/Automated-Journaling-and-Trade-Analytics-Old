@@ -9,13 +9,13 @@ import JournalProvider from './Context/JournalProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <JournalProvider>
-    <ChakraProvider>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-    </ChakraProvider>
-  </JournalProvider>
+  <ChakraProvider>
+    <BrowserRouter>
+      <JournalProvider>
+        <App />
+      </JournalProvider>
+    </BrowserRouter>
+  </ChakraProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
