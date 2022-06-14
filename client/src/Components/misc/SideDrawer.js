@@ -1,25 +1,79 @@
 import React, { useState } from 'react';
 import { Box, Text } from "@chakra-ui/layout";
-import { Menu, MenuButton, Tooltip, MenuList, MenuItem, MenuDivider } from "@chakra-ui/react";
+import { Menu, MenuButton, Tooltip, MenuList, MenuItem, MenuDivider, useToast, Input } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
+import { useDisclosure } from "@chakra-ui/hooks";
+import {
+    Drawer,
+    DrawerBody,
+    DrawerContent,
+    DrawerHeader,
+    DrawerOverlay,
+  } from "@chakra-ui/modal";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons"
 import { JournalState } from '../../Context/JournalProvider';
 import { Avatar } from "@chakra-ui/avatar";
 import ProfileModal from './ProfileModal';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import JournalLoading from '../JournalLoading';
+import UserListItem from "../UserAvatar/UserListItem";
 
 const SideDrawer = () => {
     const [ search, setSearch ] = useState("");
     const [ searchResult, setSearchResult ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ loadingJournal, setLoadingJournal ] = useState();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     const { user } = JournalState();
     const navigate = useNavigate();
+    const toast = useToast();
 
     const logoutHandler = () => {
         localStorage.removeItem("userInfo");
         navigate('/');
+    }
+
+    const handleSearch = async () => {
+        if (!search) {
+            toast({
+                title: "Please enter something",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "top-left",
+            });
+        }
+
+        try {
+            setLoading(true)
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.get(`/api/user?search=${search}`, config)
+
+            setLoading(false);
+            setSearchResult(data);
+        
+        } catch (error) {
+            toast({
+                title: "Error Occured!",
+                description: "Failed to Load the Search Results",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-left",
+            });
+        }
+    };
+
+    const accessJournal = (userId) => {
+
     }
 
     return (
@@ -33,7 +87,7 @@ const SideDrawer = () => {
                 p="5px 10px 5px 10px"
                 borderWidth="5px">
                 <Tooltip label="Search users" hasArrow placement="bottom-end">
-                    <Button variant="ghost">
+                    <Button variant="ghost" onClick={onOpen}>
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <Text d={{base:"none", md:"flex"}} px="4">
                             Search User
@@ -67,6 +121,37 @@ const SideDrawer = () => {
                 </div>
 
             </Box>
+
+            <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
+                <DrawerOverlay/>
+                <DrawerContent>
+                    <DrawerHeader borderBottomWidth="1px">Search users</DrawerHeader>
+                    <DrawerBody>
+                        <Box d="flex" pb={2}>
+                            <Input
+                                placeholder="Search by name or email"
+                                mr={2}
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}/>
+                            <Button onClick={handleSearch}>Go</Button>
+                        </Box>
+                        {loading ? (
+                            <JournalLoading/>
+                        ) : (
+                            searchResult?.map((user) => (
+                                
+                                <UserListItem 
+                                    key={user._id}
+                                    user={user}
+                                    handleFunction={() => accessJournal(user._id)}
+                                />
+                            ))
+                        ) }
+                    </DrawerBody>
+                </DrawerContent>
+            </Drawer>
+
+
         </>
     )
 };
