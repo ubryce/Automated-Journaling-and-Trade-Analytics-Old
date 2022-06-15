@@ -9,7 +9,7 @@ const JournalProvider = ({children}) => {
     const [user, setUser] = useState();
     const navigate = useNavigate();
     const [selectedJournal, setSelectedJournal] = useState();
-    const [journals, setJournals] = useState();
+    const [journals, setJournals] = useState([]);
 
     // Whenever a user logs in the user info is stored into the local storage
     // we can take this and 
