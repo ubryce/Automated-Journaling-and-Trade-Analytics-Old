@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./misc/ProfileModal";
+import UpdateJournalModal from './misc/updateJournalModal';
 
 
 const SingleJournal = ({fetchAgain, setFetchAgain}) => {
@@ -30,7 +31,22 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                             icon={<ArrowBackIcon/>}
                             onClick={() => setSelectedJournal("")}/>
                         {selectedJournal.journalName.toUpperCase()}
+                        <UpdateJournalModal
+                            fetchAgain={fetchAgain}
+                            setFetchAgain={setFetchAgain}/>
                     </Text>
+                    <Box
+                        d="flex"
+                        flexDir="column"
+                        justifyContent="flex-end"
+                        p={3}
+                        bg="#E8E8E8"
+                        w='100%'
+                        h='100%'
+                        borderRadius='lg'
+                        overflowY="hidden">
+
+                    </Box>
                 </>
             ) : (
                 <Box d="flex" alignItems="center" justifyContent='center' h='100%'>
