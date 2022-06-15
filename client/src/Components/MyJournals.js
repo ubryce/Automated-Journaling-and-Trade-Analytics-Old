@@ -6,6 +6,7 @@ import { AddIcon } from "@chakra-ui/icons";
 import { Box, Stack, Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 import JournalLoading from './JournalLoading';
+import GroupJournalModal from './misc/GroupJournalModal';
 
 const MyJournal = () => {
     const [ loggedUser, setLoggedUser ] = useState();
@@ -60,12 +61,14 @@ const MyJournal = () => {
                 justifyContent="space-between"
                 alignItems="center">
                 My Journals
-                <Button
-                    d="flex"
-                    fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-                    rightIcon={<AddIcon />}>
-                    New Journal
-                </Button>
+                <GroupJournalModal>
+                    <Button
+                        d="flex"
+                        fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+                        rightIcon={<AddIcon />}>
+                        New Journal
+                    </Button>
+                </GroupJournalModal>
             </Box>
             <Box
                 d="flex"
