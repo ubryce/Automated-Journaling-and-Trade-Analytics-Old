@@ -11,6 +11,7 @@ connectDB()
 
 const userRoutes = require('./routes/userRoutes');
 const journalRoutes = require('./routes/journalRoutes');
+const tradeRoutes = require('./routes/tradeRoutes');
 const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 
 // To accept JSON data
@@ -21,6 +22,7 @@ app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use('/api/user', userRoutes);
 app.use('/api/journal', journalRoutes);
+app.use('/api/trade', tradeRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
