@@ -8,6 +8,8 @@ const JournalProvider = ({children}) => {
     // Will be accessible everywhere since its in the provider
     const [user, setUser] = useState();
     const navigate = useNavigate();
+    const [selectedJournal, setSelectedJournal] = useState();
+    const [journals, setJournals] = useState();
 
     // Whenever a user logs in the user info is stored into the local storage
     // we can take this and 
@@ -25,7 +27,7 @@ const JournalProvider = ({children}) => {
 
     // value prop is where we define it is used throughout the app
     return(
-        <JournalContext.Provider value ={{ user, setUser }}>{children}</JournalContext.Provider>
+        <JournalContext.Provider value ={{ user, setUser, selectedJournal, setSelectedJournal, journals, setJournals }}>{children}</JournalContext.Provider>
     )
 };
 

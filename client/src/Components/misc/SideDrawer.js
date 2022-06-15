@@ -26,7 +26,7 @@ const SideDrawer = () => {
     const [ loadingJournal, setLoadingJournal ] = useState();
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const { user } = JournalState();
+    const { user, setSelectedJournal, journals, setJournals } = JournalState();
     const navigate = useNavigate();
     const toast = useToast();
 
@@ -72,9 +72,33 @@ const SideDrawer = () => {
         }
     };
 
-    const accessJournal = (userId) => {
+    const accessJournal = async (userId) => {
+        try {
+            setLoadingJournal(true);
 
-    }
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.post('/api/journal', { userId }, config);
+            
+            setSelectedJournal(data);
+            setLoadingJournal(false);
+            onClose();
+        } catch (error) {
+            toast({
+                title: "Error fetching journal",
+                description: error.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-left",
+            });
+        };
+    };
 
     return (
         <>
@@ -139,7 +163,6 @@ const SideDrawer = () => {
                             <JournalLoading/>
                         ) : (
                             searchResult?.map((user) => (
-                                
                                 <UserListItem 
                                     key={user._id}
                                     user={user}
