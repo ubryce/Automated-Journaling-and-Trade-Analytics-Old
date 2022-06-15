@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Text } from "@chakra-ui/layout";
-import { Menu, MenuButton, Tooltip, MenuList, MenuItem, MenuDivider, useToast, Input } from "@chakra-ui/react";
+import { Menu, MenuButton, Tooltip, MenuList, MenuItem, MenuDivider, useToast, Input, Spinner } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import {
@@ -84,6 +84,8 @@ const SideDrawer = () => {
             };
 
             const {data} = await axios.post('/api/journal', { userId }, config);
+            
+            if (!journals.find((c) => c._id === data._id)) setJournals([data, ...journals]);
             
             setSelectedJournal(data);
             setLoadingJournal(false);
@@ -170,6 +172,7 @@ const SideDrawer = () => {
                                 />
                             ))
                         ) }
+                        {loadingJournal && <Spinner ml="auto" d="flex"/>}
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { JournalState } from "../Context/JournalProvider";
 import SideDrawer from '../Components/misc/SideDrawer';
-import MyJournals from '../Components/misc/MyJournals';
-import JournalBox from '../Components/misc/JournalBox';
+import MyJournals from '../Components/MyJournals';
+import JournalBox from '../Components/JournalBox';
 import { Box } from '@chakra-ui/layout';
 
 const Journalspage = () => {
