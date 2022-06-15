@@ -38,4 +38,17 @@ const sendTrade = asyncHandler( async (req, res) => {
     }
 });
 
-module.exports = { sendTrade };
+const allTrades = asyncHandler( async (req, res) => {
+    try {
+        const trades = await Trade.find({journal:req.params.journalId})
+            .populate("user", "name email")
+            .populate("journal");
+
+        res.json(trades);
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    }
+});
+
+module.exports = { sendTrade, allTrades };
