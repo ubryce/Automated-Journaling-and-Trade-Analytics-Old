@@ -7,6 +7,7 @@ import { Box } from '@chakra-ui/layout';
 
 const Journalspage = () => {
     const { user } = JournalState();
+    const [fetchAgain, setFetchAgain] = useState(false);
 
     return (
         <div style={{width:'100%'}}>
@@ -17,8 +18,8 @@ const Journalspage = () => {
                 w='100%'
                 h='91.5vh'
                 p='10px'>
-                {user && <MyJournals/>}
-                {user && <JournalBox/>}
+                {user && <MyJournals fetchAgain={fetchAgain}/>}
+                {user && <JournalBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
             </Box>
         </div>
     )

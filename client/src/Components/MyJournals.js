@@ -8,7 +8,7 @@ import { Button } from "@chakra-ui/react";
 import JournalLoading from './JournalLoading';
 import GroupJournalModal from './misc/GroupJournalModal';
 
-const MyJournal = () => {
+const MyJournals = ({fetchAgain}) => {
     const [ loggedUser, setLoggedUser ] = useState();
     const { selectedJournal, setSelectedJournal, user, journals, setJournals } = JournalState();
     const toast = useToast();
@@ -39,7 +39,7 @@ const MyJournal = () => {
     useEffect(() => {
         setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
         fetchJournals();
-    }, []);
+    }, [fetchAgain]);
 
     return (
         <Box
@@ -105,4 +105,4 @@ const MyJournal = () => {
     )
 };
 
-export default MyJournal;
+export default MyJournals;
