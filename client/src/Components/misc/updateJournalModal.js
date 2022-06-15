@@ -23,7 +23,7 @@ import UserBadgeItem from "../UserAvatar/UserBadgeItem";
 import UserListItem from "../UserAvatar/UserListItem";
 import React from 'react';
 
-const UpdateJournalModal = ({fetchAgain, setFetchAgain}) => {
+const UpdateJournalModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [groupJournalName, setGroupJournalName] = useState();
     const [search, setSearch] = useState("");
@@ -183,6 +183,7 @@ const UpdateJournalModal = ({fetchAgain, setFetchAgain}) => {
 
             user1._id === user._id ? setSelectedJournal() : setSelectedJournal(data);
             setFetchAgain(!fetchAgain);
+            fetchTrades();
             setLoading(false);
         } catch (error) {
             toast({

@@ -9,6 +9,7 @@ import axios from "axios";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./misc/ProfileModal";
 import UpdateJournalModal from './misc/updateJournalModal';
+import './styles.css';
 
 
 const SingleJournal = ({fetchAgain, setFetchAgain}) => {
@@ -35,8 +36,6 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                     journalId: selectedJournal._id,
                 }, config);
 
-                console.log(data);
-
                 setTrades([...trades, data]);
             } catch (error) {
                 toast({
@@ -54,6 +53,38 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
     const typingHandler = (e) => {
         setNewTrade(e.target.value);
     };
+
+    const fetchTrades = async () => {
+        if (!selectedJournal) return;
+
+        try {
+            const config = {
+                headers: {
+                    Authorization:`Bearer ${user.token}`,
+                },
+            };
+
+            setLoading(true);
+
+            const {data} = await axios.get(`/api/trade/${selectedJournal._id}`, config);
+
+            setTrades(data);
+            setLoading(false);
+        } catch (error) {
+            toast({
+                title: "Error occured",
+                description: "Failed to send the trade",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+        }
+    };
+
+    useEffect(() => {
+        fetchTrades();
+    }, [selectedJournal])
 
     return (
         <>
@@ -75,7 +106,8 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                         {selectedJournal.journalName.toUpperCase()}
                         <UpdateJournalModal
                             fetchAgain={fetchAgain}
-                            setFetchAgain={setFetchAgain}/>
+                            setFetchAgain={setFetchAgain}
+                            fetchTrades={fetchTrades}/>
                     </Text>
                     <Box
                         d="flex"
@@ -95,7 +127,7 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                                 alignSelf="center"
                                 margin="auto"/>
                         ) : (
-                            <div></div>
+                            <div className='trades'></div>
                         )}
                         <FormControl
                             onKeyDown={sendTrade}
