@@ -10,6 +10,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./misc/ProfileModal";
 import UpdateJournalModal from './misc/updateJournalModal';
 import './styles.css';
+import ScrollableJournal from './ScrollableJournal';
 
 
 const SingleJournal = ({fetchAgain, setFetchAgain}) => {
@@ -127,7 +128,9 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                                 alignSelf="center"
                                 margin="auto"/>
                         ) : (
-                            <div className='trades'></div>
+                            <div className='trades'>
+                                <ScrollableJournal trades={trades}></ScrollableJournal>
+                            </div>
                         )}
                         <FormControl
                             onKeyDown={sendTrade}
