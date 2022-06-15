@@ -100,9 +100,60 @@ const UpdateJournalModal = ({fetchAgain, setFetchAgain}) => {
         setGroupJournalName('');
     };
 
-    const handleAddUser = () => {
+    const handleAddUser = async (user1) => {
+        if (selectedJournal.users.find((u) => u._id === user1._id)) {
+          toast({
+            title: "User Already in journal!",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom",
+          });
+          return;
+        }
+    
+        if (selectedJournal.journalAdmin._id !== user._id) {
+          toast({
+            title: "Only admins can add someone!",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom",
+          });
+          return;
+        }
+    
+        try {
+          setLoading(true);
 
-    };
+          const config = {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          };
+
+          const { data } = await axios.put(`/api/journal/groupadd`, {
+              journalId: selectedJournal._id,
+              userId: user1._id,
+            }, config
+          );
+    
+          setSelectedJournal(data);
+          setFetchAgain(!fetchAgain);
+          setLoading(false);
+        } catch (error) {
+          toast({
+            title: "Error Occured!",
+            description: error.response.data.message,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "bottom",
+          });
+          setLoading(false);
+        }
+        setGroupJournalName("");
+      };
 
     const handleRemove = () => {
 
