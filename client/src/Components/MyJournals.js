@@ -22,7 +22,6 @@ const MyJournals = ({fetchAgain}) => {
             };
 
             const {data} = await axios.get("/api/journal", config);
-            console.log(data);
             setJournals(data);
         } catch (error) {
             toast({
