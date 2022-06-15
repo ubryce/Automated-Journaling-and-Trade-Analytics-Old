@@ -38,8 +38,39 @@ const UpdateJournalModal = ({fetchAgain, setFetchAgain}) => {
 
     };
 
-    const handleRename = () => {
+    const handleRename = async () => {
+        if (!groupJournalName) return
 
+        try {
+            setRenameLoading(true);
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.put('/api/journal/rename', {
+                journalId: selectedJournal._id,
+                journalName: groupJournalName,
+            }, config);
+
+            setSelectedJournal(data);
+            setFetchAgain(!fetchAgain);
+            setRenameLoading(false);
+        } catch (error) {
+            toast({
+                title: "Error occured",
+                description: error.response.data.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            setRenameLoading(false);
+        }
+
+        setGroupJournalName('');
     };
 
     const handleAddUser = () => {
@@ -117,7 +148,7 @@ const UpdateJournalModal = ({fetchAgain, setFetchAgain}) => {
                 </ModalBody>
                 <ModalFooter>
                     <Button onClick={() => handleRemove(user)} colorScheme="red">
-                    Leave Group
+                    Leave Journal
                     </Button>
                 </ModalFooter>
                 </ModalContent>
