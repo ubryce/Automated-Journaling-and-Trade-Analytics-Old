@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-//import { JournalState } from '../Context/JournalProvider';
+import { JournalState } from '../Context/JournalProvider';
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { AddIcon } from "@chakra-ui/icons";
@@ -11,7 +11,7 @@ import JournalLoading from './JournalLoading';
 
 const MyExchanges = ({fetchAgain}) => {
     const [ loggedUser, setLoggedUser ] = useState();
-    const { selectedExchange, setSelectedExchange, user, exchanges, setExchangess } = ExchangeState();
+    const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = JournalState();
     const toast = useToast();
 
     const fetchExchanges = async () => {
@@ -22,7 +22,7 @@ const MyExchanges = ({fetchAgain}) => {
                 },
             };
 
-            //const {data} = await axios.get("/api/journal", config);
+            const {data} = await axios.get("/api/exchange", config);
             setExchanges(data);
         } catch (error) {
             toast({
@@ -38,7 +38,7 @@ const MyExchanges = ({fetchAgain}) => {
 
     useEffect(() => {
         setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
-        fetchExchangess();
+        fetchExchanges();
     }, [fetchAgain]);
 
     return (
@@ -61,14 +61,14 @@ const MyExchanges = ({fetchAgain}) => {
                 justifyContent="space-between"
                 alignItems="center">
                 My Exchanges
-                <GroupExchangeModal>
+                
                     <Button
                         d="flex"
                         fontSize={{ base: "17px", md: "10px", lg: "17px" }}
                         rightIcon={<AddIcon />}>
                         New Exchange
                     </Button>
-                </GroupExchangeModal>
+                
             </Box>
             <Box
                 d="flex"
