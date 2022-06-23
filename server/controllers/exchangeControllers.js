@@ -31,7 +31,7 @@ const createExchange = asyncHandler(async (req, res) => {
 
 const fetchExchanges = asyncHandler(async (req, res) => {
     try {
-        Exchange.find({user: {$eq: req.user._id}})
+        Exchange.find({user: {$eq: req.user._id}}, "-exchangeSecret")
             .sort({updatedAt: -1})
             .then( async (results) => {
                 res.status(200).send(results);
