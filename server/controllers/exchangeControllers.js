@@ -30,7 +30,6 @@ const createExchange = asyncHandler(async (req, res) => {
 });
 
 const fetchExchanges = asyncHandler(async (req, res) => {
-    console.log("ran")
     try {
         Exchange.find({user: {$eq: req.user._id}})
             .sort({updatedAt: -1})
