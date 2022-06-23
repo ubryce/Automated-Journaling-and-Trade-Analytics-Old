@@ -29,4 +29,18 @@ const createExchange = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createExchange };
+const fetchExchanges = asyncHandler(async (req, res) => {
+    console.log("ran")
+    try {
+        Exchange.find({user: {$eq: req.user._id}})
+            .sort({updatedAt: -1})
+            .then( async (results) => {
+                res.status(200).send(results);
+            });
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    }
+});
+
+module.exports = { createExchange, fetchExchanges };
