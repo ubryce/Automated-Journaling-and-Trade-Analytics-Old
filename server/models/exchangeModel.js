@@ -13,7 +13,6 @@ exchangeModel.pre('save', async function (next) {
         next()
     }
     const salt = await bcrypt.genSalt(10);
-    this.exchangeAPI = await bcrypt.hash(this.exchangeAPI, salt);
     this.exchangeSecret = await bcrypt.hash(this.exchangeSecret, salt);
 });
 

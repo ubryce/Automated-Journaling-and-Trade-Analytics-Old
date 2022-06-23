@@ -27,22 +27,6 @@ const createExchange = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error(error.message);
     }
-    // const { journalId, userId } = req.body;
-
-    // const removed = await Journal.findByIdAndUpdate( journalId, { 
-    //     $pull: {users: userId},
-    //     },
-    //     { new: true, }
-    // )
-    //     .populate("users", "-password")
-    //     .populate("journalAdmin", "-password");
-
-    // if (!removed) {
-    //     res.status(404);
-    //     throw new Error("Journal not found");
-    // } else {
-    //     res.json(removed);
-    // }
 });
 
 module.exports = { createExchange };
