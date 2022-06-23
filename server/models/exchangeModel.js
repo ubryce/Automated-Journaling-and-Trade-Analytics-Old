@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const exchangeModel = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
-    exchangeName: {type: String},
+    exchangeName: {type: String, required: true},
     exchangeAPI: {type: String, required: true},
     exchangeSecret: {type: String, required: true},
 });

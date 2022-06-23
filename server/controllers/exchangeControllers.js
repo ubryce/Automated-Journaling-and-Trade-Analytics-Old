@@ -6,7 +6,7 @@ const User = require('../models/userModel');
 const createExchange = asyncHandler(async (req, res) => {
     
     // Check if all fields were filled
-    if (!req.body.exchangeAPI || !req.body.exchangeSecret) {
+    if (!req.body.exchangeName || !req.body.exchangeAPI || !req.body.exchangeSecret) {
         res.status(400);
         throw new Error("Please Enter All Fields");
     }
