@@ -7,7 +7,7 @@ import { Box, Stack, Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 
 import JournalLoading from './JournalLoading';
-//import GroupExchangeModal from './misc/GroupExchangeModal';
+import AddExchangeModal from './misc/AddExchangeModal';
 
 const MyExchanges = ({fetchAgain}) => {
     const [ loggedUser, setLoggedUser ] = useState();
@@ -61,14 +61,14 @@ const MyExchanges = ({fetchAgain}) => {
                 justifyContent="space-between"
                 alignItems="center">
                 My Exchanges
-                
+                <AddExchangeModal>
                     <Button
                         d="flex"
                         fontSize={{ base: "17px", md: "10px", lg: "17px" }}
                         rightIcon={<AddIcon />}>
                         New Exchange
                     </Button>
-                
+                </AddExchangeModal>
             </Box>
             <Box
                 d="flex"
