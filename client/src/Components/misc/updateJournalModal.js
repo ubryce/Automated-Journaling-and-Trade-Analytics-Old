@@ -100,6 +100,41 @@ const UpdateJournalModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
         setGroupJournalName('');
     };
 
+    const handleExchanges = async () => {
+      if (!groupJournalName) return
+
+      try {
+          setRenameLoading(true);
+
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${user.token}`,
+              },
+          };
+
+          const {data} = await axios.put('/api/journal/rename', {
+              journalId: selectedJournal._id,
+              journalName: groupJournalName,
+          }, config);
+
+          setSelectedJournal(data);
+          setFetchAgain(!fetchAgain);
+          setRenameLoading(false);
+      } catch (error) {
+          toast({
+              title: "Error occured",
+              description: error.response.data.message,
+              status: 'error',
+              duration: 5000,
+              isClosable: true,
+              position: "bottom",
+          });
+          setRenameLoading(false);
+      }
+
+      setGroupJournalName('');
+  };
+
     const handleAddUser = async (user1) => {
         if (selectedJournal.users.find((u) => u._id === user1._id)) {
           toast({
@@ -263,6 +298,22 @@ const UpdateJournalModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
                         />
                     ))
                     )}
+                    <FormControl>
+                        <Input
+                            placeholder="Connect Exchange to Journal"
+                            mb={1}
+                            onChange={(e) => handleSearch(e.target.value)}
+                        />
+                    </FormControl>
+                    <Button
+                        variant="solid"
+                        colorScheme="teal"
+                        ml={1}
+                        isLoading={renameLoading}
+                        onClick={handleExchanges}
+                    >
+                        Update
+                    </Button>
                 </ModalBody>
                 <ModalFooter>
                     <Button onClick={() => handleRemove(user)} colorScheme="red">
