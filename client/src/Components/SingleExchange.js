@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./misc/ProfileModal";
-//import UpdateJournalModal from './misc/updateJournalModal';
+import UpdateExchangeModal from './misc/updateExchangeModal';
 import './styles.css';
 import ScrollableJournal from './ScrollableJournal';
 
@@ -53,7 +53,7 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
     //     setNewTrade(e.target.value);
     // };
 
-    // const fetchTrades = async () => {
+    const fetchTrades = async () => {
     //     if (!selectedJournal) return;
 
     //     try {
@@ -79,7 +79,7 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
     //             position: "bottom",
     //         });
     //     }
-    // };
+    };
 
     // useEffect(() => {
     //     fetchTrades();
@@ -103,10 +103,10 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
                             icon={<ArrowBackIcon/>}
                             onClick={() => setSelectedExchange("")}/>
                         {selectedExchange.exchangeName.toUpperCase()}
-                        {/* <UpdateJournalModal
+                        <UpdateExchangeModal
                             fetchAgain={fetchAgain}
                             setFetchAgain={setFetchAgain}
-                            fetchTrades={fetchTrades}/> */}
+                            fetchTrades={fetchTrades}/>
                         {selectedExchange.exchangeAPI}
                     </Text>
                     <Box
