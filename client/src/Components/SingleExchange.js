@@ -101,12 +101,13 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
                         <IconButton
                             d={{ base: "flex", md: "none"}}
                             icon={<ArrowBackIcon/>}
-                            onClick={() => setSelectedJournal("")}/>
+                            onClick={() => setSelectedExchange("")}/>
                         {selectedExchange.exchangeName.toUpperCase()}
                         {/* <UpdateJournalModal
                             fetchAgain={fetchAgain}
                             setFetchAgain={setFetchAgain}
                             fetchTrades={fetchTrades}/> */}
+                        {selectedExchange.exchangeAPI}
                     </Text>
                     <Box
                         d="flex"

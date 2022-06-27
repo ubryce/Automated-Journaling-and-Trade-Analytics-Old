@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react"
 import { JournalState } from "../Context/JournalProvider";
 import SideDrawer from '../Components/misc/SideDrawer';
 import MyExchanges from '../Components/MyExchanges';
+import ExchangeBox from '../Components/ExchangeBox';
 import { Box } from '@chakra-ui/layout';
 
-const Journalspage = () => {
+const Exchangespage = () => {
     const { user } = JournalState();
     const [fetchAgain, setFetchAgain] = useState(false);
 
@@ -18,9 +19,10 @@ const Journalspage = () => {
                 h='91.5vh'
                 p='10px'>
                 {user && <MyExchanges fetchAgain={fetchAgain}/>}
+                {user && <ExchangeBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
             </Box>
         </div>
     )
 }
 
-export default Journalspage;
+export default Exchangespage;
