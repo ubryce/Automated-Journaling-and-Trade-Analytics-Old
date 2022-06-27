@@ -29,51 +29,121 @@ const UpdateExchangeModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
     const [exchangeSecret, setExchangeSecret] = useState();
     const [loading, setLoading] = useState(false);
     const [renameLoading, setRenameLoading] = useState(false);
+    const [APILoading, setAPILoading] = useState(false);
+    const [secretLoading, setSecretLoading] = useState(false);
     const toast = useToast();
 
     const { selectedExchange, setSelectedExchange, user } = JournalState();
 
     const handleRename = async () => {
-        // if (!groupJournalName) return
+        if (!exchangeName) return
 
-        // try {
-        //     setRenameLoading(true);
+        try {
+            setRenameLoading(true);
 
-        //     const config = {
-        //         headers: {
-        //             Authorization: `Bearer ${user.token}`,
-        //         },
-        //     };
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
 
-        //     const {data} = await axios.put('/api/journal/rename', {
-        //         journalId: selectedJournal._id,
-        //         journalName: groupJournalName,
-        //     }, config);
+            const {data} = await axios.put('/api/exchange/rename', {
+                exchangeId: selectedExchange._id,
+                exchangeName: exchangeName,
+            }, config);
 
-        //     setSelectedJournal(data);
-        //     setFetchAgain(!fetchAgain);
-        //     setRenameLoading(false);
-        // } catch (error) {
-        //     toast({
-        //         title: "Error occured",
-        //         description: error.response.data.message,
-        //         status: 'error',
-        //         duration: 5000,
-        //         isClosable: true,
-        //         position: "bottom",
-        //     });
-        //     setRenameLoading(false);
-        // }
+            setSelectedExchange(data);
+            setFetchAgain(!fetchAgain);
+            setRenameLoading(false);
 
-        // setGroupJournalName('');
+        } catch (error) {
+            toast({
+                title: "Error occured",
+                description: error.response.data.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+
+            setRenameLoading(false);
+        }
+        
+        setExchangeName('');
     };
 
     const handleAPI = async () => {
+        if (!exchangeAPI) return
+
+        try {
+            setAPILoading(true);
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.put('/api/exchange/apikey', {
+                exchangeId: selectedExchange._id,
+                exchangeAPI: exchangeAPI,
+            }, config);
+
+            setSelectedExchange(data);
+            setFetchAgain(!fetchAgain);
+            setAPILoading(false);
+
+        } catch (error) {
+            toast({
+                title: "Error occured",
+                description: error.response.data.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            
+            setAPILoading(false);
+        }
         
+        setExchangeAPI('');
     };
 
     const handleSecret = async () => {
+        if (!exchangeSecret) return
+
+        try {
+            setSecretLoading(true);
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.put('/api/exchange/secret', {
+                exchangeId: selectedExchange._id,
+                exchangeSecret: exchangeSecret,
+            }, config);
+
+            setSelectedExchange(data);
+            setFetchAgain(!fetchAgain);
+            setSecretLoading(false);
+
+        } catch (error) {
+            toast({
+                title: "Error occured",
+                description: error.response.data.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            
+            setSecretLoading(false);
+        }
         
+        setExchangeSecret('');
     };
 
     const handleDelete = async () => {
@@ -134,7 +204,7 @@ const UpdateExchangeModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
                             variant="solid"
                             colorScheme="teal"
                             ml={1}
-                            isLoading={renameLoading}
+                            isLoading={APILoading}
                             onClick={handleAPI}
                         >
                             Update
@@ -149,7 +219,7 @@ const UpdateExchangeModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
                             variant="solid"
                             colorScheme="teal"
                             ml={1}
-                            isLoading={renameLoading}
+                            isLoading={secretLoading}
                             onClick={handleSecret}
                         >
                             Update
