@@ -1,7 +1,7 @@
 const express = require('express');
 const { protect } = require('../middleware/authMiddleware');
 //const { accessJournal, fetchJournals, createGroupJournal, renameJournal, addToJournal, removeFromJournal } = require("../controllers/journalControllers")
-const { createExchange, fetchExchanges } = require("../controllers/exchangeControllers")
+const { createExchange, fetchExchanges, renameExchange } = require("../controllers/exchangeControllers")
 const router = express.Router();
 
 // router.route('/').post(protect, accessJournal);
@@ -13,5 +13,6 @@ const router = express.Router();
 
 router.route('/').post(protect, createExchange);
 router.route('/').get(protect, fetchExchanges);
+router.route('/rename').put(protect, renameExchange);
 
 module.exports = router;

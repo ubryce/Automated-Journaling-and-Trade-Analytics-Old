@@ -168,16 +168,6 @@ const UpdateExchangeModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
 
                 <ModalCloseButton />
                 <ModalBody d="flex" flexDir="column" alignItems="center">
-                    <Box w="100%" d="flex" flexWrap="wrap" pb={3}>
-                    {/* {selectedExchange.users.map((u) => (
-                        <UserBadgeItem
-                        key={u._id}
-                        user={u}
-                        admin={selectedJournal.journalAdmin}
-                        handleFunction={() => handleRemove(u)}
-                        />
-                    ))} */}
-                    </Box>
                     <FormControl d="flex">
                         <Input
                             placeholder={selectedExchange.exchangeName}

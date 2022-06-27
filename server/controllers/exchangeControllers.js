@@ -42,4 +42,26 @@ const fetchExchanges = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createExchange, fetchExchanges };
+const renameExchange = asyncHandler(async (req, res) => {
+    const { exchangeId, exchangeName } = req.body;
+
+    const updatedExchange = await Exchange.findByIdAndUpdate(
+        exchangeId,
+        {
+            exchangeName: exchangeName,
+        },
+        {
+            new: true,
+        }
+    )
+    console.log(updatedExchange)
+
+    if (!updatedExchange) {
+        res.status(404);
+        throw new Error("Exchange not found");
+    } else {
+        res.json(updatedExchange);
+    }
+});
+
+module.exports = { createExchange, fetchExchanges, renameExchange };
