@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Exchange = require('../models/exchangeModel');
 const { update } = require('../models/userModel');
 const User = require('../models/userModel');
+const bcrypt = require('bcryptjs');
 
 const createExchange = asyncHandler(async (req, res) => {
     
@@ -54,7 +55,6 @@ const renameExchange = asyncHandler(async (req, res) => {
             new: true,
         }
     )
-    console.log(updatedExchange)
 
     if (!updatedExchange) {
         res.status(404);
@@ -64,4 +64,51 @@ const renameExchange = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createExchange, fetchExchanges, renameExchange };
+const renameExchangeAPI = asyncHandler(async (req, res) => {
+    const { exchangeId, exchangeAPI } = req.body;
+
+    const updatedExchange = await Exchange.findByIdAndUpdate(
+        exchangeId,
+        {
+            exchangeAPI: exchangeAPI,
+        },
+        {
+            new: true,
+        }
+    )
+
+    if (!updatedExchange) {
+        res.status(404);
+        throw new Error("Exchange not found");
+    } else {
+        res.json(updatedExchange);
+    }
+});
+
+const renameExchangeSecret = asyncHandler(async (req, res) => {
+    const { exchangeId, exchangeSecret } = req.body;
+
+    let newExchangeSecret = exchangeSecret;
+
+    const salt = await bcrypt.genSalt(10);
+    newExchangeSecret = await bcrypt.hash(newExchangeSecret, salt);
+
+    const updatedExchange = await Exchange.findByIdAndUpdate(
+        exchangeId,
+        {
+            exchangeSecret: newExchangeSecret,
+        },
+        {
+            new: true,
+        }
+    )
+
+    if (!updatedExchange) {
+        res.status(404);
+        throw new Error("Exchange not found");
+    } else {
+        res.json(updatedExchange);
+    }
+});
+
+module.exports = { createExchange, fetchExchanges, renameExchange, renameExchangeAPI, renameExchangeSecret };
