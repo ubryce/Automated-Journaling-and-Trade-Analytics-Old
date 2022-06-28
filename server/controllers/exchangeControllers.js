@@ -4,6 +4,8 @@ const { update } = require('../models/userModel');
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
+// TODO
+// make sure only user = user owner
 const createExchange = asyncHandler(async (req, res) => {
     
     // Check if all fields were filled
@@ -111,4 +113,19 @@ const renameExchangeSecret = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createExchange, fetchExchanges, renameExchange, renameExchangeAPI, renameExchangeSecret };
+const deleteExchange = asyncHandler(async (req, res) => {
+    const { exchangeId } = req.body;
+
+    const updatedExchange = await Exchange.findByIdAndDelete(
+        exchangeId
+    )
+
+    if (!updatedExchange) {
+        res.status(404);
+        throw new Error("Exchange not found");
+    } else {
+        res.json(updatedExchange);
+    }
+});
+
+module.exports = { createExchange, fetchExchanges, renameExchange, renameExchangeAPI, renameExchangeSecret, deleteExchange };

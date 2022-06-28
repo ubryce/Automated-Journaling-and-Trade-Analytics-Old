@@ -5,6 +5,7 @@ const User = require('../models/userModel');
 
 // TODO
 // allow user to create a journal alone in accessJournal
+// make sure only user = user owner
 
 // Current user sends their user id
 const accessJournal = asyncHandler(async (req, res) => {
