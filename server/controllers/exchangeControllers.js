@@ -58,7 +58,7 @@ const renameExchange = asyncHandler(async (req, res) => {
         }
     )
 
-    if (!updatedExchange) {
+    if (!updatedExchange || req.user._id != updatedExchange.user) {
         res.status(404);
         throw new Error("Exchange not found");
     } else {
@@ -79,7 +79,7 @@ const renameExchangeAPI = asyncHandler(async (req, res) => {
         }
     )
 
-    if (!updatedExchange) {
+    if (!updatedExchange || req.user._id != updatedExchange.user) {
         res.status(404);
         throw new Error("Exchange not found");
     } else {
@@ -105,7 +105,7 @@ const renameExchangeSecret = asyncHandler(async (req, res) => {
         }
     )
 
-    if (!updatedExchange) {
+    if (!updatedExchange || req.user._id != updatedExchange.user) {
         res.status(404);
         throw new Error("Exchange not found");
     } else {
@@ -120,7 +120,7 @@ const deleteExchange = asyncHandler(async (req, res) => {
         exchangeId
     )
 
-    if (!updatedExchange) {
+    if (!updatedExchange || req.user._id != updatedExchange.user) {
         res.status(404);
         throw new Error("Exchange not found");
     } else {
