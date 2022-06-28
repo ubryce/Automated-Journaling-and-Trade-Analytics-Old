@@ -101,8 +101,6 @@ const UpdateJournalModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
         setGroupJournalName('');
     };
 
-    
-
     const handleAddUser = async (user1) => {
         if (selectedJournal.users.find((u) => u._id === user1._id)) {
           toast({
@@ -266,22 +264,7 @@ const UpdateJournalModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
                         />
                     ))
                     )}
-                    <CheckboxGroup colorScheme='green' defaultValue={['naruto', 'kakashi']}>
-                      <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                        <Checkbox value='naruto'>Naruto</Checkbox>
-                        <Checkbox value='sasuke'>Sasuke</Checkbox>
-                        <Checkbox value='kakashi'>Kakashi</Checkbox>
-                      </Stack>
-                    </CheckboxGroup>
-                    <Button
-                        variant="solid"
-                        colorScheme="teal"
-                        ml={1}
-                        isLoading={renameLoading}
-                        // onClick={handleExchanges}
-                    >
-                        Update
-                    </Button>
+                    
                 </ModalBody>
                 <ModalFooter>
                     <Button onClick={() => handleRemove(user)} colorScheme="red">

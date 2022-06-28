@@ -4,8 +4,6 @@ const { update } = require('../models/userModel');
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
-// TODO
-// make sure only user = user owner
 const createExchange = asyncHandler(async (req, res) => {
     
     // Check if all fields were filled
