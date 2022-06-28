@@ -31,6 +31,7 @@ const UpdateExchangeModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
     const [renameLoading, setRenameLoading] = useState(false);
     const [APILoading, setAPILoading] = useState(false);
     const [secretLoading, setSecretLoading] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false);
     const toast = useToast();
 
     const { selectedExchange, setSelectedExchange, user } = JournalState();
@@ -147,6 +148,38 @@ const UpdateExchangeModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
     };
 
     const handleDelete = async () => {
+        if (!selectedExchange) return
+
+        try {
+            setDeleteLoading(true);
+
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+                data: {
+                    exchangeId: selectedExchange._id,
+                }
+            };
+
+            await axios.delete('/api/exchange', config);
+
+            setSelectedExchange();
+            setFetchAgain(!fetchAgain);
+            setSecretLoading(false);
+
+        } catch (error) {
+            toast({
+                title: "Error occured",
+                description: error.response.data.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            
+            setSecretLoading(false);
+        }
         
     };
 
@@ -218,7 +251,7 @@ const UpdateExchangeModal = ({fetchAgain, setFetchAgain, fetchTrades}) => {
                     
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={() => handleDelete(user)} colorScheme="red">
+                    <Button onClick={handleDelete} colorScheme="red">
                         Delete Exchange API
                     </Button>
                 </ModalFooter>

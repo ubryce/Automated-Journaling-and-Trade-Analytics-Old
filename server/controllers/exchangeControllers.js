@@ -115,7 +115,7 @@ const renameExchangeSecret = asyncHandler(async (req, res) => {
 
 const deleteExchange = asyncHandler(async (req, res) => {
     const { exchangeId } = req.body;
-
+    console.log(exchangeId)
     const updatedExchange = await Exchange.findByIdAndDelete(
         exchangeId
     )
