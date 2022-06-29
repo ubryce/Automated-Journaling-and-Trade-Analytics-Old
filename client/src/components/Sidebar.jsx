@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+import { FiShoppingBag } from 'react-icons/fi';
 
 import { links } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
@@ -33,6 +34,46 @@ const Sidebar = () => {
           </TooltipComponent>
         </div>
         <div className='mt-10'>
+          <div>
+            <p className='text-gray-400 m-3 mt-4 uppercase'>
+              Dashboard
+            </p>
+              <NavLink to={`/home`} key='home' onClick={handleCloseSideBar} className={({ isActive }) => isActive ? activeLink : normalLink} style={({ isActive }) => ({ backgroundColor: isActive ? currentColor : ""})}>
+                <FiShoppingBag />
+                <span className='capitalize'>
+                  home
+                </span>
+              </NavLink>
+          </div>
+          <div>
+            <p className='text-gray-400 m-3 mt-4 uppercase'>
+              Dashboard
+            </p>
+              <NavLink to={`/journals`} key='journals' onClick={handleCloseSideBar} className={({ isActive }) => isActive ? activeLink : normalLink} style={({ isActive }) => ({ backgroundColor: isActive ? currentColor : ""})}>
+                <FiShoppingBag />
+                <span className='capitalize'>
+                  journals
+                </span>
+              </NavLink>
+              <NavLink to={`/exchanges`} key='exchanges' onClick={handleCloseSideBar} className={({ isActive }) => isActive ? activeLink : normalLink} style={({ isActive }) => ({ backgroundColor: isActive ? currentColor : ""})}>
+                <FiShoppingBag />
+                <span className='capitalize'>
+                  exchanges
+                </span>
+              </NavLink>
+              <NavLink to={`/trading-plans`} key='trading-plans' onClick={handleCloseSideBar} className={({ isActive }) => isActive ? activeLink : normalLink} style={({ isActive }) => ({ backgroundColor: isActive ? currentColor : ""})}>
+                <FiShoppingBag />
+                <span className='capitalize'>
+                  Trading Plans
+                </span>
+              </NavLink>
+              <NavLink to={`/notebook`} key='notebook' onClick={handleCloseSideBar} className={({ isActive }) => isActive ? activeLink : normalLink} style={({ isActive }) => ({ backgroundColor: isActive ? currentColor : ""})}>
+                <FiShoppingBag />
+                <span className='capitalize'>
+                  notebook
+                </span>
+              </NavLink>
+          </div>
           {links.map((item) => (
             <div key={item.title}>
               <p className='text-gray-400 m-3 mt-4 uppercase'>

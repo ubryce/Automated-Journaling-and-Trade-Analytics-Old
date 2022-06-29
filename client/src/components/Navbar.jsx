@@ -22,7 +22,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 )
 
 const Navbar = () => {
-  const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
+  const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize, user } = useStateContext();
 
 
   useEffect(() => {
@@ -55,10 +55,10 @@ const Navbar = () => {
         <NavButton title="Notification" dotColor="rgb(254, 201, 15)" customFunc={() => handleClick('notification')} color={currentColor} icon={<RiNotification3Line />} />
         <TooltipComponent content="Profile" position="BottomCenter">
           <div className='flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg' onClick={() => handleClick('userProfile')}>
-            <span className="e-avatar e-avatar-circle h-24 w-24 ">SJ</span>
+            <span className="e-avatar e-avatar-circle h-24 w-24 ">{user.name.slice(0,1)}</span>
             <p>
               <span className='text-gray-400 text-14'>Hi, </span> {' '}
-              <span className='text-gray-400 font-bold ml-1 text-14'>Michael</span>
+              <span className='text-gray-400 font-bold ml-1 text-14'>{user.name}</span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14"/>
           </div>

@@ -7,10 +7,12 @@ import { useStateContext } from '../contexts/ContextProvider';
 import avatar from '../data/avatar.jpg';
 
 const UserProfile = () => {
-  const { currentColor } = useStateContext();
+  const { currentColor, user } = useStateContext();
 
   const handleLogout = () => {
-    console.log("logged out")
+    console.log("logged out");
+    //localStorage.removeItem("userInfo");
+    //navigate('/');
   };
 
   return (
@@ -31,10 +33,10 @@ const UserProfile = () => {
           src={avatar}
           alt="user-profile"
         /> */}
-        <span className="e-avatar e-avatar-circle h-24 w-24 ">SJ</span>
+        <span className="e-avatar e-avatar-circle h-24 w-24 ">{user.name}</span>
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> Michael Roberts </p>
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> info@shop.com </p>
+          <p className="font-semibold text-xl dark:text-gray-200"> {user.name} </p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {user.email} </p>
         </div>
       </div>
       <div>
