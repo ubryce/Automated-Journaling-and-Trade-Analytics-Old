@@ -9,6 +9,10 @@ import avatar from '../data/avatar.jpg';
 const UserProfile = () => {
   const { currentColor } = useStateContext();
 
+  const handleLogout = () => {
+    console.log("logged out")
+  };
+
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
@@ -22,14 +26,14 @@ const UserProfile = () => {
         />
       </div>
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
-        <img
+        {/* <img
           className="rounded-full h-24 w-24"
           src={avatar}
           alt="user-profile"
-        />
+        /> */}
+        <span className="e-avatar e-avatar-circle h-24 w-24 ">SJ</span>
         <div>
           <p className="font-semibold text-xl dark:text-gray-200"> Michael Roberts </p>
-          <p className="text-gray-500 text-sm dark:text-gray-400">  Administrator   </p>
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> info@shop.com </p>
         </div>
       </div>
@@ -58,7 +62,9 @@ const UserProfile = () => {
           text="Logout"
           borderRadius="10px"
           width="full"
+          customFunc={handleLogout}
         />
+     
       </div>
     </div>
 
