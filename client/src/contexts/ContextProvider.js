@@ -37,7 +37,14 @@ export const ContextProvider = ({ children }) => {
         setThemeSettings(false);
     };
 
-    const handleClick = (clicked) => setIsClicked({ ...initialState, [clicked]: true });
+    const handleClick = (clicked) => {
+        if ( isClicked[clicked] == false ) {
+            setIsClicked({ ...initialState, [clicked]: true })
+        } else {
+            setIsClicked({ ...initialState, [clicked]: false })
+            
+        }
+    };
 
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
