@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StateContext = createContext();
 
@@ -23,6 +24,8 @@ export const ContextProvider = ({ children }) => {
     const [selectedExchange, setSelectedExchange] = useState();
     const [exchanges, setExchanges] = useState([]);
 
+    const navigate = useNavigate();
+
     const setMode = (e) => {
         setCurrentMode(e.target.value);
         localStorage.setItem('themeMode', e.target.value);
@@ -45,6 +48,20 @@ export const ContextProvider = ({ children }) => {
             
         }
     };
+
+    // Whenever a user logs in the user info is stored into the local storage
+    // we can take this and 
+    useEffect(() => {
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        // store into our state
+        setUser(userInfo);
+
+        // if user not logged in redirect to homepage
+        if (!userInfo) {
+            navigate('/');
+        }
+        // brackets for whenever navigate changes the useEffect is called
+    }, [navigate])
 
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
