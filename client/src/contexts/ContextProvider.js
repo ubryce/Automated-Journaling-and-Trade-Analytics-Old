@@ -19,6 +19,7 @@ export const ContextProvider = ({ children }) => {
     const [isClicked, setIsClicked] = useState(initialState);
 
     const [user, setUser] = useState();
+    const [visability, setVisability] = useState(true);
     const [selectedJournal, setSelectedJournal] = useState();
     const [journals, setJournals] = useState([]);
     const [selectedExchange, setSelectedExchange] = useState();
@@ -45,7 +46,7 @@ export const ContextProvider = ({ children }) => {
             setIsClicked({ ...initialState, [clicked]: true })
         } else {
             setIsClicked({ ...initialState, [clicked]: false })
-            
+            console.log("ran")
         }
     };
 
@@ -65,7 +66,7 @@ export const ContextProvider = ({ children }) => {
 
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <StateContext.Provider value={{ currentColor, currentMode, activeMenu, screenSize, setScreenSize, handleClick, isClicked, initialState, setIsClicked, setActiveMenu, setMode, setColor, themeSettings, setThemeSettings, user, setUser }}>
+        <StateContext.Provider value={{ currentColor, currentMode, activeMenu, screenSize, setScreenSize, handleClick, isClicked, initialState, setIsClicked, setActiveMenu, setMode, setColor, themeSettings, setThemeSettings, user, setUser, visability, setVisability }}>
         {children}
         </StateContext.Provider>
     );
