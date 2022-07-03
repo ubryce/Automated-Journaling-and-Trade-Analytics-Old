@@ -45,7 +45,6 @@ const Sidebar = () => {
                 </span>
               </NavLink>
           </div>
-          <div>
             <p className='text-gray-400 m-3 mt-4 uppercase'>
               Dashboard
             </p>
@@ -73,7 +72,6 @@ const Sidebar = () => {
                   notebook
                 </span>
               </NavLink>
-          </div>
           {links.map((item) => (
             <div key={item.title}>
               <p className='text-gray-400 m-3 mt-4 uppercase'>
