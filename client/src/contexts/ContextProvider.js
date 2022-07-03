@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const StateContext = createContext();
 
 const initialState = {
-    chat: false,
-    cart: false,
     userProfile: false,
     notification: false,
 };
