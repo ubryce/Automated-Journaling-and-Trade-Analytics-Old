@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components'
-import { Journals, Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
+import { Homepage, Journals, Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 
 import { useStateContext } from './contexts/ContextProvider';
 
@@ -22,6 +23,7 @@ const App = () => {
 
   return (
     <div>
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_API_TOKEN}>
       { user && <div className={currentMode === 'Dark' ? 'dark' : ""}>
           <div className='flex relative dark:bg-main-dark-bg'>
             <div className='fixed right-4 bottom-4' style={{ zIndex: "1000" }}>
@@ -51,8 +53,9 @@ const App = () => {
                 {themeSettings && <ThemeSettings/>}
                 <Routes>
                   {/* Dashboard */}
-                  <Route path="/" element={<Ecommerce/>} />
+                  {/* <Route path="/" element={<Ecommerce/>} /> */}
                   <Route path="/journals" element={<Journals/>} />
+                  <Route path="/" element={<Homepage/>} />
                   <Route path="/ecommerce" element={<Ecommerce/>} />
 
                   {/* Pages */}
@@ -80,6 +83,7 @@ const App = () => {
             </div>
           </div>
       </div>}
+      </GoogleOAuthProvider>
     </div>
   )
 }
