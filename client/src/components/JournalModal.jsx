@@ -85,7 +85,7 @@ const JournalModal = () => {
                                         <input
                                         type="text"
                                         onChange={(e) => setJournalName(e.target.value)}
-                                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border"
+                                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border inline-flex items-center px-3 py-1"
                                         placeholder="Enter your Journal name"
                                         />
                                     </div>
@@ -100,7 +100,7 @@ const JournalModal = () => {
                                     <textarea
                                         onChange={(e) => setJournalDescription(e.target.value)}
                                         rows={3}
-                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md inline-flex items-center px-3 py-1"
                                         placeholder="Enter a description for your journal"
                                         defaultValue={journalDescription}
                                     />
