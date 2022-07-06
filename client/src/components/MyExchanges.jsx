@@ -34,7 +34,7 @@ const MyExchanges = ({fetchAgain}) => {
 
     return (
         <>
-            <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+            <div className="md:flex items-center justify-end md:flex-1">
                 <Button color="white" bgColor={currentColor} text="Create a Exchange" borderRadius="10px" size="md" />
             </div>
             <Listbox value={selectedExchange} onChange={setSelectedExchange}>
