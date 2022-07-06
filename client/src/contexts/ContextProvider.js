@@ -46,7 +46,7 @@ export const ContextProvider = ({ children }) => {
             setIsClicked({ ...initialState, [clicked]: true })
         } else {
             setIsClicked({ ...initialState, [clicked]: false })
-            console.log("ran")
+            
         }
     };
 

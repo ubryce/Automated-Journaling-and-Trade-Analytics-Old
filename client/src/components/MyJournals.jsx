@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
-import { Button, JournalModal } from '../components';
+import { Button, JournalModal, Header } from '../components';
 
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
@@ -42,7 +42,8 @@ const MyJournals = ({fetchAgain}) => {
     }, [fetchAgain]);
   
     return (
-        <>
+        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+            <Header category="Page" title="Journals" />
             <JournalModal />
             <div className="md:flex items-center justify-end md:flex-1">
                 <Button customFunc={() => setAddJournal(true)} color="white" bgColor={currentColor} text="Create a Journal" borderRadius="10px" size="md" />
@@ -111,7 +112,7 @@ const MyJournals = ({fetchAgain}) => {
             </>
         )}
             </Listbox>
-        </>
+        </div>
     )
 }
 

@@ -86,7 +86,7 @@ const JournalModal = () => {
                                         type="text"
                                         onChange={(e) => setJournalName(e.target.value)}
                                         className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border inline-flex items-center px-3 py-1"
-                                        placeholder="Enter your Journal name"
+                                        placeholder="Enter Journal name"
                                         />
                                     </div>
                                     </div>
