@@ -2,11 +2,40 @@ import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { PlusIcon } from '@heroicons/react/outline'
 import { useStateContext } from '../contexts/ContextProvider';
+import axios from "axios";
 
 const JournalModal = () => {
-    const { addJournal, setAddJournal } = useStateContext();
+    const { addJournal, setAddJournal, user, journals, setJournals } = useStateContext();
+    const [journalName, setJournalName] = useState();
+    const [journalDescription, setJournalDescription] = useState();
 
-    const cancelButtonRef = useRef(null)
+    const cancelButtonRef = useRef(null);
+
+    const handleSubmit = async () => {
+        if (!journalName ) {
+            console.log("missing name")
+            return;
+        }
+
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.post('/api/journal/create', {
+                name: journalName,
+                description: journalDescription,
+            }, config);
+
+            setJournals([data, ...journals]);
+            setAddJournal(false);
+            console.log("new journal")
+        } catch (error) {
+            console.log("failed to create journal")
+        }
+    };
 
     return (
         <Transition.Root show={addJournal} as={Fragment}>
@@ -55,8 +84,7 @@ const JournalModal = () => {
                                     <div className="mt-1 flex rounded-md shadow-sm">
                                         <input
                                         type="text"
-                                        name="company-website"
-                                        id="company-website"
+                                        onChange={(e) => setJournalName(e.target.value)}
                                         className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border"
                                         placeholder="Enter your Journal name"
                                         />
@@ -70,12 +98,11 @@ const JournalModal = () => {
                                     </label>
                                     <div className="mt-1">
                                     <textarea
-                                        id="about"
-                                        name="about"
+                                        onChange={(e) => setJournalDescription(e.target.value)}
                                         rows={3}
                                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                                         placeholder="Enter a description for your journal"
-                                        defaultValue={''}
+                                        defaultValue={journalDescription}
                                     />
                                     </div>
                                 </div>
@@ -86,8 +113,8 @@ const JournalModal = () => {
                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button
                             type="button"
-                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                            onClick={() => setAddJournal(false)}
+                            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                            onClick={() => {setAddJournal(false); handleSubmit();}}
                         >
                             Create
                         </button>
