@@ -45,7 +45,10 @@ const MyJournals = ({fetchAgain}) => {
             {({ open }) => (
         <>
         <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <a href="#" className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+            <a
+            href="#"
+            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+            >
             Create a Journal
             </a>
         </div>
@@ -70,7 +73,7 @@ const MyJournals = ({fetchAgain}) => {
               <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                 {journals.map((journal) => (
                   <Listbox.Option
-                    key={journal.id}
+                    key={journal._id}
                     className={({ active }) =>
                       classNames(
                         active ? 'text-white bg-indigo-600' : 'text-gray-900',
