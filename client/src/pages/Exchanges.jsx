@@ -7,7 +7,7 @@ const Exchanges = () => {
     const [fetchAgain, setFetchAgain] = useState(false);
 
     return (
-        <div>
+        <div className='mt-12'>
             {user && <MyExchanges fetchAgain={fetchAgain}/>}
         </div>
     )
