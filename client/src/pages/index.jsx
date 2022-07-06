@@ -1,4 +1,5 @@
 export { default as Journals } from './Journals';
+export { default as Exchanges } from './Exchanges';
 export { default as Homepage } from './Homepage';
 
 export { default as Ecommerce } from './Ecommerce';

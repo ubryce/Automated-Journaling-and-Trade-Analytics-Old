@@ -5,7 +5,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components'
-import { Homepage, Journals, Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
+import { Homepage, Journals, Exchanges, Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 
 import { useStateContext } from './contexts/ContextProvider';
 
@@ -55,6 +55,7 @@ const App = () => {
                   {/* Dashboard */}
                   {/* <Route path="/" element={<Ecommerce/>} /> */}
                   <Route path="/journals" element={<Journals/>} />
+                  <Route path="/exchanges" element={<Exchanges/>} />
                   <Route path="/home" element={<Homepage/>} />
                   <Route path="/ecommerce" element={<Ecommerce/>} />
 
