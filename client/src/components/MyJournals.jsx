@@ -1,17 +1,18 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
-import { Button } from '../components';
+import { Button, JournalModal } from '../components';
 
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import { PlusIcon } from '@heroicons/react/outline'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
 const MyJournals = ({fetchAgain}) => {
-    const { selectedJournal, setSelectedJournal, user, journals, setJournals, currentColor } = useStateContext();
+    const { selectedJournal, setSelectedJournal, user, journals, setJournals, currentColor, addJournal, setAddJournal } = useStateContext();
 
     const fetchJournals = async () => {
         try {
@@ -42,8 +43,10 @@ const MyJournals = ({fetchAgain}) => {
   
     return (
         <>
+            <JournalModal />
             <div className="md:flex items-center justify-end md:flex-1">
-                <Button color="white" bgColor={currentColor} text="Create a Journal" borderRadius="10px" size="md" />
+                <Button customFunc={() => setAddJournal(true)} color="white" bgColor={currentColor} text="Create a Journal" borderRadius="10px" size="md" />
+                <PlusIcon onClick={() => setAddJournal(true)} className="h-6 w-6 text-gray-600 hover:drop-shadow-xl cursor-pointer" aria-hidden="true" />
             </div>
             <Listbox value={selectedJournal} onChange={setSelectedJournal}>
                 {({ open }) => (
