@@ -1,17 +1,18 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
-import { Button } from '../components';
+import { Button, ExchangeModal } from '../components';
 
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import { PlusIcon } from '@heroicons/react/outline';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
 const MyExchanges = ({fetchAgain}) => {
-    const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges, currentColor } = useStateContext();
+    const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges, currentColor, addExchange, setAddExchange } = useStateContext();
 
     const fetchExchanges = async () => {
         try {
@@ -34,8 +35,10 @@ const MyExchanges = ({fetchAgain}) => {
 
     return (
         <>
-            <div className="md:flex items-center justify-end md:flex-1">
-                <Button color="white" bgColor={currentColor} text="Create a Exchange" borderRadius="10px" size="md" />
+        <ExchangeModal />
+        <div className="md:flex items-center justify-end md:flex-1">
+                <Button customFunc={() => setAddExchange(true)} color="white" bgColor={currentColor} text="Add an Exchange" borderRadius="10px" size="md" />
+                <PlusIcon onClick={() => setAddExchange(true)} className="h-6 w-6 text-gray-600 hover:drop-shadow-xl cursor-pointer" aria-hidden="true" />
             </div>
             <Listbox value={selectedExchange} onChange={setSelectedExchange}>
                 {({ open }) => (
