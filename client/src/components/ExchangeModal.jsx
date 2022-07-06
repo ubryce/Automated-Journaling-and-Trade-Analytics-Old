@@ -99,13 +99,16 @@ const ExchangeModal = () => {
                                         Exchange API
                                     </label>
                                     <div className="mt-1">
-                                    <textarea
+                                    <input
                                         onChange={(e) => setExchangeAPI(e.target.value)}
                                         rows={3}
                                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md inline-flex items-center px-3 py-1"
-                                        placeholder="Enter a description for your journal"
+                                        placeholder="Enter Read-Only Exchange API"
                                         defaultValue={exchangeAPI}
                                     />
+                                    <p className="mt-2 text-sm text-gray-500">
+                                        Read Only API
+                                    </p>
                                     </div>
                                 </div>
 
@@ -114,11 +117,11 @@ const ExchangeModal = () => {
                                         Exchange Secret
                                     </label>
                                     <div className="mt-1">
-                                    <textarea
+                                    <input
                                         onChange={(e) => setExchangeSecret(e.target.value)}
                                         rows={3}
                                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md inline-flex items-center px-3 py-1"
-                                        placeholder="Enter a description for your journal"
+                                        placeholder="Enter Exchange Secret"
                                         defaultValue={exchangeSecret}
                                     />
                                     </div>
