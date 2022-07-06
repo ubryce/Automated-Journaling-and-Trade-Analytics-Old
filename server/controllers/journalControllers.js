@@ -56,8 +56,7 @@ const accessJournal = asyncHandler(async (req, res) => {
 
 const fetchJournals = asyncHandler(async (req, res) => {
     try {
-        Journal.find({users: {$elemMatch: {$eq: req.user._id}}})
-            .populate("users", "-password")
+        Journal.find({journalAdmin: {$eq: req.user._id}})
             .populate("journalAdmin", "-password")
             .populate("latestTrade")
             .sort({updatedAt: -1})
@@ -88,7 +87,7 @@ const createJournal = asyncHandler(async (req, res) => {
     try {
 
         const createdJournal = await Journal.create(journalData);
-        const fullJournal = await Journal.findOne({ _id: groupJournal._id })
+        const fullJournal = await Journal.findOne({ _id: createdJournal._id })
             .populate("journalAdmin", "-password");
         
         res.status(200).json(fullJournal);

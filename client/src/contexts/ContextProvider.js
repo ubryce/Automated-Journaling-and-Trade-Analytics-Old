@@ -20,7 +20,7 @@ export const ContextProvider = ({ children }) => {
     const [visability, setVisability] = useState(true);
     const [selectedJournal, setSelectedJournal] = useState();
     const [journals, setJournals] = useState([]);
-    const [addJournal, setAddJournal] = useState(true);
+    const [addJournal, setAddJournal] = useState(false);
     const [selectedExchange, setSelectedExchange] = useState();
     const [exchanges, setExchanges] = useState([]);
 
