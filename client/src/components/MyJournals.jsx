@@ -5,6 +5,10 @@ import { useStateContext } from '../contexts/ContextProvider';
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
+
 const MyJournals = ({fetchAgain}) => {
     const { selectedJournal, setSelectedJournal, user, journals, setJournals } = useStateContext();
 
@@ -18,9 +22,6 @@ const MyJournals = ({fetchAgain}) => {
     
             const {data} = await axios.get("/api/journal", config);
             setJournals(data);
-           
-            console.log(data[0]);
-            //setSelectedJournal(data[0]);
         } catch (error) {
             // toast({
             //     title: "Error occured",
@@ -64,14 +65,19 @@ const MyJournals = ({fetchAgain}) => {
                 {journals.map((journal) => (
                   <Listbox.Option
                     key={journal.id}
-                    className={({ isActive }) => isActive ? 'text-white bg-indigo-600' : 'text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9'} 
+                    className={({ active }) =>
+                      classNames(
+                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        'cursor-default select-none relative py-2 pl-3 pr-9'
+                      )
+                    }
                     value={journal}
                   >
                     {({ selected, active }) => (
                       <>
                         <div className="flex items-center">
-                          <span
-                            className={selected ? 'font-semibold' : 'font-normal ml-3 block truncate'}
+                        <span
+                            className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
                           >
                             {journal.journalName}
                           </span>
@@ -79,10 +85,11 @@ const MyJournals = ({fetchAgain}) => {
 
                         {selected ? (
                           <span
-                            className={
-                              active ? 'text-white' : 'text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4'
-                            }
-                          >
+                          className={classNames(
+                            active ? 'text-white' : 'text-indigo-600',
+                            'absolute inset-y-0 right-0 flex items-center pr-4'
+                          )}
+                        >
                             <CheckIcon className="h-5 w-5" aria-hidden="true" />
                           </span>
                         ) : null}
