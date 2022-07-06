@@ -74,32 +74,24 @@ const fetchJournals = asyncHandler(async (req, res) => {
     }
 });
 
-const createGroupJournal = asyncHandler(async (req, res) => {
-    if ( !req.body.users || !req.body.name ) {
-        return res.status(400).send({messgae: "Please fill all fields"});
-    }
-    var users = JSON.parse(req.body.users);
-
-    if (users.length < 2) {
-        return res
-            .status(400)
-            .send("More than 2 users are required to form a group chat");
+const createJournal = asyncHandler(async (req, res) => {
+    if ( !req.body.name ) {
+        return res.status(400).send({messgae: "Please fill Journal name"});
     }
 
-    users.push(req.user);
+    var journalData = {
+        journalName: req.body.name,
+        journalDescription: req.body.description,
+        journalAdmin: req.user,
+    };
 
     try {
-        const groupJournal = await Journal.create({
-            journalName: req.body.name,
-            users: users,
-            journalAdmin: req.user,
-        });
 
-        const fullGroupJournal = await Journal.findOne({ _id: groupJournal._id })
-            .populate("users", "-password")
+        const createdJournal = await Journal.create(journalData);
+        const fullJournal = await Journal.findOne({ _id: groupJournal._id })
             .populate("journalAdmin", "-password");
         
-        res.status(200).json(fullGroupJournal);
+        res.status(200).json(fullJournal);
     } catch (error) {
         res.status(400);
         throw new Error(error.message);
@@ -167,4 +159,4 @@ const removeFromJournal = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {accessJournal, fetchJournals, createGroupJournal, renameJournal, addToJournal, removeFromJournal};
+module.exports = {accessJournal, fetchJournals, createJournal, renameJournal, addToJournal, removeFromJournal};
