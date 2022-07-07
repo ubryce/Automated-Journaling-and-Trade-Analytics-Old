@@ -3,6 +3,7 @@ export { default as ThemeSettings } from './ThemeSettings';
 export { default as Sidebar } from './Sidebar';
 export { default as JournalModal } from './JournalModal';
 export { default as ExchangeModal } from './ExchangeModal';
+export { default as Toast } from './Toast';
 // eslint-disable-next-line import/no-cycle
 export { default as Navbar } from './Navbar';
 export { default as Footer } from './Footer';
