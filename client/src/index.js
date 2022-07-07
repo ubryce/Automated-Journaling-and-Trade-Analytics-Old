@@ -8,7 +8,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { registerLicense } from '@syncfusion/ej2-base';
 
 
-
 ReactDOM.render(
   //<React.StrictMode>
     <BrowserRouter>
