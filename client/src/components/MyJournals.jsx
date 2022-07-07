@@ -59,7 +59,7 @@ const MyJournals = ({fetchAgain}) => {
             </div>
             <div>
                 <FormControl sx={{ m: 1, minWidth: 200 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Journal</InputLabel>
+                    <InputLabel id="journal-label">Journal</InputLabel>
                     <Select
                     labelId="journal-label"
                     id="journal"
