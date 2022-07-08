@@ -22,10 +22,42 @@ function classNames(...classes) {
   }
 
 const MyExchanges = ({fetchAgain}) => {
-    const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges, currentColor, addExchange, setAddExchange } = useStateContext();
+    const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [exchangeName, setExchangeName] = useState();
+    const [exchangeAPI, setExchangeAPI] = useState();
+    const [exchangeSecret, setExchangeSecret] = useState();
+
+    const handleSubmit = async () => {
+        if (!exchangeName || !exchangeAPI || !exchangeSecret) {
+            console.log("missing fields")
+            return;
+        }
+
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.post('/api/exchange', {
+                exchangeName: exchangeName,
+                exchangeAPI: exchangeAPI,
+                exchangeSecret: exchangeSecret,
+            }, config);
+
+            setExchanges([data, ...exchanges]);
+            handleClose();
+            console.log("new exchange")
+        } catch (error) {
+            console.log("failed to create exchange")
+        }
+    };
 
     const fetchExchanges = async () => {
         try {
@@ -55,10 +87,11 @@ const MyExchanges = ({fetchAgain}) => {
                 <DialogContent>
                 <div>
                     <TextField
-                    label="Exchange Name"
-                    id="standard-size-normal"
-                    defaultValue=""
-                    variant="standard"
+                        label="Exchange Name"
+                        id="standard-size-normal"
+                        defaultValue=""
+                        variant="standard"
+                        onChange={(e) => setExchangeName(e.target.value)}
                     />
                 </div>
                 <div>
@@ -67,6 +100,7 @@ const MyExchanges = ({fetchAgain}) => {
                         id="standard-size-normal"
                         defaultValue=""
                         variant="standard"
+                        onChange={(e) => setExchangeAPI(e.target.value)}
                     />
                 </div>
                 <div>
@@ -75,12 +109,13 @@ const MyExchanges = ({fetchAgain}) => {
                         id="standard-size-normal"
                         defaultValue=""
                         variant="standard"
+                        onChange={(e) => setExchangeSecret(e.target.value)}
                     />
                 </div>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Create</Button>
+                    <Button onClick={handleSubmit}>Create</Button>
                 </DialogActions>
             </Dialog>
         <div className="md:flex items-center justify-end md:flex-1">
