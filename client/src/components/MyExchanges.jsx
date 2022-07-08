@@ -1,12 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
-import { Button, ExchangeModal, Header } from '../components';
+import { Header } from '../components';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import { PlusIcon } from '@heroicons/react/outline';
 
 function classNames(...classes) {
@@ -15,6 +23,9 @@ function classNames(...classes) {
 
 const MyExchanges = ({fetchAgain}) => {
     const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges, currentColor, addExchange, setAddExchange } = useStateContext();
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const fetchExchanges = async () => {
         try {
@@ -39,10 +50,41 @@ const MyExchanges = ({fetchAgain}) => {
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
         <Header category="Page" title="Exchanges" />
-        <ExchangeModal />
+        <Dialog open={open} onClose={handleClose}> 
+                <DialogTitle>New Exchange</DialogTitle>
+                <DialogContent>
+                <div>
+                    <TextField
+                    label="Exchange Name"
+                    id="standard-size-normal"
+                    defaultValue=""
+                    variant="standard"
+                    />
+                </div>
+                <div>
+                    <TextField
+                        label="Exchange API"
+                        id="standard-size-normal"
+                        defaultValue=""
+                        variant="standard"
+                    />
+                </div>
+                <div>
+                    <TextField
+                        label="Exchange Secret"
+                        id="standard-size-normal"
+                        defaultValue=""
+                        variant="standard"
+                    />
+                </div>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleClose}>Create</Button>
+                </DialogActions>
+            </Dialog>
         <div className="md:flex items-center justify-end md:flex-1">
-                <Button customFunc={() => setAddExchange(true)} color="white" bgColor={currentColor} text="Add an Exchange" borderRadius="10px" size="md" />
-                <PlusIcon onClick={() => setAddExchange(true)} className="h-6 w-6 text-gray-600 hover:drop-shadow-xl cursor-pointer" aria-hidden="true" />
+                <PlusIcon onClick={handleOpen} className="h-6 w-6 text-gray-600 hover:drop-shadow-xl cursor-pointer" aria-hidden="true" />
             </div>
             <div>
                 <FormControl sx={{ m: 1, minWidth: 200 }}>

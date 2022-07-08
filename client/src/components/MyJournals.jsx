@@ -1,30 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
-import {  JournalModal, Header } from '../components';
+import { Header } from '../components';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import { PlusIcon } from '@heroicons/react/outline'
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
 
 const MyJournals = ({fetchAgain}) => {
     const { selectedJournal, setSelectedJournal, user, journals, setJournals, currentColor, addJournal, setAddJournal } = useStateContext();
