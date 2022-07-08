@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -84,27 +85,37 @@ const MyJournals = ({fetchAgain}) => {
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
             <Header category="Page" title="Journals" />
-            <Dialog open={open} onClose={handleClose}> 
+            <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth="true"> 
                 <DialogTitle>New Journal</DialogTitle>
                 <DialogContent>
-                <div>
-                    <TextField
-                        label="Journal Name"
-                        id="standard-size-normal"
-                        defaultValue=""
-                        variant="standard"
-                        onChange={(e) => setJournalName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <TextField
-                        label="Journal Description"
-                        id="standard-size-normal"
-                        defaultValue=""
-                        variant="standard"
-                        onChange={(e) => setJournalDescription(e.target.value)}
-                    />
-                </div>
+                    <Box noValidate
+                        component="form"
+                        sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        m: 'auto',
+                        width: 'fit-content',
+                        }}
+                    >
+                        <div>
+                            <TextField
+                                label="Journal Name"
+                                id="standard-size-normal"
+                                defaultValue=""
+                                variant="standard"
+                                onChange={(e) => setJournalName(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                label="Journal Description"
+                                id="standard-size-normal"
+                                defaultValue=""
+                                variant="standard"
+                                onChange={(e) => setJournalDescription(e.target.value)}
+                            />
+                        </div>
+                        </Box>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>

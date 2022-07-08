@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -78,36 +79,46 @@ const MyExchanges = ({fetchAgain}) => {
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
         <Header category="Page" title="Exchanges" />
-        <Dialog open={open} onClose={handleClose}> 
+        <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth="true"> 
                 <DialogTitle>New Exchange</DialogTitle>
                 <DialogContent>
-                <div>
-                    <TextField
-                        label="Exchange Name"
-                        id="standard-size-normal"
-                        defaultValue=""
-                        variant="standard"
-                        onChange={(e) => setExchangeName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <TextField
-                        label="Exchange API"
-                        id="standard-size-normal"
-                        defaultValue=""
-                        variant="standard"
-                        onChange={(e) => setExchangeAPI(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <TextField
-                        label="Exchange Secret"
-                        id="standard-size-normal"
-                        defaultValue=""
-                        variant="standard"
-                        onChange={(e) => setExchangeSecret(e.target.value)}
-                    />
-                </div>
+                    <Box noValidate
+                        component="form"
+                        sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        m: 'auto',
+                        width: 'fit-content',
+                        }}
+                    >
+                        <div>
+                            <TextField
+                                label="Exchange Name"
+                                id="standard-size-normal"
+                                defaultValue=""
+                                variant="standard"
+                                onChange={(e) => setExchangeName(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                label="Exchange API"
+                                id="standard-size-normal"
+                                defaultValue=""
+                                variant="standard"
+                                onChange={(e) => setExchangeAPI(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                label="Exchange Secret"
+                                id="standard-size-normal"
+                                defaultValue=""
+                                variant="standard"
+                                onChange={(e) => setExchangeSecret(e.target.value)}
+                            />
+                        </div>
+                    </Box>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
