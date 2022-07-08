@@ -18,11 +18,40 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { PlusIcon } from '@heroicons/react/outline'
 
 const MyJournals = ({fetchAgain}) => {
-    const { selectedJournal, setSelectedJournal, user, journals, setJournals, currentColor, addJournal, setAddJournal } = useStateContext();
+    const { selectedJournal, setSelectedJournal, user, journals, setJournals, currentColor } = useStateContext();
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     
+    const [journalName, setJournalName] = useState();
+    const [journalDescription, setJournalDescription] = useState();
+
+    const handleSubmit = async () => {
+        if (!journalName ) {
+            console.log("missing name")
+            return;
+        }
+
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.post('/api/journal/create', {
+                name: journalName,
+                description: journalDescription,
+            }, config);
+
+            setJournals([data, ...journals]);
+            handleClose()
+            console.log("new journal")
+        } catch (error) {
+            console.log("failed to create journal")
+        }
+    };
 
     const fetchJournals = async () => {
         try {
@@ -60,10 +89,11 @@ const MyJournals = ({fetchAgain}) => {
                 <DialogContent>
                 <div>
                     <TextField
-                    label="Journal Name"
-                    id="standard-size-normal"
-                    defaultValue=""
-                    variant="standard"
+                        label="Journal Name"
+                        id="standard-size-normal"
+                        defaultValue=""
+                        variant="standard"
+                        onChange={(e) => setJournalName(e.target.value)}
                     />
                 </div>
                 <div>
@@ -72,12 +102,13 @@ const MyJournals = ({fetchAgain}) => {
                         id="standard-size-normal"
                         defaultValue=""
                         variant="standard"
+                        onChange={(e) => setJournalDescription(e.target.value)}
                     />
                 </div>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Create</Button>
+                    <Button onClick={handleSubmit}>Create</Button>
                 </DialogActions>
             </Dialog>
             <div className="md:flex items-center justify-end md:flex-1">
