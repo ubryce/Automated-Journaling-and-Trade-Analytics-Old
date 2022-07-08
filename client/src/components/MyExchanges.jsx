@@ -17,10 +17,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { PlusIcon } from '@heroicons/react/outline';
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
-
 const MyExchanges = ({fetchAgain}) => {
     const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();
 
