@@ -46,17 +46,14 @@ const fetchExchanges = asyncHandler(async (req, res) => {
 const renameExchange = asyncHandler(async (req, res) => {
     const { exchangeId, exchangeName, exchangeAPI, exchangeSecret } = req.body;
 
-    const updatedExchange = await Exchange.findByIdAndUpdate(
-        exchangeId,
+    const updatedExchange = await Exchange.findOneAndUpdate(
+        {_id: exchangeId, user: req.user._id},
         {
             exchangeName: exchangeName,
-        },
-        {
-            new: true,
         }
     )
 
-    if (!updatedExchange || req.user._id != updatedExchange.user) {
+    if (!updatedExchange) {
         res.status(404);
         throw new Error("Exchange not found");
     } else {
