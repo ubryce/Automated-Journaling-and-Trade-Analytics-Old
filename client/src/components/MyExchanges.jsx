@@ -79,7 +79,7 @@ const MyExchanges = ({fetchAgain}) => {
     return (
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
         <Header category="Page" title="Exchanges" />
-        <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth="true"> 
+        <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth={true}> 
                 <DialogTitle>New Exchange</DialogTitle>
                 <DialogContent>
                     <Box noValidate

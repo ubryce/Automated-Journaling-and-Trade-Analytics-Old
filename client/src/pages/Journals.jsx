@@ -8,7 +8,7 @@ const Journals = () => {
 
   return (
     <div className='mt-12'>
-      {user && <MyJournals fetchAgain={fetchAgain}/>}
+      {user && <MyJournals fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
     </div>
   )
 }

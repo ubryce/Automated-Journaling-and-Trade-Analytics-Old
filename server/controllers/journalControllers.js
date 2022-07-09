@@ -98,12 +98,13 @@ const createJournal = asyncHandler(async (req, res) => {
 });
 
 const renameJournal = asyncHandler(async (req, res) => {
-    const { journalId, journalName } = req.body;
+    const { journalId, journalName, journalDescription } = req.body;
 
     const updatedJournal = await Journal.findByIdAndUpdate(
         journalId,
         {
             journalName: journalName,
+            journalDescription: journalDescription
         },
         {
             new: true,
