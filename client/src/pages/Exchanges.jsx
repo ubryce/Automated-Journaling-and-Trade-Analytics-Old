@@ -8,7 +8,7 @@ const Exchanges = () => {
 
     return (
         <div className='mt-12'>
-            {user && <MyExchanges fetchAgain={fetchAgain}/>}
+            {user && <MyExchanges fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
         </div>
     )
 }

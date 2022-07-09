@@ -16,14 +16,17 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { PlusIcon } from '@heroicons/react/outline';
+import { PlusIcon, PencilAltIcon } from '@heroicons/react/outline';
 
-const MyExchanges = ({fetchAgain}) => {
+const MyExchanges = ({fetchAgain, setFetchAgain}) => {
     const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [editOpen, setEditOpen] = useState(false);
+    const handleEditOpen = () => setEditOpen(true);
+    const handleEditClose = () => setEditOpen(false);
 
     const [exchangeName, setExchangeName] = useState();
     const [exchangeAPI, setExchangeAPI] = useState();
@@ -54,6 +57,35 @@ const MyExchanges = ({fetchAgain}) => {
         } catch (error) {
             console.log("failed to create exchange")
         }
+    };
+
+    const handleEditSubmit = async () => {
+        // if (!journalName ) {
+        //     console.log("missing name")
+        //     return;
+        // }
+
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.put('/api/exchange/rename', {
+                exchangeId: selectedExchange._id,
+                exchangeName: exchangeName,
+            }, config);
+
+            setSelectedExchange(data);
+            handleEditClose()
+            setFetchAgain(!fetchAgain);
+            console.log("edited")
+        } catch (error) {
+            console.log("failed to edit journal")
+        }
+
+        setExchangeName('');
     };
 
     const fetchExchanges = async () => {
@@ -125,8 +157,55 @@ const MyExchanges = ({fetchAgain}) => {
                     <Button onClick={handleSubmit}>Create</Button>
                 </DialogActions>
             </Dialog>
+            {selectedExchange && <Dialog open={editOpen} onClose={handleEditClose} maxWidth="sm" fullWidth={true}> 
+                <DialogTitle>Edit Exchange</DialogTitle>
+                <DialogContent>
+                    <Box noValidate
+                        component="form"
+                        sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        m: 'auto',
+                        width: 'fit-content',
+                        }}
+                    >
+                        <div>
+                            <TextField
+                                label="Exchange Name"
+                                id="standard-size-normal"
+                                defaultValue={selectedExchange.exchangeName}
+                                variant="standard"
+                                onChange={(e) => setExchangeName(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                label="Exchange API"
+                                id="standard-size-normal"
+                                defaultValue={selectedExchange.exchangeAPI}
+                                variant="standard"
+                                onChange={(e) => setExchangeAPI(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                label="Exchange Secret"
+                                id="standard-size-normal"
+                                defaultValue=""
+                                variant="standard"
+                                onChange={(e) => setExchangeSecret(e.target.value)}
+                            />
+                        </div>
+                        </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleEditClose}>Cancel</Button>
+                    <Button onClick={handleEditSubmit}>Confirm</Button>
+                </DialogActions>
+            </Dialog>}
         <div className="md:flex items-center justify-end md:flex-1">
                 <PlusIcon onClick={handleOpen} className="h-6 w-6 text-gray-600 hover:drop-shadow-xl cursor-pointer" aria-hidden="true" />
+                {selectedExchange && <PencilAltIcon onClick={handleEditOpen} className="h-6 w-6 text-gray-600 hover:drop-shadow-xl cursor-pointer" aria-hidden="true"/>}
             </div>
             <div>
                 <FormControl sx={{ m: 1, minWidth: 200 }}>
