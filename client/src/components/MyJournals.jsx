@@ -75,7 +75,6 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
                 journalName: journalName,
                 journalDescription: journalDescription
             }, config);
-
             setJournals([data, ...journals]);
             handleEditClose()
             setFetchAgain(!fetchAgain);

@@ -100,19 +100,11 @@ const createJournal = asyncHandler(async (req, res) => {
 const renameJournal = asyncHandler(async (req, res) => {
     const { journalId, journalName, journalDescription } = req.body;
 
-    const updatedJournal = await Journal.findByIdAndUpdate(
-        journalId,
-        {
-            journalName: journalName,
-            journalDescription: journalDescription
-        },
-        {
-            new: true,
-        }
+    const updatedJournal = await Journal.findOneAndUpdate(
+        {_id: journalId, journalAdmin: req.user._id},
+        {journalName: journalName, journalDescription: journalDescription}
     )
-        .populate("users", "-password")
-        .populate("journalAdmin", "-password");
-
+    
     if (!updatedJournal) {
         res.status(404);
         throw new Error("Journal not found");

@@ -44,7 +44,7 @@ const fetchExchanges = asyncHandler(async (req, res) => {
 });
 
 const renameExchange = asyncHandler(async (req, res) => {
-    const { exchangeId, exchangeName } = req.body;
+    const { exchangeId, exchangeName, exchangeAPI, exchangeSecret } = req.body;
 
     const updatedExchange = await Exchange.findByIdAndUpdate(
         exchangeId,
