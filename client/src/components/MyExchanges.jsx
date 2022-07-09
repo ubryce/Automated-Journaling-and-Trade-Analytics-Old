@@ -77,7 +77,7 @@ const MyExchanges = ({fetchAgain, setFetchAgain}) => {
                 exchangeName: exchangeName,
             }, config);
 
-            setSelectedExchange(data);
+            setSelectedExchange();
             handleEditClose()
             setFetchAgain(!fetchAgain);
             console.log("edited")
@@ -191,7 +191,7 @@ const MyExchanges = ({fetchAgain, setFetchAgain}) => {
                             <TextField
                                 label="Exchange Secret"
                                 id="standard-size-normal"
-                                defaultValue=""
+                                defaultValue=''
                                 variant="standard"
                                 onChange={(e) => setExchangeSecret(e.target.value)}
                             />
