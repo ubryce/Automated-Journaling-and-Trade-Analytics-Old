@@ -72,6 +72,12 @@ const Sidebar = () => {
                   notebook
                 </span>
               </NavLink>
+              <NavLink to={`/marketprep`} key='marketprep' onClick={handleCloseSideBar} className={({ isActive }) => isActive ? activeLink : normalLink} style={({ isActive }) => ({ backgroundColor: isActive ? currentColor : ""})}>
+                <FiShoppingBag />
+                <span className='capitalize'>
+                  market prep
+                </span>
+              </NavLink>
           {links.map((item) => (
             <div key={item.title}>
               <p className='text-gray-400 m-3 mt-4 uppercase'>
