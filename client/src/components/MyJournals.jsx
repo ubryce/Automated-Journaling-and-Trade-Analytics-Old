@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
-import { Header } from '../components';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -113,8 +112,7 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
     }, [fetchAgain]);
   
     return (
-        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-            <Header category="Page" title="Journals" />
+        <>
             <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth={true}> 
                 <DialogTitle>New Journal</DialogTitle>
                 <DialogContent>
@@ -215,7 +213,7 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
                 {selectedJournal ? selectedJournal.journalDescription : ""}
             </div> */}
 
-        </div>
+        </>
     )
 }
 

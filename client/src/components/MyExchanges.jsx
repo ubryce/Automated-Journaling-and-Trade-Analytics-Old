@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
-import { Header } from '../components';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -109,8 +108,8 @@ const MyExchanges = ({fetchAgain, setFetchAgain}) => {
     }, [fetchAgain]);
 
     return (
-        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-        <Header category="Page" title="Exchanges" />
+        <>
+        
         <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth={true}> 
                 <DialogTitle>New Exchange</DialogTitle>
                 <DialogContent>
@@ -224,7 +223,7 @@ const MyExchanges = ({fetchAgain, setFetchAgain}) => {
                     </Select>
                 </FormControl>
             </div>
-        </div>
+        </>
     )
 }
 
