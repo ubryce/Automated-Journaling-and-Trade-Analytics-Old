@@ -23,9 +23,6 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [editOpen, setEditOpen] = useState(false);
-    const handleEditOpen = () => setEditOpen(true);
-    const handleEditClose = () => setEditOpen(false);
     
     const [journalName, setJournalName] = useState();
     const [journalDescription, setJournalDescription] = useState();
@@ -53,33 +50,6 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
             console.log("new journal")
         } catch (error) {
             console.log("failed to create journal")
-        }
-    };
-
-    const handleEditSubmit = async () => {
-        // if (!journalName ) {
-        //     console.log("missing name")
-        //     return;
-        // }
-
-        try {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-
-            const {data} = await axios.put('/api/journal/rename', {
-                journalId: selectedJournal._id,
-                journalName: journalName,
-                journalDescription: journalDescription
-            }, config);
-            setJournals([data, ...journals]);
-            handleEditClose()
-            setFetchAgain(!fetchAgain);
-            console.log("edited")
-        } catch (error) {
-            console.log("failed to edit journal")
         }
     };
 
@@ -150,48 +120,8 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
                     <Button onClick={handleSubmit}>Create</Button>
                 </DialogActions>
             </Dialog>
-            {selectedJournal && <Dialog open={editOpen} onClose={handleEditClose} maxWidth="sm" fullWidth={true}> 
-                <DialogTitle>Edit Journal</DialogTitle>
-                <DialogContent>
-                    <Box noValidate
-                        component="form"
-                        sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        m: 'auto',
-                        width: 'fit-content',
-                        }}
-                    >
-                        <div>
-                            <TextField
-                                label="Journal Name"
-                                id="standard-size-normal"
-                                defaultValue={selectedJournal.journalName}
-                                variant="standard"
-                                onChange={(e) => setJournalName(e.target.value)}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                label="Journal Description"
-                                id="standard-size-normal"
-                                defaultValue={selectedJournal.journalDescription}
-                                variant="standard"
-                                onChange={(e) => setJournalDescription(e.target.value)}
-                            />
-                        </div>
-                        </Box>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleEditClose}>Cancel</Button>
-                    <Button onClick={handleEditSubmit}>Confirm</Button>
-                </DialogActions>
-            </Dialog>}
             <div className="md:flex items-center justify-end md:flex-1">
                 <PlusIcon onClick={handleOpen} className="h-6 w-6 text-gray-600 hover:drop-shadow-xl cursor-pointer" aria-hidden="true" />
-                {selectedJournal && <PencilAltIcon onClick={handleEditOpen} className="h-6 w-6 text-gray-600 hover:drop-shadow-xl cursor-pointer" aria-hidden="true"/>}
-            </div>
-            <div>
                 <FormControl sx={{ m: 1, minWidth: 200 }}>
                     <InputLabel id="journal-label">Journal</InputLabel>
                     <Select
@@ -208,7 +138,6 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
                     </Select>
                 </FormControl>
             </div>
-
             {/* <div>
                 {selectedJournal ? selectedJournal.journalDescription : ""}
             </div> */}
