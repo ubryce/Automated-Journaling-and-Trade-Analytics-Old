@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -136,10 +137,13 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                 },
                 }}
             >
-                
                 <MenuItem onClick={handleEditOpen} >
                     <EditIcon />
                     Edit
+                </MenuItem>
+                <MenuItem onClick={handleClose} >
+                    <AddIcon />
+                    Add Exchange
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <DeleteIcon/>
