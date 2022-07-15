@@ -50,6 +50,8 @@ const renameExchange = asyncHandler(async (req, res) => {
         {_id: exchangeId, user: req.user._id},
         {
             exchangeName: exchangeName,
+            exchangeAPI: exchangeAPI,
+            exchangeSecret: exchangeSecret
         }
     )
 
@@ -76,4 +78,4 @@ const deleteExchange = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createExchange, fetchExchanges, renameExchange, renameExchangeAPI, renameExchangeSecret, deleteExchange };
+module.exports = { createExchange, fetchExchanges, renameExchange, deleteExchange };
