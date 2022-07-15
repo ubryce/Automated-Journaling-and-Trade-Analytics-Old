@@ -61,53 +61,6 @@ const renameExchange = asyncHandler(async (req, res) => {
     }
 });
 
-const renameExchangeAPI = asyncHandler(async (req, res) => {
-    const { exchangeId, exchangeAPI } = req.body;
-
-    const updatedExchange = await Exchange.findByIdAndUpdate(
-        exchangeId,
-        {
-            exchangeAPI: exchangeAPI,
-        },
-        {
-            new: true,
-        }
-    )
-
-    if (!updatedExchange || req.user._id != updatedExchange.user) {
-        res.status(404);
-        throw new Error("Exchange not found");
-    } else {
-        res.json(updatedExchange);
-    }
-});
-
-const renameExchangeSecret = asyncHandler(async (req, res) => {
-    const { exchangeId, exchangeSecret } = req.body;
-
-    let newExchangeSecret = exchangeSecret;
-
-    const salt = await bcrypt.genSalt(10);
-    newExchangeSecret = await bcrypt.hash(newExchangeSecret, salt);
-
-    const updatedExchange = await Exchange.findByIdAndUpdate(
-        exchangeId,
-        {
-            exchangeSecret: newExchangeSecret,
-        },
-        {
-            new: true,
-        }
-    )
-
-    if (!updatedExchange || req.user._id != updatedExchange.user) {
-        res.status(404);
-        throw new Error("Exchange not found");
-    } else {
-        res.json(updatedExchange);
-    }
-});
-
 const deleteExchange = asyncHandler(async (req, res) => {
     const { exchangeId } = req.body;
     console.log(exchangeId)
