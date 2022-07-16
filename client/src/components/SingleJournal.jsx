@@ -19,10 +19,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 const ITEM_HEIGHT = 48;
 
 const SingleJournal = ({fetchAgain, setFetchAgain}) => {
-    const { selectedJournal, setSelectedJournal, user, journals, setJournals } = useStateContext();;
+    const { selectedJournal, setSelectedJournal, user, journals, setJournals, exchanges, setExchanges } = useStateContext();;
 
     const [journalName, setJournalName] = useState();
     const [journalDescription, setJournalDescription] = useState();
@@ -47,6 +51,16 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
         setDeleteOpen(false);
     };
 
+    const [addOpen, setAddOpen] = useState(false);
+    const handleAddOpen = () => {
+        setAnchorEl(null);
+        setAddOpen(true);
+    };
+    const handleAddClose = () => {
+        setAnchorEl(null);
+        setAddOpen(false);
+    };
+
     const [anchorEl, setAnchorEl] = useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -55,6 +69,25 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const fetchExchanges = async () => {
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+
+            const {data} = await axios.get("/api/exchange", config);
+            setExchanges(data);
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    const handleAddSubmit = async () => {
+        console.log(exchanges)
+    }
 
     const handleEditSubmit = async () => {
         // if (!journalName ) {
@@ -94,7 +127,7 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                     journalId: selectedJournal._id,
                 }
             };
-            console.log(config)
+            
             await axios.delete('/api/journal', config);
 
             setSelectedJournal();
@@ -175,6 +208,31 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                 <Button onClick={handleDeleteSubmit}>Confirm</Button>
             </DialogActions>
         </Dialog>
+        <Dialog open={addOpen} onClose={handleAddClose} maxWidth="sm" fullWidth={true}> 
+            <DialogTitle>Add Exchanges to Journal</DialogTitle>
+            <DialogContent>
+                <Box noValidate
+                    component="form"
+                    sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    m: 'auto',
+                    width: 'fit-content',
+                    }}
+                >
+                    <FormGroup>
+                        {exchanges.map((exchange) => (
+                            <FormControlLabel key={exchange._id} control={<Checkbox />} label={exchange.exchangeName} />
+                        ))}
+                    </FormGroup>
+
+                </Box>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleAddClose}>Cancel</Button>
+                <Button onClick={handleAddSubmit}>Confirm</Button>
+            </DialogActions>
+        </Dialog>
         <div className="md:flex items-center justify-end md:flex-1">
             <IconButton
                 aria-label="more"
@@ -205,7 +263,7 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                     <EditIcon />
                     Edit
                 </MenuItem>
-                <MenuItem onClick={handleClose} >
+                <MenuItem onClick={() => {fetchExchanges(); handleAddOpen()}} >
                     <AddIcon />
                     Add Exchange
                 </MenuItem>
