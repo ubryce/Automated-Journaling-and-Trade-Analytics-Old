@@ -113,6 +113,21 @@ const renameJournal = asyncHandler(async (req, res) => {
     }
 });
 
+const deleteJournal = asyncHandler(async (req, res) => {
+    const { journalId } = req.body;
+    
+    const updatedJournal = await Journal.findOneAndDelete(
+        {_id: journalId, user: req.user._id}
+    )
+
+    if (!updatedJournal ) {
+        res.status(404);
+        throw new Error("Journal not found");
+    } else {
+        res.json(updatedJournal);
+    }
+})
+
 const addToJournal = asyncHandler(async (req, res) => {
     const { journalId, userId } = req.body;
 
@@ -151,4 +166,4 @@ const removeFromJournal = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {accessJournal, fetchJournals, createJournal, renameJournal, addToJournal, removeFromJournal};
+module.exports = {accessJournal, fetchJournals, createJournal, renameJournal, deleteJournal, addToJournal, removeFromJournal};

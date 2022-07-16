@@ -36,6 +36,17 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
         setAnchorEl(null);
         setEditOpen(false);
     };
+
+    const [deleteOpen, setDeleteOpen] = useState(false);
+    const handleDeleteOpen = () => {
+        setAnchorEl(null);
+        setDeleteOpen(true);
+    };
+    const handleDeleteClose = () => {
+        setAnchorEl(null);
+        setDeleteOpen(false);
+    };
+
     const [anchorEl, setAnchorEl] = useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -70,6 +81,30 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
         } catch (error) {
             console.log("failed to edit journal")
         }
+    };
+
+    const handleDeleteSubmit = async () => {
+        if (!selectedJournal) return
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+                data: {
+                    journalId: selectedJournal._id,
+                }
+            };
+            console.log(config)
+            await axios.delete('/api/journal', config);
+
+            setSelectedJournal();
+            setFetchAgain(!fetchAgain);
+            console.log("deleted")
+        } catch (error) {
+            console.log("failed to delete journal")
+        }
+
+        
     };
 
   return (
@@ -111,6 +146,35 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                 <Button onClick={handleEditSubmit}>Confirm</Button>
             </DialogActions>
         </Dialog>
+        <Dialog open={deleteOpen} onClose={handleDeleteClose} maxWidth="sm" fullWidth={true}> 
+            <DialogTitle>Delete Journal</DialogTitle>
+            <DialogContent>
+                <Box noValidate
+                    component="form"
+                    sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    m: 'auto',
+                    width: 'fit-content',
+                    }}
+                >
+                    <div>
+                        <>
+                            Journal Name: {selectedJournal.journalName}
+                        </>
+                    </div>
+                    <div>
+                        <>
+                            Journal Description: {selectedJournal.journalDescription}
+                        </>
+                    </div>
+                    </Box>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleDeleteClose}>Cancel</Button>
+                <Button onClick={handleDeleteSubmit}>Confirm</Button>
+            </DialogActions>
+        </Dialog>
         <div className="md:flex items-center justify-end md:flex-1">
             <IconButton
                 aria-label="more"
@@ -145,7 +209,7 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                     <AddIcon />
                     Add Exchange
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleDeleteOpen}>
                     <DeleteIcon/>
                     Delete
                 </MenuItem>
