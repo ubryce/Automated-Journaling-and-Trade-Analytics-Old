@@ -65,12 +65,12 @@ const renameExchange = asyncHandler(async (req, res) => {
 
 const deleteExchange = asyncHandler(async (req, res) => {
     const { exchangeId } = req.body;
-    console.log(exchangeId)
-    const updatedExchange = await Exchange.findByIdAndDelete(
-        exchangeId
+    
+    const updatedExchange = await Exchange.findOneAndDelete(
+        {_id: exchangeId, user: req.user._id}
     )
 
-    if (!updatedExchange || req.user._id != updatedExchange.user) {
+    if (!updatedExchange ) {
         res.status(404);
         throw new Error("Exchange not found");
     } else {

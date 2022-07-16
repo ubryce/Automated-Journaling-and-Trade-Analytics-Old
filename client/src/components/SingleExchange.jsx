@@ -74,7 +74,38 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
         }
 
         setExchangeName('');
+        setExchangeAPI('');
+        setExchangeSecret('');
     };
+
+    const handleDelete = async () => {
+        if (!selectedExchange) return
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+                data: {
+                    exchangeId: selectedExchange._id,
+                }
+            };
+            console.log(config)
+            await axios.delete('/api/exchange', config);
+
+            setSelectedExchange();
+            setFetchAgain(!fetchAgain);
+            console.log("deleted")
+        } catch (error) {
+            console.log("failed to delete exchange")
+        }
+
+        
+    };
+
+    useEffect(() => {
+        
+    }, [fetchAgain]);
+
     return (
         <>
             <Dialog open={editOpen} onClose={handleEditClose} maxWidth="sm" fullWidth={true}> 
@@ -154,7 +185,7 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
                         <EditIcon />
                         Edit
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handleDelete}>
                         <DeleteIcon/>
                         Delete
                     </MenuItem>
