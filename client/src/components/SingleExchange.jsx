@@ -36,6 +36,17 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
         setAnchorEl(null);
         setEditOpen(false);
     };
+
+    const [deleteOpen, setDeleteOpen] = useState(false);
+    const handleDeleteOpen = () => {
+        setAnchorEl(null);
+        setDeleteOpen(true);
+    };
+    const handleDeleteClose = () => {
+        setAnchorEl(null);
+        setDeleteOpen(false);
+    };
+
     const [anchorEl, setAnchorEl] = useState(false);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -78,7 +89,7 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
         setExchangeSecret('');
     };
 
-    const handleDelete = async () => {
+    const handleDeleteSubmit = async () => {
         if (!selectedExchange) return
         try {
             const config = {
@@ -154,6 +165,35 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
                     <Button onClick={handleEditSubmit}>Confirm</Button>
                 </DialogActions>
             </Dialog>
+            <Dialog open={deleteOpen} onClose={handleDeleteClose} maxWidth="sm" fullWidth={true}> 
+                <DialogTitle>Delete Exchange?</DialogTitle>
+                <DialogContent>
+                    <Box noValidate
+                        component="form"
+                        sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        m: 'auto',
+                        width: 'fit-content',
+                        }}
+                    >
+                        <div>
+                            <>
+                                Exchange Name: {selectedExchange.exchangeName}
+                            </>
+                        </div>
+                        <div>
+                        <>
+                                Exchange API: {selectedExchange.exchangeAPI}
+                            </>
+                        </div>
+                        </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDeleteClose}>Cancel</Button>
+                    <Button onClick={handleDeleteSubmit}>Confirm</Button>
+                </DialogActions>
+            </Dialog>
             <div className="md:flex items-center justify-end md:flex-1">
                 <IconButton
                     aria-label="more"
@@ -185,7 +225,7 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
                         <EditIcon />
                         Edit
                     </MenuItem>
-                    <MenuItem onClick={handleDelete}>
+                    <MenuItem onClick={handleDeleteOpen}>
                         <DeleteIcon/>
                         Delete
                     </MenuItem>
