@@ -143,7 +143,6 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
 
   return (
     <>
-        <SubHeader name={selectedJournal.journalName} description={selectedJournal.journalDescription}/>
         <Dialog open={editOpen} onClose={handleEditClose} maxWidth="sm" fullWidth={true}> 
             <DialogTitle>Edit Journal</DialogTitle>
             <DialogContent>
@@ -235,45 +234,48 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
                 <Button onClick={handleAddSubmit}>Confirm</Button>
             </DialogActions>
         </Dialog>
-        <div className="md:flex items-center justify-end md:flex-1">
-            <IconButton
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? 'long-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-            >
-                <MoreVertIcon />
-            </IconButton>
-            <Menu
-                id="long-menu"
-                MenuListProps={{
-                'aria-labelledby': 'long-button',
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                PaperProps={{
-                style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: '20ch',
-                },
-                }}
-            >
-                <MenuItem onClick={handleEditOpen} >
-                    <EditIcon />
-                    Edit
-                </MenuItem>
-                <MenuItem onClick={() => {fetchExchanges(); handleAddOpen()}} >
-                    <AddIcon />
-                    Add Exchange
-                </MenuItem>
-                <MenuItem onClick={handleDeleteOpen}>
-                    <DeleteIcon/>
-                    Delete
-                </MenuItem>
-            </Menu>
+        <div className="flex justify-between">
+            <SubHeader name={selectedJournal.journalName} description={selectedJournal.journalDescription}/>
+            <div className="md:flex items-center justify-end md:flex-1">
+                <IconButton
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls={open ? 'long-menu' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                >
+                    <MoreVertIcon />
+                </IconButton>
+                <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                    'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                    style: {
+                        maxHeight: ITEM_HEIGHT * 4.5,
+                        width: '20ch',
+                    },
+                    }}
+                >
+                    <MenuItem onClick={handleEditOpen} >
+                        <EditIcon />
+                        Edit
+                    </MenuItem>
+                    <MenuItem onClick={() => {fetchExchanges(); handleAddOpen()}} >
+                        <AddIcon />
+                        Add Exchange
+                    </MenuItem>
+                    <MenuItem onClick={handleDeleteOpen}>
+                        <DeleteIcon/>
+                        Delete
+                    </MenuItem>
+                </Menu>
+            </div>
         </div>
     </>
   )
