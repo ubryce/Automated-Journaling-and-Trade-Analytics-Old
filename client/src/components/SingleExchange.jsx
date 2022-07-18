@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
+import { SubHeader } from './';
 
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -119,6 +120,7 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
 
     return (
         <>
+            <SubHeader name={selectedExchange.exchangeName} description=""/>
             <Dialog open={editOpen} onClose={handleEditClose} maxWidth="sm" fullWidth={true}> 
                 <DialogTitle>Edit Exchange</DialogTitle>
                 <DialogContent>
