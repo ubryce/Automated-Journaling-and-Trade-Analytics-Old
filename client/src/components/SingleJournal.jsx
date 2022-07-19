@@ -141,6 +141,22 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
         
     };
 
+    // const [bids, setBids] = useState([0]);
+    // const ws = new WebSocket("wss://ftx.com/ws/");
+    // const apiCall = {'type': 'subscribed', 'channel': 'trades'};
+    // ws.onopen = (event) => {
+    //     ws.send(JSON.stringify(apiCall));
+    //   };
+    //   ws.onmessage = function (event) {
+    //     const json = JSON.parse(event.data);
+    //     try {
+        
+    //       console.log(json)
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   };
+
   return (
     <>
         <Dialog open={editOpen} onClose={handleEditClose} maxWidth="sm" fullWidth={true}> 

@@ -6,6 +6,7 @@ const exchangeModel = mongoose.Schema({
     exchangeName: {type: String, required: true},
     exchangeAPI: {type: String, required: true},
     exchangeSecret: {type: String, required: true},
+    exchange: {type: String, required: true},
 });
 
 exchangeModel.pre('save', async function (next) {
