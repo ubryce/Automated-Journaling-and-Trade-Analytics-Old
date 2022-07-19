@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useStateContext } from '../contexts/ContextProvider';
 import MyJournals from '../components/MyJournals';
 import SingleJournal from '../components/SingleJournal';
+import Journal from '../components/Journal';
 import { Header } from '../components';
 
 const Journals = () => {
@@ -16,6 +17,7 @@ const Journals = () => {
             {user && <MyJournals fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
           </div>
             {user && selectedJournal && <SingleJournal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
+            {user && selectedJournal && <Journal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
         </div>
     </div>
   )

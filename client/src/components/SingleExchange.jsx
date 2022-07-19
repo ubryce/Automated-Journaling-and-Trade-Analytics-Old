@@ -22,7 +22,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 const ITEM_HEIGHT = 48;
 
 const SingleExchange = ({fetchAgain, setFetchAgain}) => {
-    const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();;
+    const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();
 
     const [exchangeName, setExchangeName] = useState();
     const [exchangeAPI, setExchangeAPI] = useState();

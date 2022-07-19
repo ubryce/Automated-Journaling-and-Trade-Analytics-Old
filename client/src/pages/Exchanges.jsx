@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useStateContext } from '../contexts/ContextProvider';
 import MyExchanges from '../components/MyExchanges';
 import SingleExchange from '../components/SingleExchange';
+import Exchange from '../components/Exchange';
 import { Header } from '../components';
 
 const Exchanges = () => {
@@ -16,6 +17,7 @@ const Exchanges = () => {
                     {user && <MyExchanges fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
                 </div>
                     {user && selectedExchange && <SingleExchange fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
+                    {user && selectedExchange && <Exchange fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
             </div>
         </div>
     )
