@@ -27,9 +27,10 @@ const MyExchanges = ({fetchAgain, setFetchAgain}) => {
     const [exchangeName, setExchangeName] = useState();
     const [exchangeAPI, setExchangeAPI] = useState();
     const [exchangeSecret, setExchangeSecret] = useState();
+    const [exchange, setExchange] = useState();
 
     const handleSubmit = async () => {
-        if (!exchangeName || !exchangeAPI || !exchangeSecret) {
+        if (!exchangeName || !exchangeAPI || !exchangeSecret || !exchange) {
             console.log("missing fields")
             return;
         }
@@ -45,6 +46,7 @@ const MyExchanges = ({fetchAgain, setFetchAgain}) => {
                 exchangeName: exchangeName,
                 exchangeAPI: exchangeAPI,
                 exchangeSecret: exchangeSecret,
+                exchange: exchange,
             }, config);
 
             setExchanges([data, ...exchanges]);
@@ -115,6 +117,21 @@ const MyExchanges = ({fetchAgain, setFetchAgain}) => {
                                 variant="standard"
                                 onChange={(e) => setExchangeSecret(e.target.value)}
                             />
+                        </div>
+                        <div>
+                            <FormControl sx={{ minWidth: 200 }}>
+                            <InputLabel id="exchange-label">Exchange</InputLabel>
+                                <Select
+                                labelId="exchange-label"
+                                id="exchange"
+                                value={exchange ? exchange : ""}
+                                defaultValue=""
+                                label="Exchange"
+                                onChange={(e) => setExchange(e.target.value)}
+                                >
+                                    <MenuItem value={"FTX"}>FTX</MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
                     </Box>
                 </DialogContent>

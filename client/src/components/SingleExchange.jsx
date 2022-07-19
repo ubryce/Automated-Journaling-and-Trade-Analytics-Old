@@ -7,6 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -27,6 +31,7 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
     const [exchangeName, setExchangeName] = useState();
     const [exchangeAPI, setExchangeAPI] = useState();
     const [exchangeSecret, setExchangeSecret] = useState();
+    const [exchange, setExchange] = useState("");
 
     const [editOpen, setEditOpen] = useState(false);
     const handleEditOpen = () => {
@@ -158,6 +163,21 @@ const SingleExchange = ({fetchAgain, setFetchAgain}) => {
                                 variant="standard"
                                 onChange={(e) => setExchangeSecret(e.target.value)}
                             />
+                        </div>
+                        <div>
+                            <FormControl sx={{ minWidth: 200 }}>
+                                <InputLabel id="exchange-label">Exchange</InputLabel>
+                                    <Select
+                                    labelId="exchange-label"
+                                    id="exchange"
+                                    value={exchange ? exchange : ""}
+                                    defaultValue={selectedExchange.exchange}
+                                    label="Exchange"
+                                    onChange={(e) => setExchange(e.target.value)}
+                                    >
+                                        <MenuItem value={"FTX"}>FTX</MenuItem>
+                                    </Select>
+                            </FormControl>
                         </div>
                         </Box>
                 </DialogContent>

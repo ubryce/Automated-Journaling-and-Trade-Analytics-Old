@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const createExchange = asyncHandler(async (req, res) => {
     
     // Check if all fields were filled
-    if (!req.body.exchangeName || !req.body.exchangeAPI || !req.body.exchangeSecret) {
+    if (!req.body.exchangeName || !req.body.exchangeAPI || !req.body.exchangeSecret || !req.body.exchange) {
         res.status(400);
         throw new Error("Please Enter All Fields");
     }
@@ -19,6 +19,7 @@ const createExchange = asyncHandler(async (req, res) => {
             exchangeName: req.body.exchangeName,
             exchangeAPI: req.body.exchangeAPI,
             exchangeSecret: req.body.exchangeSecret,
+            exchange: req.body.exchange
         });
 
         const fullExchange = await Exchange.findOne({ _id: exchange._id })
@@ -44,14 +45,15 @@ const fetchExchanges = asyncHandler(async (req, res) => {
 });
 
 const renameExchange = asyncHandler(async (req, res) => {
-    const { exchangeId, exchangeName, exchangeAPI, exchangeSecret } = req.body;
+    const { exchangeId, exchangeName, exchangeAPI, exchangeSecret, exchange } = req.body;
 
     const updatedExchange = await Exchange.findOneAndUpdate(
         {_id: exchangeId, user: req.user._id},
         {
             exchangeName: exchangeName,
             exchangeAPI: exchangeAPI,
-            exchangeSecret: exchangeSecret
+            exchangeSecret: exchangeSecret,
+            exchange: exchange
         }
     )
 
