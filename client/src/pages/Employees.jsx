@@ -1,6 +1,6 @@
 import React from 'react';
 import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page, Toolbar } from '@syncfusion/ej2-react-grids';
-
+import { useNavigate } from 'react-router-dom';
 import { employeesData, employeesGrid } from '../data/dummy';
 import { Header } from '../components';
 
@@ -8,6 +8,18 @@ const Employees = () => {
   const toolbarOptions = ['Search'];
 
   const editing = { allowDeleting: true, allowEditing: true };
+
+  const navigate = useNavigate();
+
+  let gridInstance = null
+  const rowSelected = () => {
+      if(gridInstance) {
+        const selectedrowindex = gridInstance.getSelectedRowIndexes();
+        const selectedrecords = gridInstance.getSelectedRecords();
+        alert(selectedrowindex + " : " + JSON.stringify(selectedrecords))
+        navigate('/');
+      }
+  }
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -20,6 +32,8 @@ const Employees = () => {
         pageSettings={{ pageCount: 5 }}
         editSettings={editing}
         toolbar={toolbarOptions}
+        ref={grid => gridInstance = grid}
+        rowSelected={rowSelected}
       >
         <ColumnsDirective>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}

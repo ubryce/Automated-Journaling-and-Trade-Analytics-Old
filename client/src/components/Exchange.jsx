@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
 
 const Exchange = ({fetchAgain, setFetchAgain}) => {
-    const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();
+    const { selectedExchange, setSelectedExchange, user } = useStateContext();
 
     return (
         <div>Exchange</div>
