@@ -17,3 +17,5 @@ export { default as Header } from './Header';
 export { default as SubHeader } from './SubHeader';
 
 export { default as MyJournals } from './MyJournals';
+
+export { default as Journal } from './Journal';

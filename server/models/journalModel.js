@@ -11,6 +11,12 @@ const journalModel = mongoose.Schema(
                 ref: "Exchange"
             },
         ],
+        journalTrades:[
+            {
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: "Trade"
+            },
+        ],
         latestTrade: {type: mongoose.Schema.Types.ObjectId, ref: "Trade"},
         journalAdmin: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     },
