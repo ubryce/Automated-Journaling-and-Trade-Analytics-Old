@@ -120,6 +120,25 @@ const Journal = ({fetchAgain, setFetchAgain}) => {
           >
             <ColumnsDirective>
               {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+              {openTradeGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
+              
+            </ColumnsDirective>
+            <Inject services={[Search, Page, Toolbar]} />
+
+          </GridComponent>
+          <GridComponent
+            dataSource={selectedJournal.journalTrades}
+            width="auto"
+            allowPaging
+            allowSorting
+            pageSettings={{ pageCount: 5 }}
+            editSettings={editing}
+            toolbar={toolbarOptions}
+            ref={grid => gridInstance = grid}
+            rowSelected={rowSelected}
+          >
+            <ColumnsDirective>
+              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               {finishedTradeGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
               
             </ColumnsDirective>
