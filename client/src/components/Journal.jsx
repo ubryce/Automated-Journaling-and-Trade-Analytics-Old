@@ -107,6 +107,7 @@ const Journal = ({fetchAgain, setFetchAgain}) => {
 
     return (
         <div>
+          <>Open Trades</>
           <GridComponent
             dataSource={selectedJournal.journalTrades}
             width="auto"
@@ -126,6 +127,7 @@ const Journal = ({fetchAgain, setFetchAgain}) => {
             <Inject services={[Search, Page, Toolbar]} />
 
           </GridComponent>
+          <>Closed Trades</>
           <GridComponent
             dataSource={selectedJournal.journalTrades}
             width="auto"
