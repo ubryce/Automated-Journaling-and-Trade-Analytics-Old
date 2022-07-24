@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
-import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page, Toolbar } from '@syncfusion/ej2-react-grids';
+import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Filter, Sort, Page } from '@syncfusion/ej2-react-grids';
 import { useNavigate } from 'react-router-dom';
 
 const Journal = ({fetchAgain, setFetchAgain}) => {
@@ -124,7 +124,7 @@ const Journal = ({fetchAgain, setFetchAgain}) => {
               {openTradeGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
               
             </ColumnsDirective>
-            <Inject services={[Search, Page, Toolbar]} />
+            <Inject services={[Filter, Page, Sort]} />
 
           </GridComponent>
           <>Closed Trades</>
@@ -144,7 +144,7 @@ const Journal = ({fetchAgain, setFetchAgain}) => {
               {finishedTradeGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
               
             </ColumnsDirective>
-            <Inject services={[Search, Page, Toolbar]} />
+            <Inject services={[Filter, Page, Sort]} />
 
           </GridComponent>
         </div>
