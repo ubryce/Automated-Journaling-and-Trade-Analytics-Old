@@ -5,7 +5,7 @@ import { GridComponent, Inject, ColumnsDirective, ColumnDirective, Filter, Sort,
 import { useNavigate } from 'react-router-dom';
 
 const Journal = ({fetchAgain, setFetchAgain}) => {
-    const { user, selectedJournal } = useStateContext();
+    const { selectedJournal } = useStateContext();
 
     const toolbarOptions = ['Search'];
 
