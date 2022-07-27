@@ -140,7 +140,7 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
 
         
     };
-
+    // example websocket
     // const [bids, setBids] = useState([0]);
     // const ws = new WebSocket("wss://ftx.com/ws/");
     // const apiCall = {'type': 'subscribed', 'channel': 'trades'};
