@@ -91,10 +91,7 @@ const SingleJournal = ({fetchAgain, setFetchAgain}) => {
     }
 
     const handleEditSubmit = async () => {
-        // if (!journalName ) {
-        //     console.log("missing name")
-        //     return;
-        // }
+        // add error
 
         try {
             const config = {
