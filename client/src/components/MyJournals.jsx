@@ -64,14 +64,6 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
             const {data} = await axios.get("/api/journal", config);
             setJournals(data);
         } catch (error) {
-            // toast({
-            //     title: "Error occured",
-            //     description: "Failed to load the Journals",
-            //     status: "error",
-            //     duration: 5000,
-            //     isClosable: true,
-            //     position: "bottom-left",
-            // })
             console.log(error);
         }
     }
