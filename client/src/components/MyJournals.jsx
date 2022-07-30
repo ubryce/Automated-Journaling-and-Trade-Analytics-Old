@@ -130,10 +130,6 @@ const MyJournals = ({fetchAgain, setFetchAgain}) => {
                     </Select>
                 </FormControl>
             </div>
-            {/* <div>
-                {selectedJournal ? selectedJournal.journalDescription : ""}
-            </div> */}
-
         </>
     )
 }
