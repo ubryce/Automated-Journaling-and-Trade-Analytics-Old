@@ -28,11 +28,7 @@ const UserProfile = () => {
         />
       </div>
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
-        {/* <img
-          className="rounded-full h-24 w-24"
-          src={avatar}
-          alt="user-profile"
-        /> */}
+
         <span className="e-avatar e-avatar-circle h-24 w-24 ">{user.name}</span>
         <div>
           <p className="font-semibold text-xl dark:text-gray-200"> {user.name} </p>
