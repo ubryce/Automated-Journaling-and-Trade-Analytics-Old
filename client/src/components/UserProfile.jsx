@@ -35,8 +35,8 @@ const UserProfile = () => {
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {user.email} </p>
         </div>
       </div>
-      <div>
-        {/* {userProfileData.map((item, index) => (
+      {/* <div>
+        {userProfileData.map((item, index) => (
           <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
               type="button"
@@ -51,8 +51,8 @@ const UserProfile = () => {
               <p className="text-gray-500 text-sm dark:text-gray-400"> {item.desc} </p>
             </div>
           </div>
-        ))} */}
-      </div>
+        ))}
+      </div> */}
       <div className="mt-5">
         <Button
           color="white"
