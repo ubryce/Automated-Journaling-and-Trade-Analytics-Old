@@ -120,9 +120,7 @@ const Journal = ({fetchAgain, setFetchAgain}) => {
             rowSelected={rowSelected}
           >
             <ColumnsDirective>
-              {/* eslint-disable-next-line react/jsx-props-no-spreading */}
               {openTradeGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
-              
             </ColumnsDirective>
             <Inject services={[Filter, Page, Sort]} />
 
