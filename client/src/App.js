@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useStateContext } from './contexts/ContextProvider';
 
 import  SignIn  from './pages/SignIn.jsx';
+import  SignUp  from './pages/SignUp.jsx';
 import  Home  from './pages/Home.jsx';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
     <div className="App">
       <Routes>
         {/* <Route path="/" element={<Home/>}/> */}
-        <Route path="/" element={<SignIn/>} />
+        <Route path="/" element={<SignUp/>} />
       </Routes>
     </div>
   );
