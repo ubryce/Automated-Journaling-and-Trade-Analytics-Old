@@ -38,10 +38,34 @@ const SignUp = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    
     console.log({
+      name: data.get("firstName") + " " + data.get("lastName"),
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    const config = {
+        headers: {
+            "Content-type": "application/json",
+        },
+    };
+
+    const { data2 } = await axios.post(
+        "/api/user", 
+        {
+            name: data.get("firstName") + " " + data.get("lastName"),
+            email: data.get('email'),
+            password: data.get('password'),
+          },
+        config
+    ).then((response) => {
+        console.log(response.data)
+        localStorage.setItem("userInfo", JSON.stringify(response.data));
+        navigate('/');
+      }, (error) => {
+        console.log(error.message)
+      }) || {}
   };
 
   return (
