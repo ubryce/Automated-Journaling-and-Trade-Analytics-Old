@@ -3,19 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const StateContext = createContext();
 
-const initialState = {
-    userProfile: false,
-    notification: false,
-};
-
 export const ContextProvider = ({ children }) => {
-    const [screenSize, setScreenSize] = useState(undefined);
-    const [currentColor, setCurrentColor] = useState('#03C9D7');
-    const [currentMode, setCurrentMode] = useState('Light');
-    const [themeSettings, setThemeSettings] = useState(false);
-    const [activeMenu, setActiveMenu] = useState(true);
-    const [isClicked, setIsClicked] = useState(initialState);
-
     const [user, setUser] = useState();
     const [visability, setVisability] = useState(true);
     const [selectedJournal, setSelectedJournal] = useState();
@@ -24,29 +12,6 @@ export const ContextProvider = ({ children }) => {
     const [exchanges, setExchanges] = useState([]);
 
     const navigate = useNavigate();
-
-    const setMode = (e) => {
-        setCurrentMode(e.target.value);
-        localStorage.setItem('themeMode', e.target.value);
-
-        setThemeSettings(false);
-    };
-
-    const setColor = (color) => {
-        setCurrentColor(color);
-        localStorage.setItem('colorMode', color);
-
-        setThemeSettings(false);
-    };
-
-    const handleClick = (clicked) => {
-        if ( isClicked[clicked] == false ) {
-            setIsClicked({ ...initialState, [clicked]: true })
-        } else {
-            setIsClicked({ ...initialState, [clicked]: false })
-            
-        }
-    };
 
     // Whenever a user logs in the user info is stored into the local storage
     // we can take this and 
@@ -64,7 +29,7 @@ export const ContextProvider = ({ children }) => {
 
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <StateContext.Provider value={{ currentColor, currentMode, activeMenu, screenSize, setScreenSize, handleClick, isClicked, initialState, setIsClicked, setActiveMenu, setMode, setColor, themeSettings, setThemeSettings, user, setUser, visability, setVisability, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange }}>
+        <StateContext.Provider value={{ user, setUser, visability, setVisability, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange }}>
         {children}
         </StateContext.Provider>
     );
