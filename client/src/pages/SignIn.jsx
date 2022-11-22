@@ -39,17 +39,6 @@ const SignIn = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
-
-    // Check data if blank
-    // if(!data.email || !data.password) {
-    //   console.log("Please fill all fields")
-    //   return;
-    // }
-
     const config = {
       headers: {
         "Content-type": "application/json",
