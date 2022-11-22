@@ -38,7 +38,6 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data)
 
     // console.log({
     //   email: data.get('email'),
@@ -51,30 +50,54 @@ const SignIn = () => {
     //   return;
     // }
 
-    try{
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
 
-      const { data2 } = await axios.post(
-        "/api/user/login",
-        {
-          email: data.get('email'),
-          password: data.get('password'),
-        },
-        config
-      );
-      console.log(data2);
-
-      console.log("Login successful");
-
-      localStorage.setItem("userInfo", JSON.stringify(data2));
+    const { data2 } = await axios.post(
+      "/api/user/login",
+      {
+        email: data.get('email'),
+        password: data.get('password'),
+      },
+      config
+    ).then((response) => {
+      console.log(response.data)
+      localStorage.setItem("userInfo", JSON.stringify(response.data));
       navigate('/');
-    } catch (error) {
-      console.log("Error occured")
-    }
+    }, (error) => {
+      console.log(error.message)
+    }) || {}
+
+
+    // try{
+    //   const config = {
+    //     headers: {
+    //       "Content-type": "application/json",
+    //     },
+    //   };
+
+    //   const { data2 } = await axios.post(
+    //     "/api/user/login",
+    //     {
+    //       email: data.get('email'),
+    //       password: data.get('password'),
+    //     },
+    //     config
+    //   ).then((response) => {
+    //     console.log(response.data)
+    //   })
+    //   // console.log(JSON.stringify(data2));
+
+    //   // console.log("Login successful");
+
+    //   // localStorage.setItem("userInfo", JSON.stringify(data2));
+    //   // navigate('/');
+    // } catch (error) {
+    //   console.log(error)
+    // }
 
   };
 
