@@ -8,6 +8,7 @@ import  SignUp  from './pages/SignUp.jsx';
 import  Home  from './pages/Home.jsx';
 
 import  Dashboard  from './pages/Dashboard.jsx';
+import Journals from './components/Journals';
 
 function App() {
 
@@ -25,7 +26,9 @@ function App() {
         <Route path="/login" element={<SignIn/>} />
         <Route path="/signup" element={<SignUp/>} />
 
-        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="dashboard/*" element={<Dashboard/>}>
+          {/* <Route path='journals' element={<Journals/>}/> */}
+        </Route>
       </Routes>
     </div>
   );

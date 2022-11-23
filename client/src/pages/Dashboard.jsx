@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { useStateContext } from '../contexts/ContextProvider';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -105,7 +105,6 @@ const mdTheme = createTheme();
 
 const Dashboard = () => {
 
-  const { activeMenu, setActiveMenu } = useStateContext();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
 
@@ -190,31 +189,31 @@ const Dashboard = () => {
           <Divider />
           <List component="nav">
           <React.Fragment>
-            <ListItemButton onClick={() => setActiveMenu("Dash")}>
+            <ListItemButton onClick={() => navigate('/dashboard/dash')}>
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItemButton>
-            <ListItemButton onClick={() => setActiveMenu("Journals")}>
+            <ListItemButton onClick={() => navigate('/dashboard/journals')}>
               <ListItemIcon>
                 <LibraryBooksIcon />
               </ListItemIcon>
               <ListItemText primary="Journals" />
             </ListItemButton>
-            <ListItemButton onClick={() => setActiveMenu("Trading Plans")}>
+            <ListItemButton onClick={() => navigate('/dashboard/tradingplans')}>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
               <ListItemText primary="Trading Plans" />
             </ListItemButton>
-            <ListItemButton onClick={() => setActiveMenu("Notebook")}>
+            <ListItemButton onClick={() => navigate('/dashboard/notebook')}>
               <ListItemIcon>
                 <LayersIcon />
               </ListItemIcon>
               <ListItemText primary="Notebook" />
             </ListItemButton>
-            <ListItemButton onClick={() => setActiveMenu("Market Prep")}>
+            <ListItemButton onClick={() => navigate('/dashboard/marketprep')}>
               <ListItemIcon>
                 <LayersIcon />
               </ListItemIcon>
@@ -226,19 +225,19 @@ const Dashboard = () => {
               <ListSubheader component="div" inset>
                 Exchanges
               </ListSubheader>
-              <ListItemButton onClick={() => setActiveMenu("Bybit")}>
+              <ListItemButton >
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary="Bybit" />
               </ListItemButton>
-              <ListItemButton onClick={() => setActiveMenu("Binance")}>
+              <ListItemButton >
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary="Binance" />
               </ListItemButton>
-              <ListItemButton onClick={() => setActiveMenu("Phemex")}>
+              <ListItemButton >
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
@@ -295,15 +294,13 @@ const Dashboard = () => {
                 </Paper>
               </Grid> */}
             {/* </Grid> */}
-            {
-              {
-                "Dash": <Dash/>,
-                "Journals": <Journals/>,
-                "Trading Plans": <TradingPlans/>,
-                "Notebook": <Notebook/>,
-                "Market Prep": <MarketPrep/>,
-              }[activeMenu]
-            }
+            <Routes> 
+              <Route path={'dash'} element={<Dash/>} /> 
+              <Route path={'journals'} element={<Journals/>} /> 
+              <Route path={'tradingplans'} element={<TradingPlans/>} /> 
+              <Route path={'notebook'} element={<Notebook/>} /> 
+              <Route path={'marketprep'} element={<MarketPrep/>} /> 
+            </Routes>
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
