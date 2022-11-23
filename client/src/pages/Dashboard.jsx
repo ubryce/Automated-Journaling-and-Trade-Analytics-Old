@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useStateContext } from '../contexts/ContextProvider';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -24,6 +25,22 @@ import { mainListItems, secondaryListItems } from '../components/listItems';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
+
+import Dash from '../components/dash';
+import Journals from '../components/journals';
+import TradingPlans from '../components/tradingPlans';
+import Notebook from '../components/notebook';
+import MarketPrep from '../components/marketPrep';
+
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import HomeIcon from '@mui/icons-material/Home';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import LayersIcon from '@mui/icons-material/Layers';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 function Copyright(props) {
   return (
@@ -88,9 +105,10 @@ const mdTheme = createTheme();
 
 const Dashboard = () => {
 
+  const { activeMenu, setActiveMenu } = useStateContext();
   const navigate = useNavigate();
-
   const [open, setOpen] = React.useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -105,6 +123,8 @@ const Dashboard = () => {
       const user = JSON.parse(localStorage.getItem("userInfo"));
       if (!user) navigate('/');
   }, [navigate]);
+
+  
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -169,9 +189,62 @@ const Dashboard = () => {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+          <React.Fragment>
+            <ListItemButton onClick={() => setActiveMenu("Dash")}>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItemButton>
+            <ListItemButton onClick={() => setActiveMenu("Journals")}>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              <ListItemText primary="Journals" />
+            </ListItemButton>
+            <ListItemButton onClick={() => setActiveMenu("Trading Plans")}>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Trading Plans" />
+            </ListItemButton>
+            <ListItemButton onClick={() => setActiveMenu("Notebook")}>
+              <ListItemIcon>
+                <LayersIcon />
+              </ListItemIcon>
+              <ListItemText primary="Notebook" />
+            </ListItemButton>
+            <ListItemButton onClick={() => setActiveMenu("Market Prep")}>
+              <ListItemIcon>
+                <LayersIcon />
+              </ListItemIcon>
+              <ListItemText primary="Market Prep" />
+            </ListItemButton>
+          </React.Fragment>
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            <React.Fragment>
+              <ListSubheader component="div" inset>
+                Exchanges
+              </ListSubheader>
+              <ListItemButton onClick={() => setActiveMenu("Bybit")}>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Bybit" />
+              </ListItemButton>
+              <ListItemButton onClick={() => setActiveMenu("Binance")}>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Binance" />
+              </ListItemButton>
+              <ListItemButton onClick={() => setActiveMenu("Phemex")}>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Phemex" />
+              </ListItemButton>
+            </React.Fragment>
           </List>
         </Drawer>
         <Box
@@ -188,7 +261,7 @@ const Dashboard = () => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+            {/* <Grid container spacing={3}> */}
               {/* Chart */}
               {/* <Grid item xs={12} md={8} lg={9}>
                 <Paper
@@ -221,7 +294,16 @@ const Dashboard = () => {
                   <Orders />
                 </Paper>
               </Grid> */}
-            </Grid>
+            {/* </Grid> */}
+            {
+              {
+                "Dash": <Dash/>,
+                "Journals": <Journals/>,
+                "Trading Plans": <TradingPlans/>,
+                "Notebook": <Notebook/>,
+                "Market Prep": <MarketPrep/>,
+              }[activeMenu]
+            }
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

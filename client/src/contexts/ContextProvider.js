@@ -10,6 +10,7 @@ export const ContextProvider = ({ children }) => {
     const [journals, setJournals] = useState([]);
     const [selectedExchange, setSelectedExchange] = useState();
     const [exchanges, setExchanges] = useState([]);
+    const [activeMenu, setActiveMenu] = useState("");
 
     const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ export const ContextProvider = ({ children }) => {
 
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <StateContext.Provider value={{ user, setUser, visability, setVisability, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange }}>
+        <StateContext.Provider value={{ activeMenu, setActiveMenu, user, setUser, visability, setVisability, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange }}>
         {children}
         </StateContext.Provider>
     );
