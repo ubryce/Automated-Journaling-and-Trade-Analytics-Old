@@ -67,7 +67,7 @@ const SignUp = () => {
     ).then((response) => {
         console.log(response.data)
         localStorage.setItem("userInfo", JSON.stringify(response.data));
-        navigate('/');
+        navigate('/dashboard');
       }, (error) => {
         console.log(error.message)
       }) || {}

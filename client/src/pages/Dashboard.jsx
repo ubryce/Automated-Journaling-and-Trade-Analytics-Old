@@ -95,6 +95,8 @@ const Dashboard = () => {
   };
 
   function logoutHandler() {
+    localStorage.clear();
+    navigate('/')
     console.log("logged out")
   }
 
