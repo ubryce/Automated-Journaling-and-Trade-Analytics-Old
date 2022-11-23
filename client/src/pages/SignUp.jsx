@@ -37,7 +37,7 @@ const SignUp = () => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("userInfo"));
-        if (user) navigate('/');
+        if (user) navigate('/dashboard');
     }, [navigate]);
 
   const handleSubmit = async (event) => {
