@@ -20,8 +20,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        {/* <Route path="/" element={<Home/>}/> */}
-        <Route path="/" element={<SignUp/>} />
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<SignIn/>} />
+        <Route path="/signup" element={<SignUp/>} />
       </Routes>
     </div>
   );
