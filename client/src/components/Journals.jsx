@@ -11,6 +11,9 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+
+import Button from '@mui/material/Button';
+
 const Journals = () => {
   const { user, journals, setJournals, selectedJournal, setSelectedJournal } = useStateContext()
 
@@ -44,6 +47,7 @@ const Journals = () => {
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
           Journals
+          <Button variant="contained">+ Create a Journal</Button>
           <Table size="small">
             <TableHead>
               <TableRow>
