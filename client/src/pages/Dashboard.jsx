@@ -18,6 +18,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { mainListItems, secondaryListItems } from '../components/listItems';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
@@ -93,6 +94,10 @@ const Dashboard = () => {
     setOpen(!open);
   };
 
+  function logoutHandler() {
+    console.log("logged out")
+  }
+
   useEffect(() => {
       const user = JSON.parse(localStorage.getItem("userInfo"));
       if (!user) navigate('/');
@@ -132,6 +137,11 @@ const Dashboard = () => {
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit" onClick={logoutHandler}>
+              <Badge color="secondary">
+                <LogoutIcon />
               </Badge>
             </IconButton>
           </Toolbar>
