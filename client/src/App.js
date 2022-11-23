@@ -7,6 +7,8 @@ import  SignIn  from './pages/SignIn.jsx';
 import  SignUp  from './pages/SignUp.jsx';
 import  Home  from './pages/Home.jsx';
 
+import  Dashboard  from './pages/Dashboard.jsx';
+
 function App() {
 
   const navigate = useNavigate();
@@ -22,6 +24,8 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<SignIn/>} />
         <Route path="/signup" element={<SignUp/>} />
+
+        <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </div>
   );
