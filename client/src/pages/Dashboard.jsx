@@ -18,6 +18,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { mainListItems, secondaryListItems } from '../components/listItems';
 // import Chart from './Chart';
@@ -139,6 +140,11 @@ const Dashboard = () => {
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit">
+              <Badge color="secondary">
+                <VisibilityIcon />
               </Badge>
             </IconButton>
             <IconButton color="inherit" onClick={logoutHandler}>
