@@ -26,8 +26,8 @@ import { mainListItems, secondaryListItems } from '../components/listItems';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
 
-import Dash from '../components/dash';
-import Journals from '../components/journals';
+import Dash from '../components/Dash';
+import Journals from '../components/Journals';
 import TradingPlans from '../components/tradingPlans';
 import Notebook from '../components/notebook';
 import MarketPrep from '../components/marketPrep';

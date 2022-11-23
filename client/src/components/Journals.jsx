@@ -1,8 +1,11 @@
 import React from 'react'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import axios from 'axios';
+import { useStateContext } from '../contexts/ContextProvider';
 
-const journals = () => {
+const Journals = () => {
+  const { user, journals, setJournals, selectedJournal, setSelectedJournal } = useStateContext()
   return (
     <div>
       <Grid container spacing={3}>
@@ -16,4 +19,4 @@ const journals = () => {
   )
 }
 
-export default journals
+export default Journals
