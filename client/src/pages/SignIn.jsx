@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -34,6 +34,11 @@ const theme = createTheme();
 const SignIn = () => {
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+    if (user) navigate('/');
+  }, [navigate]);
   
   const handleSubmit = async (event) => {
     event.preventDefault();

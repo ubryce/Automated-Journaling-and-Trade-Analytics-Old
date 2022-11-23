@@ -20,10 +20,10 @@ export const ContextProvider = ({ children }) => {
         // store into our state
         setUser(userInfo);
 
-        // if user not logged in redirect to homepage
-        if (!userInfo) {
-            navigate('/');
-        }
+        // // if user not logged in redirect to homepage
+        // if (!userInfo) {
+        //     navigate('/');
+        // }
         // brackets for whenever navigate changes the useEffect is called
     }, [navigate])
 
