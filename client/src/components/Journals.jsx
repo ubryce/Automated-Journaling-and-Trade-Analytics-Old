@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
@@ -16,6 +17,7 @@ import Button from '@mui/material/Button';
 
 const Journals = () => {
   const { user, journals, setJournals, selectedJournal, setSelectedJournal } = useStateContext()
+  const navigate = useNavigate();
 
   const fetchJournals = async () => {
     try {
@@ -47,7 +49,7 @@ const Journals = () => {
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
           Journals
-          <Button variant="contained">+ Create a Journal</Button>
+          <Button variant="contained" onClick={() => navigate('/dashboard/journals/add')}>+ Create a Journal</Button>
           <Table size="small">
             <TableHead>
               <TableRow>

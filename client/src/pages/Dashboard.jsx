@@ -296,7 +296,7 @@ const Dashboard = () => {
             {/* </Grid> */}
             <Routes> 
               <Route path={'dash'} element={<Dash/>} /> 
-              <Route path={'journals'} element={<Journals/>} /> 
+              <Route path={'journals/*'} element={<Journals/>} /> 
               <Route path={'tradingplans'} element={<TradingPlans/>} /> 
               <Route path={'notebook'} element={<Notebook/>} /> 
               <Route path={'marketprep'} element={<MarketPrep/>} /> 
