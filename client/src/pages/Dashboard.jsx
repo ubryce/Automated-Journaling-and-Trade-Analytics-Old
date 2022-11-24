@@ -27,7 +27,7 @@ import { mainListItems, secondaryListItems } from '../components/listItems';
 // import Orders from './Orders';
 
 import Dash from '../components/Dash';
-import Journals from '../components/Journals';
+import Journal from '../components/Journal';
 import TradingPlans from '../components/tradingPlans';
 import Notebook from '../components/notebook';
 import MarketPrep from '../components/marketPrep';
@@ -189,13 +189,13 @@ const Dashboard = () => {
           <Divider />
           <List component="nav">
           <React.Fragment>
-            <ListItemButton onClick={() => navigate('/dashboard/dash')}>
+            <ListItemButton onClick={() => navigate('/dashboard')}>
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate('/dashboard/journals')}>
+            <ListItemButton onClick={() => navigate('/dashboard/journal')}>
               <ListItemIcon>
                 <LibraryBooksIcon />
               </ListItemIcon>
@@ -295,8 +295,8 @@ const Dashboard = () => {
               </Grid> */}
             {/* </Grid> */}
             <Routes> 
-              <Route path={'dash'} element={<Dash/>} /> 
-              <Route path={'journals/*'} element={<Journals/>} /> 
+              <Route path={''} element={<Dash/>} /> 
+              <Route path={'journal/*'} element={<Journal/>} /> 
               <Route path={'tradingplans'} element={<TradingPlans/>} /> 
               <Route path={'notebook'} element={<Notebook/>} /> 
               <Route path={'marketprep'} element={<MarketPrep/>} /> 

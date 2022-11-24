@@ -49,7 +49,7 @@ const Journals = () => {
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
           Journals
-          <Button variant="contained" onClick={() => navigate('/dashboard/journals/add')}>+ Create a Journal</Button>
+          <Button variant="contained" onClick={() => navigate('/dashboard/journal/add')}>+ Create a Journal</Button>
           <Table size="small">
             <TableHead>
               <TableRow>
