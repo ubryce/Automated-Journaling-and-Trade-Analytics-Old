@@ -62,8 +62,8 @@ const Journals = () => {
             </TableHead>
             <TableBody>
               {journals.map((journal) => (
-                <TableRow key={journal._id}>
-                  <Link to ={journal._id}>
+                <TableRow key={journal._id} onClick={setSelectedJournal(journal)}>
+                  <Link to={journal._id}>
                     <TableCell>{journal.journalName}</TableCell>
                     <TableCell>{journal.journalDescription}</TableCell>
                     <TableCell></TableCell>
