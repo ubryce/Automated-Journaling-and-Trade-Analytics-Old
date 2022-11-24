@@ -16,7 +16,10 @@ const JournalView = () => {
     <Grid container spacing={3}>
         <Grid item xs={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                Journal View
+                Name: 
+                {selectedJournal.journalName}
+                Description: 
+                {selectedJournal.journalDescription}
             </Paper>
         </Grid>
     </Grid>
