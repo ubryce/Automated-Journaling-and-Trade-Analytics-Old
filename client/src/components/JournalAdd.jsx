@@ -23,6 +23,7 @@ import Button from '@mui/material/Button';
 const theme = createTheme();
 
 const JournalAdd = () => {
+    const { selectedJournal, setSelectedJournal, user, journals, setJournals, currentColor } = useStateContext();
     const navigate = useNavigate();
     
     function preventDefault(event) {
@@ -34,29 +35,26 @@ const JournalAdd = () => {
         const data = new FormData(event.currentTarget);
         
         console.log({
-            name: data.get("firstName") + " " + data.get("lastName"),
-            email: data.get('email'),
-            password: data.get('password'),
+            name: data.get('name'),
+            description: data.get('description'),
         });
 
         const config = {
             headers: {
-                "Content-type": "application/json",
+                Authorization: `Bearer ${user.token}`,
             },
         };
 
         const { data2 } = await axios.post(
-            "/api/user", 
+            "/api/journal/create", 
             {
-                name: data.get("firstName") + " " + data.get("lastName"),
-                email: data.get('email'),
-                password: data.get('password'),
-                },
+                name: data.get('name'),
+                description: data.get('description'),
+            },
             config
         ).then((response) => {
             console.log(response.data)
-            localStorage.setItem("userInfo", JSON.stringify(response.data));
-            navigate('/dashboard');
+            navigate('/dashboard/journal');
             }, (error) => {
             console.log(error.message)
             }) || {}
@@ -99,7 +97,6 @@ const JournalAdd = () => {
                                     fullWidth
                                     name="description"
                                     label="Description"
-                                    type="descriptiond"
                                     id="description"
                                     autoComplete="description"
                                     />
