@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import { useStateContext } from '../contexts/ContextProvider';
 
-import Link from '@mui/material/Link';
+import Links from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -63,18 +63,20 @@ const Journals = () => {
             <TableBody>
               {journals.map((journal) => (
                 <TableRow key={journal._id}>
-                  <TableCell>{journal.journalName}</TableCell>
-                  <TableCell>{journal.journalDescription}</TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                  <TableCell align="right">{`$${journal.amount}`}</TableCell>
+                  <Link to ={journal._id}>
+                    <TableCell>{journal.journalName}</TableCell>
+                    <TableCell>{journal.journalDescription}</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                    <TableCell align="right">{`$${journal.amount}`}</TableCell>
+                  </Link>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+          <Links color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
             See more orders
-          </Link>
+          </Links>
           </Paper>
         </Grid>
       </Grid>
