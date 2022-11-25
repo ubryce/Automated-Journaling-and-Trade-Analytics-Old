@@ -9,9 +9,6 @@ import { useEffect } from 'react';
 const JournalView = () => {
   const { selectedJournal } = useStateContext()
 
-  useEffect(() => {
-    console.log(selectedJournal);
-  }, []);
   return (
     <Grid container spacing={3}>
         <Grid item xs={12}>
