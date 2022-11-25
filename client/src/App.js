@@ -14,11 +14,6 @@ function App() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem("userInfo"));
-  //   if (!user) navigate('/');
-  // }, [navigate]);
-
   return (
     <div className="App">
       <Routes>
