@@ -36,7 +36,7 @@ const ExchangeAdd = () => {
         const data = new FormData(event.currentTarget);
         
         console.log({
-            exchnageName: data.get('exchangeName'),
+            exchangeName: data.get('exchangeName'),
             exchangeAPI: data.get('exchangeAPI'),
             exchangeSecret: data.get('exchangeSecret'),
             exchange: data.get('exchange')
@@ -51,7 +51,7 @@ const ExchangeAdd = () => {
         const { data2 } = await axios.post(
             '/api/exchange', 
             {
-                exchnageName: data.get('exchangeName'),
+                exchangeName: data.get('exchangeName'),
                 exchangeAPI: data.get('exchangeAPI'),
                 exchangeSecret: data.get('exchangeSecret'),
                 exchange: data.get('exchange')
