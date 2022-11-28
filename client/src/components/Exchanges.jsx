@@ -29,9 +29,14 @@ const Exchanges = () => {
 
             const {data} = await axios.get("/api/exchange", config);
             setExchanges(data);
+            console.log(data);
         } catch (error) {
             console.log(error)
         }
+    }
+
+    function preventDefault(event) {
+        event.preventDefault();
     }
 
     useEffect(() => {
@@ -39,7 +44,43 @@ const Exchanges = () => {
     }, []);
 
     return (
-        <div>Exchanges</div>
+        <div>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                Exchanges
+                <Button variant="contained" onClick={() => navigate('/dashboard/exchange/add')}>+ Add an Exchange</Button>
+                <Table size="small">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Description</TableCell>
+                        <TableCell>Ship To</TableCell>
+                        <TableCell>Payment Method</TableCell>
+                        <TableCell align="right">Sale Amount</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {exchanges.map((exchange) => (
+                        <TableRow key={exchange._id} onClick={setSelectedExchange(exchange)}>
+                        <Link to={exchange._id}>
+                            <TableCell>{exchange.journalName}</TableCell>
+                            <TableCell>{exchange.journalDescription}</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                            <TableCell align="right">{`$${exchange.amount}`}</TableCell>
+                        </Link>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+                <Links color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+                    See more orders
+                </Links>
+                </Paper>
+                </Grid>
+            </Grid>
+        </div>
     )
 }
 
