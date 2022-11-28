@@ -36,8 +36,10 @@ const ExchangeAdd = () => {
         const data = new FormData(event.currentTarget);
         
         console.log({
-            name: data.get('name'),
-            description: data.get('description'),
+            exchnageName: data.get('exchangeName'),
+            exchangeAPI: data.get('exchangeAPI'),
+            exchangeSecret: data.get('exchangeSecret'),
+            exchange: data.get('exchange')
         });
 
         const config = {
@@ -49,37 +51,39 @@ const ExchangeAdd = () => {
         const { data2 } = await axios.post(
             '/api/exchange', 
             {
-                name: data.get('name'),
-                description: data.get('description'),
+                exchnageName: data.get('exchangeName'),
+                exchangeAPI: data.get('exchangeAPI'),
+                exchangeSecret: data.get('exchangeSecret'),
+                exchange: data.get('exchange')
             },
             config
         ).then((response) => {
             console.log(response.data)
-            navigate('/dashboard/journal');
+            navigate('/dashboard/exchange');
             }, (error) => {
             console.log(error.message)
             }) || {}
 
-        try {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
+        // try {
+        //     const config = {
+        //         headers: {
+        //             Authorization: `Bearer ${user.token}`,
+        //         },
+        //     };
 
-            const {data} = await axios.post('/api/exchange', {
-                exchangeName: exchangeName,
-                exchangeAPI: exchangeAPI,
-                exchangeSecret: exchangeSecret,
-                exchange: exchange,
-            }, config);
+        //     const {data} = await axios.post('/api/exchange', {
+        //         exchangeName: data.get('exchangeName'),
+        //         exchangeAPI: data.get('exchangeAPI'),
+        //         exchangeSecret: data.get('exchangeSecret'),
+        //         exchange: data.get('exchange')
+        //     }, config);
 
-            setExchanges([data, ...exchanges]);
-            handleClose();
-            console.log("new exchange")
-        } catch (error) {
-            console.log("failed to create exchange")
-        }
+        //     setExchanges([data, ...exchanges]);
+        //     handleClose();
+        //     console.log("new exchange")
+        // } catch (error) {
+        //     console.log("failed to create exchange")
+        // }
     };
 
     return (
@@ -107,20 +111,20 @@ const ExchangeAdd = () => {
                                         <TextField
                                         required
                                         fullWidth
-                                        id="name"
-                                        label="Name"
-                                        name="name"
-                                        autoComplete="name"
+                                        id="exchangeName"
+                                        label="Exchange Name"
+                                        name="exchangeName"
+                                        autoComplete="exchangeName"
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
                                         <TextField
                                         required
                                         fullWidth
-                                        name="description"
-                                        label="Description"
-                                        id="description"
-                                        autoComplete="description"
+                                        name="exchangeAPI"
+                                        label="Exchange API"
+                                        id="exchangeAPI"
+                                        autoComplete="exchangeAPI"
                                         />
                                     </Grid>
                                     </Grid>

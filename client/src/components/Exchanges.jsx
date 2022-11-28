@@ -64,8 +64,9 @@ const Exchanges = () => {
                     {exchanges.map((exchange) => (
                         <TableRow key={exchange._id} onClick={setSelectedExchange(exchange)}>
                         <Link to={exchange._id}>
-                            <TableCell>{exchange.journalName}</TableCell>
-                            <TableCell>{exchange.journalDescription}</TableCell>
+                            <TableCell>{exchange.exchangeName}</TableCell>
+                            <TableCell>{exchange.exchangeAPI}</TableCell>
+                            <TableCell>{exchange.exchange}</TableCell>
                             <TableCell></TableCell>
                             <TableCell></TableCell>
                             <TableCell align="right">{`$${exchange.amount}`}</TableCell>
