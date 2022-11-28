@@ -31,6 +31,7 @@ import Journal from '../components/Journal';
 import TradingPlans from '../components/tradingPlans';
 import Notebook from '../components/notebook';
 import MarketPrep from '../components/marketPrep';
+import Exchange from '../components/Exchange';
 
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -222,7 +223,7 @@ const Dashboard = () => {
           </React.Fragment>
             <Divider sx={{ my: 1 }} />
             <React.Fragment>
-              <ListSubheader component="div" inset>
+              <ListSubheader component="div" inset onClick={() => navigate('/dashboard/exchange')}>
                 Exchanges
               </ListSubheader>
               <ListItemButton >
@@ -300,6 +301,7 @@ const Dashboard = () => {
               <Route path={'tradingplans'} element={<TradingPlans/>} /> 
               <Route path={'notebook'} element={<Notebook/>} /> 
               <Route path={'marketprep'} element={<MarketPrep/>} /> 
+              <Route path={'exchange/*'} element={<Exchange/>} /> 
             </Routes>
             <Copyright sx={{ pt: 4 }} />
           </Container>
