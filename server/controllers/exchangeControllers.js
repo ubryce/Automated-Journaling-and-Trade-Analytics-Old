@@ -5,22 +5,16 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
 const fetchFromExchange = asyncHandler(async (req, res) => {
-    // try {
-    //     const exchange = await Exchange.create({
-    //         user: req.user,
-    //         exchangeName: req.body.exchangeName,
-    //         exchangeAPI: req.body.exchangeAPI,
-    //         exchangeSecret: req.body.exchangeSecret,
-    //         exchange: req.body.exchange
-    //     });
-
-    //     const fullExchange = await Exchange.findOne({ _id: exchange._id })
-        
-    //     res.status(200).send(fullExchange);
-    // } catch (error) {
-    //     res.status(400);
-    //     throw new Error(error.message);
-    // }
+    try {
+        Exchange.find({user: {$eq: req.user._id}}, "-exchangeSecret")
+            .sort({updatedAt: -1})
+            .then( async (results) => {
+                res.status(200).send(results);
+            });
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    }
 });
 
 const createExchange = asyncHandler(async (req, res) => {
@@ -99,4 +93,4 @@ const deleteExchange = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createExchange, fetchExchanges, renameExchange, deleteExchange };
+module.exports = { fetchFromExchange, createExchange, fetchExchanges, renameExchange, deleteExchange };
