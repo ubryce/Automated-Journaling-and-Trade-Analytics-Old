@@ -5,9 +5,9 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
 const fetchFromExchange = asyncHandler(async (req, res) => {
+    const { exchangeId } = req.body;
     try {
-        Exchange.find({user: {$eq: req.user._id}}, "-exchangeSecret")
-            .sort({updatedAt: -1})
+        Exchange.findOne({_id: exchangeId, user: req.user._id})
             .then( async (results) => {
                 res.status(200).send(results);
             });
