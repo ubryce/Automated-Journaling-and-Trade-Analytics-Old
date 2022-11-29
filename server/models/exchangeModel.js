@@ -10,6 +10,7 @@ const exchangeModel = mongoose.Schema({
     exchangeName: {type: String, required: true},
     exchangeAPI: {type: String, required: true},
     exchangeSecret: {type: String, required: true},
+    iv: {type: String},
     exchange: {type: String, required: true},
 });
 
@@ -32,6 +33,7 @@ exchangeModel.pre('save', async function (next) {
     const base64data = Buffer.from(iv, 'binary').toString('base64');
 
     this.exchangeSecret = encrypted;
+    this.iv = base64data;
     console.log(this.exchangeSecret)
 });
 
