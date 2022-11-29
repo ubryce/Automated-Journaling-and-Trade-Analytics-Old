@@ -62,7 +62,7 @@ const Exchanges = () => {
                     </TableHead>
                     <TableBody>
                     {exchanges.map((exchange) => (
-                        <TableRow key={exchange._id} onClick={setSelectedExchange(exchange)}>
+                        <TableRow key={exchange._id} onClick={() => setSelectedExchange(exchange)}>
                         <Link to={exchange._id}>
                             <TableCell>{exchange.exchangeName}</TableCell>
                             <TableCell>{exchange.exchangeAPI}</TableCell>
