@@ -6,6 +6,10 @@ const tradeModel = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId, 
             ref:"User"
         },
+        journal: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Journal"
+        },
         openDate:{type: Date},
         closeDate:{type: Date},
         side:{type: String},
