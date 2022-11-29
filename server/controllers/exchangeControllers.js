@@ -1,16 +1,30 @@
 const asyncHandler = require('express-async-handler');
-const Exchange = require('../models/exchangeModel');
+const e = require('../models/exchangeModel');
 const { update } = require('../models/userModel');
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+const algorithm = 'aes-256-cbc'; //Using AES encryption
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
 
 const fetchFromExchange = asyncHandler(async (req, res) => {
     const { exchangeId } = req.body;
     try {
-        Exchange.findOne({_id: exchangeId, user: req.user._id})
-            .then( async (results) => {
-                res.status(200).send(results);
-            });
+        const exchangeInfo = await e.Exchange.findOne({_id: exchangeId, user: req.user._id})
+
+        console.log(e.key)
+            
+        let iv = Buffer.from(exchangeInfo.iv, 'hex');
+        let encryptedText = Buffer.from(exchangeInfo.exchangeSecret, 'hex');
+        let decipher = crypto.createDecipheriv(algorithm, Buffer.from(e.key), iv);
+        let decrypted = decipher.update(encryptedText);
+        decrypted = Buffer.concat([decrypted, decipher.final()]);
+
+        console.log(decrypted.toString())
+
+        res.status(200).send("worked");
     } catch (error) {
         res.status(400);
         throw new Error(error.message);
@@ -27,7 +41,7 @@ const createExchange = asyncHandler(async (req, res) => {
 
     // Create new exchange
     try {
-        const exchange = await Exchange.create({
+        const exchange = await e.Exchange.create({
             user: req.user,
             exchangeName: req.body.exchangeName,
             exchangeAPI: req.body.exchangeAPI,
@@ -35,7 +49,7 @@ const createExchange = asyncHandler(async (req, res) => {
             exchange: req.body.exchange
         });
 
-        const fullExchange = await Exchange.findOne({ _id: exchange._id })
+        const fullExchange = await e.Exchange.findOne({ _id: exchange._id })
         
         res.status(200).send(fullExchange);
     } catch (error) {
@@ -46,7 +60,7 @@ const createExchange = asyncHandler(async (req, res) => {
 
 const fetchExchanges = asyncHandler(async (req, res) => {
     try {
-        Exchange.find({user: {$eq: req.user._id}}, "-exchangeSecret")
+        e.Exchange.find({user: {$eq: req.user._id}}, "-exchangeSecret")
             .sort({updatedAt: -1})
             .then( async (results) => {
                 res.status(200).send(results);
@@ -60,7 +74,7 @@ const fetchExchanges = asyncHandler(async (req, res) => {
 const renameExchange = asyncHandler(async (req, res) => {
     const { exchangeId, exchangeName, exchangeAPI, exchangeSecret, exchange } = req.body;
 
-    const updatedExchange = await Exchange.findOneAndUpdate(
+    const updatedExchange = await e.Exchange.findOneAndUpdate(
         {_id: exchangeId, user: req.user._id},
         {
             exchangeName: exchangeName,
@@ -81,7 +95,7 @@ const renameExchange = asyncHandler(async (req, res) => {
 const deleteExchange = asyncHandler(async (req, res) => {
     const { exchangeId } = req.body;
     
-    const updatedExchange = await Exchange.findOneAndDelete(
+    const updatedExchange = await e.Exchange.findOneAndDelete(
         {_id: exchangeId, user: req.user._id}
     )
 

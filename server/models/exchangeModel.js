@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
-const key = crypto.randomBytes(32);
+const key = process.env.API_KEY_HASH;
 const iv = crypto.randomBytes(16);
 
 const exchangeModel = mongoose.Schema({
@@ -26,17 +26,15 @@ exchangeModel.pre('save', async function (next) {
     if (!this.isModified) {
         next()
     }
-    let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
-    let encrypted = cipher.update(this.exchangeSecret, "utf-8", 'hex');
-    encrypted += cipher.final("hex");
 
-    const base64data = Buffer.from(iv, 'binary').toString('base64');
-
-    this.exchangeSecret = encrypted;
-    this.iv = base64data;
-    console.log(this.exchangeSecret)
+    let cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv);
+    let encrypted = cipher.update(this.exchangeSecret);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    // save encrypted string along with initialization vector in database
+    this.exchangeSecret = encrypted.toString('hex');
+    this.iv = iv.toString('hex');
 });
 
 const Exchange = mongoose.model("Exchange", exchangeModel);
 
-module.exports = Exchange;
+module.exports = {Exchange, key};
