@@ -25,7 +25,9 @@ const ExchangeView = () => {
             <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                     Name: 
-                    
+                    {selectedExchange.exchangeName}
+                    Exchange: 
+                    {selectedExchange.exchange}
                 </Paper>
             </Grid>
         </Grid>

@@ -5,9 +5,6 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
-
 
 const fetchFromExchange = asyncHandler(async (req, res) => {
     const { exchangeId } = req.body;
