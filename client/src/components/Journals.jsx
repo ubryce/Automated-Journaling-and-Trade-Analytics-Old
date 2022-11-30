@@ -70,6 +70,7 @@ const Journals = () => {
                     <TableCell></TableCell>
                     <TableCell align="right">{`$${journal.amount}`}</TableCell>
                   </Link>
+                  <Button variant="contained" onClick={() => handleDeleteSubmit(journal._id)}>Delete</Button>
                 </TableRow>
               ))}
             </TableBody>
