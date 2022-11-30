@@ -15,6 +15,10 @@ import TableRow from '@mui/material/TableRow';
 
 import Button from '@mui/material/Button';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+
 const Exchanges = () => {
     const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();
     const navigate = useNavigate();
@@ -91,7 +95,11 @@ const Exchanges = () => {
                                 <TableCell></TableCell>
                                 <TableCell align="right">{`$${exchange.amount}`}</TableCell>
                             </Link>
-                            <Button variant="contained" onClick={() => handleDeleteSubmit(exchange._id)}>Delete</Button>
+                            <Tooltip title="Delete">
+                                <IconButton onClick={() => handleDeleteSubmit(exchange._id)}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Tooltip>
                         </TableRow>
                     ))}
                     </TableBody>

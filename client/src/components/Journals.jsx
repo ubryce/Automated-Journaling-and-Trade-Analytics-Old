@@ -15,6 +15,10 @@ import TableRow from '@mui/material/TableRow';
 
 import Button from '@mui/material/Button';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+
 const Journals = () => {
   const { user, journals, setJournals, selectedJournal, setSelectedJournal } = useStateContext()
   const navigate = useNavigate();
@@ -90,7 +94,11 @@ const Journals = () => {
                     <TableCell></TableCell>
                     <TableCell align="right">{`$${journal.amount}`}</TableCell>
                   </Link>
-                  <Button variant="contained" onClick={() => handleDeleteSubmit(journal._id)}>Delete</Button>
+                  <Tooltip title="Delete">
+                    <IconButton onClick={() => handleDeleteSubmit(journal._id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
                 </TableRow>
               ))}
             </TableBody>
