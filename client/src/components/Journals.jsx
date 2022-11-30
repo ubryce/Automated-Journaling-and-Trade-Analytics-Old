@@ -19,6 +19,26 @@ const Journals = () => {
   const { user, journals, setJournals, selectedJournal, setSelectedJournal } = useStateContext()
   const navigate = useNavigate();
 
+  const handleDeleteSubmit = async (journalIdDelete) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+            data: {
+                journalId: journalIdDelete,
+            }
+        };
+        
+        await axios.delete('/api/journal', config);
+
+        fetchJournals();
+        console.log("deleted")
+    } catch (error) {
+        console.log("failed to delete journal")
+    }
+  };
+
   const fetchJournals = async () => {
     try {
         const config = {
