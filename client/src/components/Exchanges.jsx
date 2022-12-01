@@ -116,14 +116,14 @@ const Exchanges = () => {
                                 <TableCell></TableCell>
                                 <TableCell align="right">{`$${exchange.amount}`}</TableCell>
                             </Link>
-                            <Tooltip title="Delete">
-                                <IconButton onClick={() => handleDeleteSubmit(exchange._id)}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </Tooltip>
                             <Tooltip title="Edit">
                                 <IconButton onClick={() => handleEditSubmit(exchange._id)}>
                                 <EditIcon />
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Delete">
+                                <IconButton onClick={() => handleDeleteSubmit(exchange._id)}>
+                                    <DeleteIcon />
                                 </IconButton>
                             </Tooltip>
                         </TableRow>
