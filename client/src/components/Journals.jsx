@@ -24,6 +24,26 @@ const Journals = () => {
   const { user, journals, setJournals, selectedJournal, setSelectedJournal } = useStateContext()
   const navigate = useNavigate();
 
+  const handleEditSubmit = async (journalIdEdit) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+            data: {
+                journalId: journalIdEdit,
+            }
+        };
+        
+        await axios.delete('/api/journal', config);
+
+        fetchJournals();
+        console.log("deleted")
+    } catch (error) {
+        console.log("failed to delete journal")
+    }
+  };
+
   const handleDeleteSubmit = async (journalIdDelete) => {
     try {
         const config = {
@@ -101,7 +121,7 @@ const Journals = () => {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Edit">
-                    <IconButton onClick={() => handleDeleteSubmit(journal._id)}>
+                    <IconButton onClick={() => handleEditSubmit(journal._id)}>
                       <EditIcon />
                     </IconButton>
                   </Tooltip>

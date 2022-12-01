@@ -24,6 +24,26 @@ const Exchanges = () => {
     const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();
     const navigate = useNavigate();
 
+    const handleEditSubmit = async (exchangeIdEdit) => {
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+                data: {
+                    exchangeId: exchangeIdEdit,
+                }
+            };
+            console.log(config)
+            await axios.delete('/api/exchange', config);
+
+            fetchExchanges();
+            console.log("deleted")
+        } catch (error) {
+            console.log("failed to delete exchange")
+        }
+    };
+
     const handleDeleteSubmit = async (exchangeIdDelete) => {
         try {
             const config = {
@@ -102,7 +122,7 @@ const Exchanges = () => {
                                 </IconButton>
                             </Tooltip>
                             <Tooltip title="Edit">
-                                <IconButton onClick={() => handleDeleteSubmit(exchange._id)}>
+                                <IconButton onClick={() => handleEditSubmit(exchange._id)}>
                                 <EditIcon />
                                 </IconButton>
                             </Tooltip>
