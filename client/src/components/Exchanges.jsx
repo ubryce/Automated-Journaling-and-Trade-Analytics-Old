@@ -18,6 +18,7 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import EditIcon from '@mui/icons-material/Edit';
 
 const Exchanges = () => {
     const { selectedExchange, setSelectedExchange, user, exchanges, setExchanges } = useStateContext();
@@ -98,6 +99,11 @@ const Exchanges = () => {
                             <Tooltip title="Delete">
                                 <IconButton onClick={() => handleDeleteSubmit(exchange._id)}>
                                     <DeleteIcon />
+                                </IconButton>
+                            </Tooltip>
+                            <Tooltip title="Edit">
+                                <IconButton onClick={() => handleDeleteSubmit(exchange._id)}>
+                                <EditIcon />
                                 </IconButton>
                             </Tooltip>
                         </TableRow>
