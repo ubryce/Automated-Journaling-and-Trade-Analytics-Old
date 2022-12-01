@@ -115,14 +115,14 @@ const Journals = () => {
                     <TableCell></TableCell>
                     <TableCell align="right">{`$${journal.amount}`}</TableCell>
                   </Link>
-                  <Tooltip title="Delete">
-                    <IconButton onClick={() => handleDeleteSubmit(journal._id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
                   <Tooltip title="Edit">
                     <IconButton onClick={() => handleEditSubmit(journal._id)}>
                       <EditIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Delete">
+                    <IconButton onClick={() => handleDeleteSubmit(journal._id)}>
+                      <DeleteIcon />
                     </IconButton>
                   </Tooltip>
                 </TableRow>
