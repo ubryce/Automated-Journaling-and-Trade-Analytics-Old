@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStateContext } from '../contexts/ContextProvider';
-import { BrowserRouter, Routes, Route, useNavigate, Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Grid from '@mui/material/Grid';

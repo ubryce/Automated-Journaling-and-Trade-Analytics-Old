@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStateContext } from '../contexts/ContextProvider';
-import { BrowserRouter, Routes, Route, useNavigate, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import Grid from '@mui/material/Grid';
@@ -16,6 +16,9 @@ import TableRow from '@mui/material/TableRow';
 
 
 import Button from '@mui/material/Button';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 const ExchangeView = () => {
     const { selectedExchange, user } = useStateContext()
@@ -24,6 +27,11 @@ const ExchangeView = () => {
         <Grid container spacing={3}>
             <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                    <Tooltip title="Back">
+                        <IconButton onClick={() => console.log("ran")}>
+                        <ArrowBackIosNewIcon />
+                        </IconButton>
+                    </Tooltip>
                     Name: 
                     {selectedExchange.exchangeName}
                     Exchange: 
