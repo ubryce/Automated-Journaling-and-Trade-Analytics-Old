@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStateContext } from '../contexts/ContextProvider';
-import { useHistory, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Grid from '@mui/material/Grid';
@@ -16,9 +16,13 @@ import TableRow from '@mui/material/TableRow';
 
 
 import Button from '@mui/material/Button';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 const JournalView = () => {
   const { selectedJournal, selectedTrades, setSelectedTrades, user } = useStateContext()
+  const navigate = useNavigate();
 
   const fetchTrades = async () => {
     try {
@@ -49,6 +53,11 @@ const JournalView = () => {
     <Grid container spacing={3}>
         <Grid item xs={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                <Tooltip title="Back">
+                    <IconButton onClick={() => navigate("/dashboard/journal")}>
+                    <ArrowBackIosNewIcon />
+                    </IconButton>
+                </Tooltip>
                 Name: 
                 {selectedJournal.journalName}
                 Description: 
