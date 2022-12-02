@@ -7,21 +7,13 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { useEffect } from 'react';
 
-import Links from '@mui/material/Link';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-
-
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 const ExchangeView = () => {
-    const { selectedExchange, user } = useStateContext()
+    const { selectedExchange } = useStateContext()
     let navigate = useNavigate();
 
     return (
