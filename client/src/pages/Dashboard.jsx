@@ -22,9 +22,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { mainListItems, secondaryListItems } from '../components/listItems';
-// import Chart from './Chart';
-// import Deposits from './Deposits';
-// import Orders from './Orders';
 
 import Dash from '../components/Dash';
 import Journal from '../components/Journal';
