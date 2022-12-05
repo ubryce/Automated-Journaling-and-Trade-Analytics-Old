@@ -13,8 +13,24 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 const ExchangeView = () => {
-    const { selectedExchange } = useStateContext()
+    const { selectedExchange, user } = useStateContext()
     let navigate = useNavigate();
+
+    const fetchExchangeData = async () => {
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+            console.log(selectedExchange._id)
+            //const {data} = await axios.get(`/api/trade/${selectedJournal._id}`, config);
+            //setSelectedTrades(data);
+            console.log(data)
+        } catch (error) {
+            console.log(error);
+        }
+      };
 
     return (
         <Grid container spacing={3}>
