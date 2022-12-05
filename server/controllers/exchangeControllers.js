@@ -11,7 +11,7 @@ const fetchFromExchange = asyncHandler(async (req, res) => {
     try {
         const exchangeInfo = await e.Exchange.findOne({_id: exchangeId, user: req.user._id})
 
-        console.log(e.key)
+        console.log(exchangeInfo)
             
         let iv = Buffer.from(exchangeInfo.iv, 'hex');
         let encryptedText = Buffer.from(exchangeInfo.exchangeSecret, 'hex');
