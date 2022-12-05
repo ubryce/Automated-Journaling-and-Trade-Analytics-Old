@@ -7,11 +7,8 @@ const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
 
 const fetchFromExchange = asyncHandler(async (req, res) => {
-    const { exchangeId } = req.body;
     try {
-        const exchangeInfo = await e.Exchange.findOne({_id: exchangeId, user: req.user._id})
-
-        console.log(exchangeInfo)
+        const exchangeInfo = await e.Exchange.findOne({_id: req.body._id, user: req.user._id})
             
         let iv = Buffer.from(exchangeInfo.iv, 'hex');
         let encryptedText = Buffer.from(exchangeInfo.exchangeSecret, 'hex');

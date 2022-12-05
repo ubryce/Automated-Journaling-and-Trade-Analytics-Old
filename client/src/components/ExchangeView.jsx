@@ -30,7 +30,11 @@ const ExchangeView = () => {
         } catch (error) {
             console.log(error);
         }
-      };
+    };
+
+    useEffect(() => {
+        fetchExchangeData();
+    }, []);
 
     return (
         <Grid container spacing={3}>
