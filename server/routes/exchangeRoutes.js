@@ -1,6 +1,5 @@
 const express = require('express');
 const { protect } = require('../middleware/authMiddleware');
-//const { accessJournal, fetchJournals, createGroupJournal, renameJournal, addToJournal, removeFromJournal } = require("../controllers/journalControllers")
 const { fetchFromExchange, createExchange, fetchExchanges, renameExchange, deleteExchange } = require("../controllers/exchangeControllers")
 const router = express.Router();
 

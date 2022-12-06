@@ -1,8 +1,5 @@
 const asyncHandler = require('express-async-handler');
 const e = require('../models/exchangeModel');
-const { update } = require('../models/userModel');
-const User = require('../models/userModel');
-const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
 
