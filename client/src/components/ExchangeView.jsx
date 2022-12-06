@@ -25,7 +25,7 @@ const ExchangeView = () => {
             };
             console.log(selectedExchange._id)
             const {data} = await axios.get(`/api/exchange/${selectedExchange._id}`, config);
-            //setSelectedTrades(data);
+            
             console.log(data)
         } catch (error) {
             console.log(error);
