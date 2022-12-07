@@ -1,24 +1,33 @@
 const asyncHandler = require('express-async-handler');
 const e = require('../models/exchangeModel');
+
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
+
+// Decrypt the text using AES-256-cbc encryption
+const decrypt = (exchangeInfoIV, text) => {
+    let iv = Buffer.from(exchangeInfoIV, 'hex');
+    let encryptedText = Buffer.from(text, 'hex');
+    let decipher = crypto.createDecipheriv(algorithm, Buffer.from(e.key), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+
+    return(decrypted.toString())
+}
 
 // Get exchange API keys in order to fetch user data from the exchange
 const fetchFromExchange = asyncHandler(async (req, res) => {
     try {
         // Get stored encrypted data form database
         const exchangeInfo = await e.Exchange.findOne({_id: req.body._id, user: req.user._id})
+        exchangeSecret = decrypt(exchangeInfo.iv, exchangeInfo.exchangeSecret);
         
-        // Decrypt the API secret using AES-256-cbc encryption
-        let iv = Buffer.from(exchangeInfo.iv, 'hex');
-        let encryptedText = Buffer.from(exchangeInfo.exchangeSecret, 'hex');
-        let decipher = crypto.createDecipheriv(algorithm, Buffer.from(e.key), iv);
-        let decrypted = decipher.update(encryptedText);
-        decrypted = Buffer.concat([decrypted, decipher.final()]);
-
         // Checking if decryption was successful 
-        console.log(decrypted.toString())
+        console.log(exchangeSecret);
         res.status(200).send("worked");
+
+        // TODO fetch data from exchange using API
+        
 
     } catch (error) {
         res.status(400);
