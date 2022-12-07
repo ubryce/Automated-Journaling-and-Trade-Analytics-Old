@@ -3,19 +3,23 @@ const e = require('../models/exchangeModel');
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
 
+// Get exchange API keys in order to fetch user data from the exchange
 const fetchFromExchange = asyncHandler(async (req, res) => {
     try {
+        // Get stored encrypted data form database
         const exchangeInfo = await e.Exchange.findOne({_id: req.body._id, user: req.user._id})
-            
+        
+        // Decrypt the API secret using AES-256-cbc encryption
         let iv = Buffer.from(exchangeInfo.iv, 'hex');
         let encryptedText = Buffer.from(exchangeInfo.exchangeSecret, 'hex');
         let decipher = crypto.createDecipheriv(algorithm, Buffer.from(e.key), iv);
         let decrypted = decipher.update(encryptedText);
         decrypted = Buffer.concat([decrypted, decipher.final()]);
 
+        // Checking if decryption was successful 
         console.log(decrypted.toString())
-
         res.status(200).send("worked");
+
     } catch (error) {
         res.status(400);
         throw new Error(error.message);
