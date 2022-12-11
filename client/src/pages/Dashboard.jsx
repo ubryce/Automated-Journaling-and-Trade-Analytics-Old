@@ -19,7 +19,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { mainListItems, secondaryListItems } from '../components/listItems';
 
 import Dash from '../components/Dash';
 import Journal from '../components/Journal';
