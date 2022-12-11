@@ -18,7 +18,6 @@ exchangeModel.pre('save', async function (next) {
     if (!this.isModified) {
         next()
     }
-
     let cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv);
     let encrypted = cipher.update(this.exchangeSecret);
     encrypted = Buffer.concat([encrypted, cipher.final()]);
