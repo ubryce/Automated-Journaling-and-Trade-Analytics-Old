@@ -100,7 +100,7 @@ const Journals = () => {
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>Description</TableCell>
-                <TableCell>Ship To</TableCell>
+                <TableCell>Ship</TableCell>
                 <TableCell>Payment Method</TableCell>
                 <TableCell align="right">Sale Amount</TableCell>
               </TableRow>
