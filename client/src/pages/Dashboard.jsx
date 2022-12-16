@@ -118,8 +118,6 @@ const Dashboard = () => {
       if (!user) navigate('/');
   }, [navigate]);
 
-  
-
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
