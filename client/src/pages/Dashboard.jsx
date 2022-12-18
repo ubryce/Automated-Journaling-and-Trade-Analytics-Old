@@ -102,11 +102,9 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
-
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
   function logoutHandler() {
     localStorage.clear();
     navigate('/')
@@ -126,8 +124,7 @@ const Dashboard = () => {
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
-            }}
-          >
+            }}>
             <IconButton
               edge="start"
               color="inherit"
