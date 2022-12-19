@@ -22,7 +22,7 @@ import EditIcon from '@mui/icons-material/Edit';
 const Journals = () => {
   const { user, journals, setJournals, selectedJournal, setSelectedJournal } = useStateContext()
   const navigate = useNavigate();
-
+  
   const handleEditSubmit = async (journalIdEdit) => {
     try {
         const config = {
@@ -37,9 +37,9 @@ const Journals = () => {
         await axios.delete('/api/journal', config);
 
         fetchJournals();
-        console.log("deleted")
+        console.log("edited")
     } catch (error) {
-        console.log("failed to delete journal")
+        console.log("failed to edit journal")
     }
   };
 
