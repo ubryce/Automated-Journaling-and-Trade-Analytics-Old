@@ -55,7 +55,6 @@ const Journals = () => {
         };
         
         await axios.delete('/api/journal', config);
-
         fetchJournals();
         console.log("deleted")
     } catch (error) {
