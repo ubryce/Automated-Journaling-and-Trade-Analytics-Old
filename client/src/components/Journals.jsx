@@ -37,7 +37,7 @@ const Journals = () => {
         await axios.delete('/api/journal', config);
         fetchJournals();
         console.log("edited")
-        
+
     } catch (error) {
         console.log("failed to edit journal")
     }
@@ -57,6 +57,7 @@ const Journals = () => {
         await axios.delete('/api/journal', config);
         fetchJournals();
         console.log("deleted")
+        
     } catch (error) {
         console.log("failed to delete journal")
     }
