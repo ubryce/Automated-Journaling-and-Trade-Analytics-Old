@@ -57,7 +57,7 @@ const Journals = () => {
         await axios.delete('/api/journal', config);
         fetchJournals();
         console.log("deleted")
-        
+
     } catch (error) {
         console.log("failed to delete journal")
     }
@@ -74,6 +74,7 @@ const Journals = () => {
         const {data} = await axios.get("/api/journal", config);
         setJournals(data);
         console.log(data)
+        
     } catch (error) {
         console.log(error);
     }
