@@ -70,11 +70,10 @@ const Journals = () => {
                 Authorization: `Bearer ${user.token}`,
             },
         };
-
         const {data} = await axios.get("/api/journal", config);
         setJournals(data);
         console.log(data)
-        
+
     } catch (error) {
         console.log(error);
     }
