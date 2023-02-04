@@ -17,6 +17,7 @@ import TableRow from '@mui/material/TableRow';
 
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -56,6 +57,11 @@ const JournalView = () => {
                 <Tooltip title="Back">
                     <IconButton onClick={() => navigate("/dashboard/journal")}>
                     <ArrowBackIosNewIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="Add Trade">
+                    <IconButton onClick={() => navigate("/dashboard/journal")}>
+                        <AddIcon/>
                     </IconButton>
                 </Tooltip>
                 Name: 
