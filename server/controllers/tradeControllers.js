@@ -10,11 +10,13 @@ const sendTrade = asyncHandler( async (req, res) => {
         console.log("Invalid data passed into request");
         return res.sendStatus(400);
     }
+    console.log(req.body);
 
     var newTrade = {
         user: req.user._id,
         journal: journalId,
         thread: thread,
+        size: req.body.size
     }
 
     try {
