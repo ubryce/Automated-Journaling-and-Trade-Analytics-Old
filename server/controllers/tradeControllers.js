@@ -4,20 +4,37 @@ const Trade = require('../models/tradeModel');
 const User = require('../models/userModel');
 
 const sendTrade = asyncHandler( async (req, res) => {
-    const { thread, journalId } = req.body;
 
+    // TODO Check if all required inputs are sent
     if (!thread || !journalId) {
         console.log("Invalid data passed into request");
         return res.sendStatus(400);
     }
     console.log(req.body);
 
-    var newTrade = {
+    const newTrade = {
         user: req.user._id,
-        journal: journalId,
-        thread: thread,
-        size: req.body.size
-    }
+        journal: req.body.journalId,
+        openDate: req.body.openDate,
+        closeDate: req.body.closeDate,
+        side: req.body.side,
+        exchange: req.body.exchange,
+        symbol: req.body.symbol,
+        avgEntry: req.body.avgEntry,
+        stop: req.body.stop,
+        target: req.body.target,
+        exit: req.body.exit,
+        size: req.body.size,
+        sizeFiat: req.body.sizeFiat,
+        walletBalance: req.body.walletBalance,
+        accRisk: req.body.accRisk,
+        confidence: req.body.confidence,
+        plannedRisk: req.body.plannedRisk,
+        finalRisk: req.body.finalRisk,
+        isOpen: req.body.isOpen,
+        tags: req.body.tags,
+        thread: req.body.thread,
+    };
 
     try {
         var trade = await Trade.create(newTrade);

@@ -84,8 +84,8 @@ const JournalView = () => {
                             {selectedTrades?.map((trades) => (
                                 <TableRow key={trades._id}>
                                     <Link>
-                                        <TableCell>{trades.thread[0].content}</TableCell>
-                                        <TableCell></TableCell>
+                                        <TableCell>{trades.thread[0].content?trades.thread[0].content: null}</TableCell>
+                                        <TableCell>{trades.thread[0].size?trades.thread[0].size: null}</TableCell>
                                         <TableCell></TableCell>
                                         <TableCell></TableCell>
                                         {/* <TableCell align="right">{`$${trades.amount}`}</TableCell> */}
