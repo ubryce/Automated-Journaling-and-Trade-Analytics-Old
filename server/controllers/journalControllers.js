@@ -100,6 +100,7 @@ const createJournal = asyncHandler(async (req, res) => {
 const renameJournal = asyncHandler(async (req, res) => {
     const { journalId, journalName, journalDescription } = req.body;
 
+    console.log("here")
     const updatedJournal = await Journal.findOneAndUpdate(
         {_id: journalId, journalAdmin: req.user._id},
         {journalName: journalName, journalDescription: journalDescription}

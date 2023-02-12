@@ -35,16 +35,18 @@ const Journals = () => {
             const config = {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
-                },
-                data: {
-                    journalId: journalIdEdit,
-                    journalName: journalName,
-                    journalDescription: journalDescription
                 }
             };
+            
+            const data = {
+                journalId: journalIdEdit,
+                journalName: journalName,
+                journalDescription: journalDescription
+            }
 
-            // await axios.delete('/api/journal', config);
-            // fetchJournals();
+            await axios.put('/api/journal/rename', data, config);
+            fetchJournals();
+            setEditingJournalId(null);
             console.log("edited")
 
         } catch (error) {
