@@ -23,7 +23,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 // TODO Add filtering
 const JournalView = () => {
-    const {selectedJournal, selectedTrades, setSelectedTrades, user} = useStateContext()
+    const {selectedJournal, selectedTrades, setSelectedTrades, user, setSelectedTrade} = useStateContext()
     const navigate = useNavigate();
 
     const fetchTrades = async () => {
@@ -85,7 +85,7 @@ const JournalView = () => {
                         </TableHead>
                         <TableBody>
                             {selectedTrades?.map((trades) => (
-                                <TableRow key={trades._id}>
+                                <TableRow key={trades._id} component={Link} to={trades._id} onClick={() => setSelectedTrade(trades._id)}>
                                     <TableCell>{`${trades.size}`}</TableCell>
                                     <TableCell>{`${trades.side}`}</TableCell>
                                     <TableCell>{`${trades.exchange}`}</TableCell>

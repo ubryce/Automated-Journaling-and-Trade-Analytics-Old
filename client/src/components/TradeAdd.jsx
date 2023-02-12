@@ -302,6 +302,24 @@ const TradeAdd = () => {
                                                     )}
                                                 />
                                             </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    fullWidth
+                                                    name="threadContent"
+                                                    label="Thread Content"
+                                                    id="threadContent"
+                                                    autoComplete="threadContent"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    fullWidth
+                                                    name="threadPicture"
+                                                    label="Thread Picture"
+                                                    id="threadPicture"
+                                                    autoComplete="threadPicture"
+                                                />
+                                            </Grid>
                                         </Grid>
                                         <Button
                                             type="submit"
