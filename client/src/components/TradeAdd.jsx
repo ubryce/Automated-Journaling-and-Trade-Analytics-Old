@@ -21,6 +21,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 import Button from '@mui/material/Button';
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import Tooltip from "@mui/material/Tooltip";
 
 const theme = createTheme();
 
@@ -105,6 +108,11 @@ const TradeAdd = () => {
                                         alignItems: 'center',
                                     }}
                                 >
+                                    <Tooltip title="Back">
+                                        <IconButton onClick={() => navigate(`/dashboard/journal/${selectedJournal._id}`)}>
+                                            <ArrowBackIosNewIcon/>
+                                        </IconButton>
+                                    </Tooltip>
                                     <Typography component="h1" variant="h5">
                                         New Trade Entry
                                     </Typography>

@@ -34,7 +34,7 @@ import TableBody from "@mui/material/TableBody";
 import Links from "@mui/material/Link";
 
 const TradeView = () => {
-    const {user, selectedTrade} = useStateContext();
+    const {user, selectedTrade, selectedJournal} = useStateContext();
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -45,7 +45,7 @@ const TradeView = () => {
             <Grid item xs={12}>
                 <Paper sx={{p: 2, display: 'flex', flexDirection: 'column'}}>
                     <Tooltip title="Back">
-                        <IconButton onClick={() => navigate("/dashboard/journal/")}>
+                        <IconButton onClick={() => navigate(`/dashboard/journal/${selectedJournal._id}`)}>
                             <ArrowBackIosNewIcon/>
                         </IconButton>
                     </Tooltip>
