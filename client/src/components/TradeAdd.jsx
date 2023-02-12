@@ -15,6 +15,8 @@ import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Chip from '@mui/material/Chip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
@@ -22,18 +24,24 @@ import Button from '@mui/material/Button';
 
 const theme = createTheme();
 
+// TODO change required
+// Check data types
 const TradeAdd = () => {
     const {selectedJournal, user} = useStateContext();
     const navigate = useNavigate();
+    const [ selectedTags, setSelectedTags ] = React.useState([])
 
     function preventDefault(event) {
         event.preventDefault();
     }
 
+    const tags = [
+        "tech", "early"
+    ];
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-
         const tradeData = {
             user: user._id,
             journalId: selectedJournal._id,
@@ -54,7 +62,7 @@ const TradeAdd = () => {
             plannedRisk: data.get("plannedRisk"),
             finalRisk: data.get("finalRisk"),
             isOpen: data.get("isOpen"),
-            tags: data.get("tags").split(','),
+            tags: selectedTags,
             thread: [
                 {
                     content: data.get("threadContent"),
@@ -62,6 +70,8 @@ const TradeAdd = () => {
                 },
             ],
         };
+
+        console.log(tradeData);
 
         const config = {
             headers: {
@@ -116,7 +126,11 @@ const TradeAdd = () => {
                                                     name="opendate"
                                                     label="Open Date"
                                                     id="opendate"
+                                                    type="datetime-local"
                                                     autoComplete="opendate"
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -125,7 +139,11 @@ const TradeAdd = () => {
                                                     name="closedate"
                                                     label="Close Date"
                                                     id="closedate"
+                                                    type="datetime-local"
                                                     autoComplete="closedate"
+                                                    InputLabelProps={{
+                                                        shrink: true,
+                                                    }}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -260,12 +278,28 @@ const TradeAdd = () => {
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
+                                                <Autocomplete
+                                                    multiple
                                                     name="tags"
-                                                    label="Tags"
                                                     id="tags"
-                                                    autoComplete="tags"
+                                                    options={tags.map((option) => option)}
+                                                    freeSolo
+                                                    onChange={(event, newValue) => {
+                                                        setSelectedTags(newValue);
+                                                    }}
+                                                    renderTags={(value, getTagProps) =>
+                                                        value.map((option, index) => (
+                                                            <Chip variant="outlined"
+                                                                  label={option} {...getTagProps({index})} />
+                                                        ))
+                                                    }
+                                                    renderInput={(params) => (
+                                                        <TextField
+                                                            {...params}
+                                                            label="Tags"
+                                                            placeholder="Favorites"
+                                                        />
+                                                    )}
                                                 />
                                             </Grid>
                                         </Grid>

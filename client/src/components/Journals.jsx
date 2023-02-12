@@ -99,21 +99,13 @@ const Journals = () => {
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>Description</TableCell>
-                <TableCell>Ship</TableCell>
-                <TableCell>Payment Method</TableCell>
-                <TableCell align="right">Sale</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {journals.map((journal) => (
-                <TableRow key={journal._id} onClick={() => setSelectedJournal(journal)}>
-                  <Link to={journal._id}>
+                <TableRow component={Link} to={journal._id} key={journal._id} onClick={() => setSelectedJournal(journal)}>
                     <TableCell>{journal.journalName}</TableCell>
                     <TableCell>{journal.journalDescription}</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                    <TableCell align="right">{`$${journal.amount}`}</TableCell>
-                  </Link>
                   <Tooltip title="Edit">
                     <IconButton onClick={() => handleEditSubmit(journal._id)}>
                       <EditIcon />

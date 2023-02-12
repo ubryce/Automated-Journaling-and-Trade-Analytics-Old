@@ -21,6 +21,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
+// TODO Add filtering
 const JournalView = () => {
     const {selectedJournal, selectedTrades, setSelectedTrades, user} = useStateContext()
     const navigate = useNavigate();
@@ -73,23 +74,25 @@ const JournalView = () => {
                     <Table size="small">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Description</TableCell>
-                                <TableCell>Ship To</TableCell>
-                                <TableCell>Payment Method</TableCell>
-                                <TableCell align="right">Sale Amount</TableCell>
+                                <TableCell>Size</TableCell>
+                                <TableCell>Side</TableCell>
+                                <TableCell>Exchange</TableCell>
+                                <TableCell>Symbol</TableCell>
+                                <TableCell>Avg Entry</TableCell>
+                                <TableCell>Exit</TableCell>
+                                <TableCell>Tags</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {selectedTrades?.map((trades) => (
                                 <TableRow key={trades._id}>
-                                    <Link>
-                                        <TableCell>{trades.thread[0].content?trades.thread[0].content: null}</TableCell>
-                                        <TableCell>{trades.thread[0].size?trades.thread[0].size: null}</TableCell>
-                                        <TableCell></TableCell>
-                                        <TableCell></TableCell>
-                                        {/* <TableCell align="right">{`$${trades.amount}`}</TableCell> */}
-                                    </Link>
+                                    <TableCell>{`${trades.size}`}</TableCell>
+                                    <TableCell>{`${trades.side}`}</TableCell>
+                                    <TableCell>{`${trades.exchange}`}</TableCell>
+                                    <TableCell>{`${trades.symbol}`}</TableCell>
+                                    <TableCell>{`${trades.avgEntry}`}</TableCell>
+                                    <TableCell>{`${trades.exit}`}</TableCell>
+                                    <TableCell>{`${trades.tags}`}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

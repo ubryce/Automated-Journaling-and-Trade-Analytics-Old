@@ -5,11 +5,12 @@ const User = require('../models/userModel');
 
 const sendTrade = asyncHandler( async (req, res) => {
 
-    // TODO Check if all required inputs are sent
-    if (!thread || !journalId) {
-        console.log("Invalid data passed into request");
-        return res.sendStatus(400);
-    }
+    // TODO Check if all required inputs are sent with proper data types
+    // Remove latest trade
+    // if (!thread || !journalId) {
+    //     console.log("Invalid data passed into request");
+    //     return res.sendStatus(400);
+    // }
     console.log(req.body);
 
     const newTrade = {
@@ -35,6 +36,8 @@ const sendTrade = asyncHandler( async (req, res) => {
         tags: req.body.tags,
         thread: req.body.thread,
     };
+    
+    console.log(newTrade);
 
     try {
         var trade = await Trade.create(newTrade);
