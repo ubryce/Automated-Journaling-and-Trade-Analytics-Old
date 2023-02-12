@@ -73,4 +73,16 @@ const allTrades = asyncHandler( async (req, res) => {
     }
 });
 
-module.exports = { sendTrade, allTrades };
+const accessTrade = asyncHandler(async (req, res) => {
+    try {
+        console.log(req.params.tradeId)
+        const trade = await Trade.findOne({_id:req.params.tradeId});
+
+        res.status(200).send(trade);
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    } 
+})
+
+module.exports = { sendTrade, allTrades, accessTrade };

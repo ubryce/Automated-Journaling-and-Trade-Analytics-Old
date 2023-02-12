@@ -85,7 +85,7 @@ const JournalView = () => {
                         </TableHead>
                         <TableBody>
                             {selectedTrades?.map((trades) => (
-                                <TableRow key={trades._id} component={Link} to={trades._id} onClick={() => setSelectedTrade(trades._id)}>
+                                <TableRow key={trades._id} component={Link} to={trades._id} onClick={() => setSelectedTrade(trades)}>
                                     <TableCell>{`${trades.size}`}</TableCell>
                                     <TableCell>{`${trades.side}`}</TableCell>
                                     <TableCell>{`${trades.exchange}`}</TableCell>
