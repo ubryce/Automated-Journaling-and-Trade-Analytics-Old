@@ -7,31 +7,15 @@ import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import {useStateContext} from '../contexts/ContextProvider';
 
-import Link from '@mui/material/Link';
-
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import Chip from '@mui/material/Chip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-
-import Button from '@mui/material/Button';
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from '@mui/icons-material/Edit';
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import AddIcon from "@mui/icons-material/Add";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
-import Links from "@mui/material/Link";
 
 const TradeView = () => {
     const {user, selectedTrade, selectedJournal} = useStateContext();
@@ -47,6 +31,11 @@ const TradeView = () => {
                     <Tooltip title="Back">
                         <IconButton onClick={() => navigate(`/dashboard/journal/${selectedJournal._id}`)}>
                             <ArrowBackIosNewIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Edit">
+                        <IconButton>
+                            <EditIcon/>
                         </IconButton>
                     </Tooltip>
                     Trade View

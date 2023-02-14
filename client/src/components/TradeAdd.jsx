@@ -90,12 +90,7 @@ const TradeAdd = () => {
             finalRisk: data.get("finalRisk"),
             isOpen: data.get("isOpen"),
             tags: selectedTags,
-            thread: [
-                {
-                    content: data.get("threadContent"),
-                    picture: data.get("threadPicture"),
-                },
-            ],
+            thread: threads,
         };
 
         console.log(tradeData);
@@ -106,7 +101,7 @@ const TradeAdd = () => {
             },
         };
 
-        const {data2} = await axios.post(
+        const data2 = await axios.post(
             "/api/trade", tradeData, config
         ).then((response) => {
             console.log(response.data)
@@ -363,24 +358,6 @@ const TradeAdd = () => {
                                                     ))}
                                             </Grid>
                                             <Button onClick={handleAddThread}>Add Thread</Button>
-                                            {/*<Grid item xs={12}>*/}
-                                            {/*    <TextField*/}
-                                            {/*        fullWidth*/}
-                                            {/*        name="threadContent"*/}
-                                            {/*        label="Thread Content"*/}
-                                            {/*        id="threadContent"*/}
-                                            {/*        autoComplete="threadContent"*/}
-                                            {/*    />*/}
-                                            {/*</Grid>*/}
-                                            {/*<Grid item xs={12}>*/}
-                                            {/*    <TextField*/}
-                                            {/*        fullWidth*/}
-                                            {/*        name="threadPicture"*/}
-                                            {/*        label="Thread Picture"*/}
-                                            {/*        id="threadPicture"*/}
-                                            {/*        autoComplete="threadPicture"*/}
-                                            {/*    />*/}
-                                            {/*</Grid>*/}
                                         </Grid>
                                         <Button
                                             type="submit"
