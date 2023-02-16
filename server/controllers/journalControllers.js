@@ -3,8 +3,7 @@ const Journal = require('../models/journalModel');
 const { update } = require('../models/userModel');
 const User = require('../models/userModel');
 
-// TODO
-// allow user to create a journal alone in accessJournal
+// TODO allow user to create a journal alone in accessJournal
 // make sure only user = user owner
 
 // Current user sends their user id

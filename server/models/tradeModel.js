@@ -28,7 +28,10 @@ const tradeModel = mongoose.Schema(
         finalRisk:{type: Number},
         isOpen:{type: Boolean, default: true},
         tags:[
-            {type: String},
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Tag"
+            },
         ],
         thread:[
             {

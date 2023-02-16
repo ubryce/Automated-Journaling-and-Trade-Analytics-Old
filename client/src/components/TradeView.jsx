@@ -21,7 +21,7 @@ const TradeView = () => {
     const {user, selectedTrade, selectedJournal} = useStateContext();
     const navigate = useNavigate();
     
-    
+
     return (
         <Grid container spacing={3}>
             <Grid item xs={12}>
