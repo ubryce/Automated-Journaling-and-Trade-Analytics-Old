@@ -9,6 +9,7 @@ import {useStateContext} from '../contexts/ContextProvider';
 import Link from '@mui/material/Link';
 
 import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -57,6 +58,19 @@ const TradeAdd = () => {
         setThreads([...threads, { content: '', picture: '' }]);
     };
 
+    const menuItems = [
+        { value: 1, label: "1" },
+        { value: 2, label: "2" },
+        { value: 3, label: "3" },
+        { value: 4, label: "4" },
+        { value: 5, label: "5" },
+        { value: 6, label: "6" },
+        { value: 7, label: "7" },
+        { value: 8, label: "8" },
+        { value: 9, label: "9" },
+        { value: 10, label: "10" },
+    ]
+
     function preventDefault(event) {
         event.preventDefault();
     }
@@ -87,6 +101,10 @@ const TradeAdd = () => {
             walletBalance: data.get("walletBalance"),
             accRisk: data.get("accRisk"),
             confidence: data.get("confidence"),
+            execution: data.get("execution"),
+            entryRating: data.get("entryRating"),
+            management: data.get("management"),
+            exitRating: data.get("exitRating"),
             plannedRisk: data.get("plannedRisk"),
             finalRisk: data.get("finalRisk"),
             isOpen: data.get("isOpen"),
@@ -276,7 +294,78 @@ const TradeAdd = () => {
                                                     label="Confidence"
                                                     id="confidence"
                                                     autoComplete="confidence"
-                                                />
+                                                    select
+                                                >
+                                                    {menuItems.map((item) => (
+                                                        <MenuItem key={item.value} value={item.value}>
+                                                            {item.label}
+                                                        </MenuItem>
+                                                    ))}
+                                                </TextField>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    fullWidth
+                                                    name="execution"
+                                                    label="Execution Rating"
+                                                    id="execution"
+                                                    autoComplete="execution"
+                                                    select
+                                                >
+                                                    {menuItems.map((item) => (
+                                                        <MenuItem key={item.value} value={item.value}>
+                                                            {item.label}
+                                                        </MenuItem>
+                                                    ))}
+                                                </TextField>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    fullWidth
+                                                    name="entryRating"
+                                                    label="Entry Rating"
+                                                    id="entryRating"
+                                                    autoComplete="entryRating"
+                                                    select
+                                                >
+                                                    {menuItems.map((item) => (
+                                                        <MenuItem key={item.value} value={item.value}>
+                                                            {item.label}
+                                                        </MenuItem>
+                                                    ))}
+                                                </TextField>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    fullWidth
+                                                    name="management"
+                                                    label="Management Rating"
+                                                    id="management"
+                                                    autoComplete="management"
+                                                    select
+                                                >
+                                                    {menuItems.map((item) => (
+                                                        <MenuItem key={item.value} value={item.value}>
+                                                            {item.label}
+                                                        </MenuItem>
+                                                    ))}
+                                                </TextField>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    fullWidth
+                                                    name="exitRating"
+                                                    label="Exit Rating"
+                                                    id="exitRating"
+                                                    autoComplete="exitRating"
+                                                    select
+                                                >
+                                                    {menuItems.map((item) => (
+                                                        <MenuItem key={item.value} value={item.value}>
+                                                            {item.label}
+                                                        </MenuItem>
+                                                    ))}
+                                                </TextField>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <TextField
