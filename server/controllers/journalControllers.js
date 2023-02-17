@@ -52,7 +52,7 @@ const accessJournal = asyncHandler(async (req, res) => {
         }
     }
 });
-
+// TODO remove latest trade
 const fetchJournals = asyncHandler(async (req, res) => {
     try {
         Journal.find({journalAdmin: {$eq: req.user._id}})

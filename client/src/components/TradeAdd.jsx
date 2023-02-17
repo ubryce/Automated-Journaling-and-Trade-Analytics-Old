@@ -28,7 +28,8 @@ import Tooltip from "@mui/material/Tooltip";
 const theme = createTheme();
 
 // TODO change required
-// Check data types
+// TODO Check data types
+// TODO use tags from database and add tags to database
 const TradeAdd = () => {
     const {selectedJournal, user} = useStateContext();
     const navigate = useNavigate();
