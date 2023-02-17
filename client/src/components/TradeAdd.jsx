@@ -1,16 +1,13 @@
 ﻿import React from 'react'
-import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import {useStateContext} from '../contexts/ContextProvider';
 
-import Link from '@mui/material/Link';
-
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
@@ -18,8 +15,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
@@ -70,11 +65,6 @@ const TradeAdd = () => {
         { value: 9, label: "9" },
         { value: 10, label: "10" },
     ]
-
-    function preventDefault(event) {
-        event.preventDefault();
-    }
-
     const tags = [
         "tech", "early"
     ];
