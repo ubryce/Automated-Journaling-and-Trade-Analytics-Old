@@ -20,8 +20,6 @@ import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import ClearIcon from '@mui/icons-material/Clear';
-import {Edit} from "@mui/icons-material";
-import {Icon} from "@mui/material";
 
 const Journals = () => {
     const {user, journals, setJournals, selectedJournal, setSelectedJournal} = useStateContext()
