@@ -307,6 +307,7 @@ const TradeAdd = () => {
                                                     id="confidence"
                                                     autoComplete="confidence"
                                                     select
+                                                    defaultValue=""
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -323,6 +324,7 @@ const TradeAdd = () => {
                                                     id="execution"
                                                     autoComplete="execution"
                                                     select
+                                                    defaultValue=""
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -339,6 +341,7 @@ const TradeAdd = () => {
                                                     id="entryRating"
                                                     autoComplete="entryRating"
                                                     select
+                                                    defaultValue=""
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -355,6 +358,7 @@ const TradeAdd = () => {
                                                     id="management"
                                                     autoComplete="management"
                                                     select
+                                                    defaultValue=""
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -371,6 +375,7 @@ const TradeAdd = () => {
                                                     id="exitRating"
                                                     autoComplete="exitRating"
                                                     select
+                                                    defaultValue=""
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
