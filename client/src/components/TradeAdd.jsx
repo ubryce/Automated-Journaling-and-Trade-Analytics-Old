@@ -37,6 +37,19 @@ const TradeAdd = () => {
         }
     ]);
 
+    const menuItems = [
+        { value: 1, label: "1" },
+        { value: 2, label: "2" },
+        { value: 3, label: "3" },
+        { value: 4, label: "4" },
+        { value: 5, label: "5" },
+        { value: 6, label: "6" },
+        { value: 7, label: "7" },
+        { value: 8, label: "8" },
+        { value: 9, label: "9" },
+        { value: 10, label: "10" },
+    ]
+
     const handleThreadContentChange = (event, index) => {
         const newThreads = [...threads];
         newThreads[index].content = event.target.value;
@@ -53,18 +66,9 @@ const TradeAdd = () => {
         setThreads([...threads, { content: '', picture: '' }]);
     };
 
-    const menuItems = [
-        { value: 1, label: "1" },
-        { value: 2, label: "2" },
-        { value: 3, label: "3" },
-        { value: 4, label: "4" },
-        { value: 5, label: "5" },
-        { value: 6, label: "6" },
-        { value: 7, label: "7" },
-        { value: 8, label: "8" },
-        { value: 9, label: "9" },
-        { value: 10, label: "10" },
-    ]
+    const handleTagsChange = (event, newValue) => {
+        setSelectedTags(new Set([...selectedTags, ...newValue]));
+    };
 
     // TODO do not allow user to add nothing to a thread
     const handleSubmit = async (event) => {
@@ -136,7 +140,7 @@ const TradeAdd = () => {
         }) || {}
     };
 
-    // TODO fix when updating tags
+    // TODO fix when tags already have tags but not updated
     useEffect(() => {
         setTradeTags();
         if(tags.length === 0){
@@ -421,9 +425,7 @@ const TradeAdd = () => {
                                                     options={tags.filter((tag) => tag.tagType === 'setup')}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
-                                                    onChange={(event, newValue) => {
-                                                        setSelectedTags(newValue);
-                                                    }}
+                                                    onChange={handleTagsChange}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
@@ -447,9 +449,7 @@ const TradeAdd = () => {
                                                     options={tags.filter((tag) => tag.tagType === 'mistake')}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
-                                                    onChange={(event, newValue) => {
-                                                        setSelectedTags(newValue);
-                                                    }}
+                                                    onChange={handleTagsChange}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
