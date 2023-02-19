@@ -1,4 +1,4 @@
-﻿import React from 'react'
+﻿import React, {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
@@ -27,7 +27,7 @@ const theme = createTheme();
 // TODO Check data types
 // TODO use tags from database and add tags to database
 const TradeAdd = () => {
-    const {selectedJournal, user} = useStateContext();
+    const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
     const [ selectedTags, setSelectedTags ] = React.useState([]);
     const [ threads, setThreads ] = React.useState([
@@ -65,9 +65,6 @@ const TradeAdd = () => {
         { value: 9, label: "9" },
         { value: 10, label: "10" },
     ]
-    const tags = [
-        "tech", "early"
-    ];
 
     // TODO do not allow user to add nothing to a thread
     const handleSubmit = async (event) => {
@@ -102,6 +99,8 @@ const TradeAdd = () => {
             thread: threads,
         };
 
+        
+
         console.log(tradeData);
 
         const config = {
@@ -119,6 +118,29 @@ const TradeAdd = () => {
             console.log(error.message)
         }) || {}
     };
+
+    const setTradeTags = async (event) => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+        };
+
+        const data2 = await axios.get(
+            "/api/tag", config
+        ).then((response) => {
+            console.log(response.data)
+            setTags(response.data)
+        }, (error) => {
+            console.log(error.message)
+        }) || {}
+    };
+
+    useEffect(() => {
+        if(tags.length === 0){
+            setTradeTags();
+        }
+    }, []);
 
     return (
         <div>
@@ -389,7 +411,7 @@ const TradeAdd = () => {
                                                     multiple
                                                     name="tags"
                                                     id="tags"
-                                                    options={tags.map((option) => option)}
+                                                    options={tags.map((option) => option.tag)}
                                                     freeSolo
                                                     onChange={(event, newValue) => {
                                                         setSelectedTags(newValue);
