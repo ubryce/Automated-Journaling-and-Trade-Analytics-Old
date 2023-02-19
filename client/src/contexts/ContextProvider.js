@@ -12,6 +12,7 @@ export const ContextProvider = ({ children }) => {
     const [selectedTrades, setSelectedTrades] = useState();
     const [exchanges, setExchanges] = useState([]);
     const [selectedTrade, setSelectedTrade] = useState();
+    const [tags, setTags] = useState([]);
 
     const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ export const ContextProvider = ({ children }) => {
 
     return (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
-        <StateContext.Provider value={{ selectedTrades, setSelectedTrades, user, setUser, visability, setVisability, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange, selectedTrade, setSelectedTrade }}>
+        <StateContext.Provider value={{ tags, setTags, selectedTrades, setSelectedTrades, user, setUser, visability, setVisability, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange, selectedTrade, setSelectedTrade }}>
         {children}
         </StateContext.Provider>
     );
