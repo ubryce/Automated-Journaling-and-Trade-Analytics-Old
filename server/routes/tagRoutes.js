@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.route('/').post(protect, createTag);
 router.route('/').get(protect, fetchTags);
-router.route('/').get(protect, deleteTag);
+router.route('/').delete(protect, deleteTag);
 
 module.exports = router;

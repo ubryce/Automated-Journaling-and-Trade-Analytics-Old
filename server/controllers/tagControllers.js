@@ -1,8 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const User = require('../models/userModel');
 const Tag = require("../models/tagModel");
+const Journal = require("../models/journalModel");
 
-// TODO create fetch tags
 const fetchTags = asyncHandler( async (req, res) => {
     try {
         // TODO fix request
@@ -43,10 +43,20 @@ const createTag = asyncHandler( async (req, res) => {
     }
 });
 
-// TODO deletetag function
+// TODO make sure no problems here
 const deleteTag = asyncHandler( async (req, res) => {
     try {
+        const { tagId } = req.body;
 
+        const tagToDelete = await Tag.findOneAndDelete(
+            {_id: tagId, user: req.user._id}
+        )
+        if (!tagToDelete ) {
+            res.status(404);
+            throw new Error("Tag not found");
+        } else {
+            res.json(tagToDelete);
+        }
     } catch (error) {
         res.status(400);
         throw new Error(error.message);
