@@ -6,8 +6,15 @@ const Tag = require("../models/tagModel");
 const fetchTags = asyncHandler( async (req, res) => {
     try {
         // TODO fix request
-        const tags = await Tag.find({user:req.params._id})
-            .populate("tag");
+        const tags = await Tag.find({$eq: req.user._id})
+            .populate("tag")
+            .then( async (results) => {
+                results = await User.populate(results, {
+                    path: "latestTrade.user",
+                    select: "name email"
+                });
+                res.status(200).send(results);
+            });
 
         res.json(tags);
     } catch (error) {
