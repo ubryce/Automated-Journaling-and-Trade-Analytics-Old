@@ -5,9 +5,9 @@ const Tag = require("../models/tagModel");
 // TODO create fetch tags
 const fetchTags = asyncHandler( async (req, res) => {
     try {
-        const tags = await Tag.find({journal:req.params.journalId})
-            .populate("user", "name email")
-            .populate("journal");
+        // TODO fix request
+        const tags = await Tag.find({user:req.params._id})
+            .populate("tag");
 
         res.json(tags);
     } catch (error) {
