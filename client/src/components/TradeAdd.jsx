@@ -136,7 +136,9 @@ const TradeAdd = () => {
         }) || {}
     };
 
+    // TODO fix when updating tags
     useEffect(() => {
+        setTradeTags();
         if(tags.length === 0){
             setTradeTags();
         }
@@ -416,7 +418,8 @@ const TradeAdd = () => {
                                                     multiple
                                                     name="tags"
                                                     id="tags"
-                                                    options={tags.map((option) => option.tag)}
+                                                    options={tags.filter((tag) => tag.tagType === 'setup')}
+                                                    getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={(event, newValue) => {
                                                         setSelectedTags(newValue);
@@ -424,13 +427,39 @@ const TradeAdd = () => {
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option} {...getTagProps({index})} />
+                                                                  label={option.tag} {...getTagProps({index})} />
                                                         ))
                                                     }
                                                     renderInput={(params) => (
                                                         <TextField
                                                             {...params}
-                                                            label="Tags"
+                                                            label="Setup Tags"
+                                                            placeholder="Favorites"
+                                                        />
+                                                    )}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Autocomplete
+                                                    multiple
+                                                    name="mistakeTags"
+                                                    id="mistakeTags"
+                                                    options={tags.filter((tag) => tag.tagType === 'mistake')}
+                                                    getOptionLabel={(option) => option.tag}
+                                                    freeSolo
+                                                    onChange={(event, newValue) => {
+                                                        setSelectedTags(newValue);
+                                                    }}
+                                                    renderTags={(value, getTagProps) =>
+                                                        value.map((option, index) => (
+                                                            <Chip variant="outlined"
+                                                                  label={option.tag} {...getTagProps({index})} />
+                                                        ))
+                                                    }
+                                                    renderInput={(params) => (
+                                                        <TextField
+                                                            {...params}
+                                                            label="Mistake Tags"
                                                             placeholder="Favorites"
                                                         />
                                                     )}
