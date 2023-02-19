@@ -77,14 +77,14 @@ const createJournal = asyncHandler(async (req, res) => {
         return res.status(400).send({messgae: "Please fill Journal name"});
     }
 
-    var journalData = {
+    const journalData = {
         journalName: req.body.name,
         journalDescription: req.body.description,
         journalAdmin: req.user,
     };
 
     try {
-
+        // TODO check if journal already exists
         const createdJournal = await Journal.create(journalData);
         const fullJournal = await Journal.findOne({ _id: createdJournal._id })
             .populate("journalAdmin", "-password");
