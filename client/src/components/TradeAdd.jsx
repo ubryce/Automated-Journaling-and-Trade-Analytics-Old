@@ -25,7 +25,7 @@ const theme = createTheme();
 
 // TODO change required
 // TODO Check data types
-// TODO use tags from database and add tags to database
+// TODO add tags to database
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
@@ -70,7 +70,23 @@ const TradeAdd = () => {
         setSelectedTags(new Set([...selectedTags, ...newValue]));
     };
 
+    const handleTagsInputChange = (event, value, reason) => {
+        if (reason === 'input') {
+            const newTag = value.trim();
+            if (newTag !== '' && !tags.some((tag) => tag.tag === newTag && tag.tagType === 'mistake')) {
+                // Create a new tag and add it to the context data
+                const tag = {
+                    tag: newTag,
+                    tagType: 'mistake'
+                };
+                // You can then add the new tag to the context data using your preferred method
+                console.log(tag);
+            }
+        }
+    };
+
     // TODO do not allow user to add nothing to a thread
+    // TODO remove thread
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -102,8 +118,6 @@ const TradeAdd = () => {
             tags: selectedTags,
             thread: threads,
         };
-
-        
 
         console.log(tradeData);
 
@@ -450,6 +464,7 @@ const TradeAdd = () => {
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={handleTagsChange}
+                                                    onInputChange={handleTagsInputChange}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
