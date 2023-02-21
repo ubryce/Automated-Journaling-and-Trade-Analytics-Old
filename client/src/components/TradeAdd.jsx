@@ -26,11 +26,13 @@ const theme = createTheme();
 // TODO change required
 // TODO Check data types
 // TODO add tags to database
+// TODO do not allow user to add nothing to a thread
+// TODO remove thread
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
-    const [ selectedTags, setSelectedTags ] = React.useState([]);
-    const [ threads, setThreads ] = React.useState([
+    const [selectedTags, setSelectedTags] = React.useState([]);
+    const [threads, setThreads] = React.useState([
         {
             content: "",
             picture: ""
@@ -38,16 +40,16 @@ const TradeAdd = () => {
     ]);
 
     const menuItems = [
-        { value: 1, label: "1" },
-        { value: 2, label: "2" },
-        { value: 3, label: "3" },
-        { value: 4, label: "4" },
-        { value: 5, label: "5" },
-        { value: 6, label: "6" },
-        { value: 7, label: "7" },
-        { value: 8, label: "8" },
-        { value: 9, label: "9" },
-        { value: 10, label: "10" },
+        {value: 1, label: "1"},
+        {value: 2, label: "2"},
+        {value: 3, label: "3"},
+        {value: 4, label: "4"},
+        {value: 5, label: "5"},
+        {value: 6, label: "6"},
+        {value: 7, label: "7"},
+        {value: 8, label: "8"},
+        {value: 9, label: "9"},
+        {value: 10, label: "10"},
     ]
 
     const handleThreadContentChange = (event, index) => {
@@ -63,7 +65,7 @@ const TradeAdd = () => {
     };
 
     const handleAddThread = () => {
-        setThreads([...threads, { content: '', picture: '' }]);
+        setThreads([...threads, {content: '', picture: ''}]);
     };
 
     const handleTagsChange = (event, newValue) => {
@@ -85,8 +87,6 @@ const TradeAdd = () => {
         }
     };
 
-    // TODO do not allow user to add nothing to a thread
-    // TODO remove thread
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -157,7 +157,7 @@ const TradeAdd = () => {
     // TODO fix when tags already have tags but not updated
     useEffect(() => {
         setTradeTags();
-        if(tags.length === 0){
+        if (tags.length === 0) {
             setTradeTags();
         }
     }, []);
@@ -179,7 +179,8 @@ const TradeAdd = () => {
                                     }}
                                 >
                                     <Tooltip title="Back">
-                                        <IconButton onClick={() => navigate(`/dashboard/journal/${selectedJournal._id}`)}>
+                                        <IconButton
+                                            onClick={() => navigate(`/dashboard/journal/${selectedJournal._id}`)}>
                                             <ArrowBackIosNewIcon/>
                                         </IconButton>
                                     </Tooltip>
@@ -483,30 +484,30 @@ const TradeAdd = () => {
                                             <Grid item xs={12}>
                                                 {threads.map((thread, index) => (
                                                     <>
-                                                    <Grid item xs={12} key={index}>
-                                                        <TextField
-                                                            fullWidth
-                                                            name="threadContent"
-                                                            label="Thread Content"
-                                                            id="threadContent"
-                                                            autoComplete="threadContent"
-                                                            value={thread.content}
-                                                            onChange={event => handleThreadContentChange(event, index)}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={12}>
-                                                    <TextField
-                                                    fullWidth
-                                                    name="threadPicture"
-                                                    label="Thread Picture"
-                                                    id="threadPicture"
-                                                    autoComplete="threadPicture"
-                                                    value={thread.picture}
-                                                    onChange={event => handleThreadPictureChange(event, index)}
-                                                    />
-                                                    </Grid>
-                                                        </>
-                                                    ))}
+                                                        <Grid item xs={12} key={index}>
+                                                            <TextField
+                                                                fullWidth
+                                                                name="threadContent"
+                                                                label="Thread Content"
+                                                                id="threadContent"
+                                                                autoComplete="threadContent"
+                                                                value={thread.content}
+                                                                onChange={event => handleThreadContentChange(event, index)}
+                                                            />
+                                                        </Grid>
+                                                        <Grid item xs={12}>
+                                                            <TextField
+                                                                fullWidth
+                                                                name="threadPicture"
+                                                                label="Thread Picture"
+                                                                id="threadPicture"
+                                                                autoComplete="threadPicture"
+                                                                value={thread.picture}
+                                                                onChange={event => handleThreadPictureChange(event, index)}
+                                                            />
+                                                        </Grid>
+                                                    </>
+                                                ))}
                                             </Grid>
                                             <Button onClick={handleAddThread}>Add Thread</Button>
                                         </Grid>
