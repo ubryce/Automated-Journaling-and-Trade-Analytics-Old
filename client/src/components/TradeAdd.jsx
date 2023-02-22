@@ -72,18 +72,17 @@ const TradeAdd = () => {
         setSelectedTags(new Set([...selectedTags, ...newValue]));
     };
 
-    const handleTagsInputChange = (event, value, reason) => {
-        if (reason === 'input') {
-            const newTag = value.trim();
-            if (newTag !== '' && !tags.some((tag) => tag.tag === newTag && tag.tagType === 'mistake')) {
-                // Create a new tag and add it to the context data
-                const tag = {
-                    tag: newTag,
-                    tagType: 'mistake'
-                };
-                // You can then add the new tag to the context data using your preferred method
-                console.log(tag);
-            }
+    const handleTagsInputChange = (event, value) => {
+        // Check if the value is not empty and is not already in the tags array
+        if (value && !tags.some((tag) => tag.tag === value)) {
+            const newTag = {
+                tag: value,
+                tagType: 'mistake',
+            };
+            // Add the new tag to the tags array in state
+            setTags([...tags, newTag]);
+            // Set the selected tags to include the new tag
+            setSelectedTags([...selectedTags, newTag]);
         }
     };
 
