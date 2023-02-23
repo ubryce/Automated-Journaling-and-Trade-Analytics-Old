@@ -1,11 +1,9 @@
 ﻿import React, {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom';
-
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import {useStateContext} from '../contexts/ContextProvider';
-
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
@@ -15,7 +13,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
-
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -69,15 +66,21 @@ const TradeAdd = () => {
     };
 
     const handleTagsChange = (event, newValue) => {
-        setSelectedTags(new Set([...selectedTags, ...newValue]));
+        // Remove any tags that are not in the options list
+        newValue = newValue.filter((tag) => {
+            return tags.find((option) => option.tag === tag.tag && option.tagType === tag.tagType);
+        });
+
+        setSelectedTags([...selectedTags, newValue]);
     };
 
-    const handleTagsInputChange = (event, value) => {
+    // TODO bug where all input changes in tags field is listed
+    const handleTagsInputChange = (event, value, tagType) => {
         // Check if the value is not empty and is not already in the tags array
         if (value && !tags.some((tag) => tag.tag === value)) {
             const newTag = {
                 tag: value,
-                tagType: 'mistake',
+                tagType: tagType,
             };
             // Add the new tag to the tags array in state
             setTags([...tags, newTag]);
@@ -434,12 +437,13 @@ const TradeAdd = () => {
                                             <Grid item xs={12}>
                                                 <Autocomplete
                                                     multiple
-                                                    name="tags"
-                                                    id="tags"
+                                                    name="setupTags"
+                                                    id="setupTags"
                                                     options={tags.filter((tag) => tag.tagType === 'setup')}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={handleTagsChange}
+                                                    onInputChange={(event, value) => handleTagsInputChange(event, value, 'setup')}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
@@ -464,7 +468,7 @@ const TradeAdd = () => {
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={handleTagsChange}
-                                                    onInputChange={handleTagsInputChange}
+                                                    onInputChange={(event, value) => handleTagsInputChange(event, value, 'mistake')}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
