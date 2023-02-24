@@ -157,9 +157,6 @@ const TradeAdd = () => {
     // TODO fix when tags already have tags but not updated
     useEffect(() => {
         setTradeTags();
-        if (tags.length === 0) {
-            setTradeTags();
-        }
     }, []);
 
     return (
