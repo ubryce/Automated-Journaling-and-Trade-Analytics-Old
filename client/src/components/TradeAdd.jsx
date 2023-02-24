@@ -121,8 +121,6 @@ const TradeAdd = () => {
             thread: threads,
         };
 
-        console.log(tradeData);
-
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
