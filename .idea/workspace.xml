@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +59,8 @@
       <workItem from="1676356789195" duration="8282000" />
       <workItem from="1676592349883" duration="1278000" />
       <workItem from="1676640213241" duration="26797000" />
-      <workItem from="1677168460260" duration="599000" />
+      <workItem from="1677168460260" duration="2092000" />
+      <workItem from="1677466749616" duration="310000" />
     </task>
     <servers />
   </component>

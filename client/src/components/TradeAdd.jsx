@@ -25,6 +25,8 @@ const theme = createTheme();
 // TODO add tags to database
 // TODO do not allow user to add nothing to a thread
 // TODO remove thread
+// TODO fix when tags already have tags but not updated
+// TODO bug where all input changes in tags field is listed
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
@@ -74,7 +76,6 @@ const TradeAdd = () => {
         setSelectedTags([...selectedTags, newValue]);
     };
 
-    // TODO bug where all input changes in tags field is listed
     const handleTagsInputChange = (event, value, tagType) => {
         // Check if the value is not empty and is not already in the tags array
         if (value && !tags.some((tag) => tag.tag === value)) {
@@ -154,7 +155,6 @@ const TradeAdd = () => {
         }) || {}
     };
 
-    // TODO fix when tags already have tags but not updated
     useEffect(() => {
         setTradeTags();
     }, []);
