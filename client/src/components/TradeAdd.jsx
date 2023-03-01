@@ -67,6 +67,10 @@ const TradeAdd = () => {
         setThreads([...threads, {content: '', picture: ''}]);
     };
 
+    const handleDeleteTag = (tag) => {
+        setTags(tags.filter((t) => t._id !== tag._id));
+    };
+
     const handleTagsChange = (event, newValue) => {
         // Remove any tags that are not in the options list
         newValue = newValue.filter((tag) => {
@@ -127,6 +131,8 @@ const TradeAdd = () => {
                 Authorization: `Bearer ${user.token}`,
             },
         };
+
+        console.log(tradeData);
 
         const data2 = await axios.post(
             "/api/trade", tradeData, config
@@ -442,7 +448,9 @@ const TradeAdd = () => {
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option.tag} {...getTagProps({index})} />
+                                                                  label={option.tag}
+                                                                  onDelete={() => handleDeleteTag(option)}
+                                                                  {...getTagProps({index})} />
                                                         ))
                                                     }
                                                     renderInput={(params) => (
@@ -467,7 +475,9 @@ const TradeAdd = () => {
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option.tag} {...getTagProps({index})} />
+                                                                  label={option.tag}
+                                                                  onDelete={() => handleDeleteTag(option)}
+                                                                  {...getTagProps({index})} />
                                                         ))
                                                     }
                                                     renderInput={(params) => (
