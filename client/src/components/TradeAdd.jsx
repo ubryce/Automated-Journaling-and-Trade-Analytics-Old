@@ -68,10 +68,12 @@ const TradeAdd = () => {
     };
 
     const handleDeleteTag = (tag) => {
+        console.log(selectedTags)
         setTags(tags.filter((t) => t._id !== tag._id));
     };
 
     const handleTagsChange = (event, newValue) => {
+        console.log(selectedTags)
         // Remove any tags that are not in the options list
         newValue = newValue.filter((tag) => {
             return tags.find((option) => option.tag === tag.tag && option.tagType === tag.tagType);
@@ -81,6 +83,7 @@ const TradeAdd = () => {
     };
 
     const handleTagsInputChange = (event, value, tagType) => {
+
         // Check if the value is not empty and is not already in the tags array
         if (value && !tags.some((tag) => tag.tag === value)) {
             const newTag = {
@@ -92,6 +95,7 @@ const TradeAdd = () => {
             // Set the selected tags to include the new tag
             setSelectedTags([...selectedTags, newTag]);
         }
+        console.log(selectedTags)
     };
 
     const handleSubmit = async (event) => {
