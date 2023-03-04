@@ -31,7 +31,10 @@ const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
     const [selectedTags, setSelectedTags] = React.useState([]);
+    const [setupTags, setSetupTags] = React.useState([]);
+    const [mistakeTags, setMistakeTags] = React.useState([]);
     const [selectedSetupTags, setSelectedSetupTags] = React.useState([]);
+    const [selectedMistakeTags, setSelectedMistakeTags] = React.useState([]);
     const [threads, setThreads] = React.useState([
         {
             content: "",
@@ -74,15 +77,19 @@ const TradeAdd = () => {
     };
 
     const handleTagsChange = (event, value, tagType) => {
-        console.log("handletagschange")
-
-        setSelectedSetupTags(value);
-        console.log(value)
-        console.log(selectedSetupTags)
+        const newTags = value.map((tag) => ({
+            tag: tag,
+            tagType: tagType
+        }))
+        if(tagType === 'setup'){
+            setSelectedSetupTags(newTags)
+        } else {
+            setSelectedMistakeTags(newTags)
+        }
     };
 
     const handleTagsInputChange = (event, value, tagType) => {
-        
+
         // //
         // // Check if the value is not empty and is not already in the tags array
         // if (value && !tags.some((tag) => tag.tag === value)) {
@@ -129,6 +136,8 @@ const TradeAdd = () => {
             tags: selectedTags,
             thread: threads,
         };
+        console.log(selectedSetupTags)
+        console.log(selectedMistakeTags)
 
         const config = {
             headers: {
@@ -159,6 +168,10 @@ const TradeAdd = () => {
             "/api/tag", config
         ).then((response) => {
             console.log(response.data)
+            const setupTags = tags.filter((tag) => tag.tagType === 'setup')
+            setSetupTags(setupTags.map(tag => tag.tag))
+            const mistakeTags = tags.filter((tag) => tag.tagType === 'mistake')
+            setMistakeTags(mistakeTags.map(tag => tag.tag))
             setTags(response.data)
         }, (error) => {
             console.log(error.message)
@@ -444,15 +457,14 @@ const TradeAdd = () => {
                                                     multiple
                                                     name="setupTags"
                                                     id="setupTags"
-                                                    options={tags.filter((tag) => tag.tagType === 'setup')}
-                                                    getOptionLabel={(option) => option.tag}
+                                                    options={setupTags}
+                                                    getOptionLabel={(option) => option}
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'setup')}
-                                                    onInputChange={handleTagsInputChange}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option.tag}
+                                                                  label={option}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
                                                         ))
@@ -471,15 +483,14 @@ const TradeAdd = () => {
                                                     multiple
                                                     name="mistakeTags"
                                                     id="mistakeTags"
-                                                    options={tags.filter((tag) => tag.tagType === 'mistake')}
-                                                    getOptionLabel={(option) => option.tag}
+                                                    options={mistakeTags}
+                                                    getOptionLabel={(option) => option}
                                                     freeSolo
-                                                    onChange={handleTagsChange}
-                                                    onInputChange={(event, value) => handleTagsInputChange(event, value, 'mistake')}
+                                                    onChange={(event, value) => handleTagsChange(event, value, 'mistake')}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option.tag}
+                                                                  label={option}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
                                                         ))
