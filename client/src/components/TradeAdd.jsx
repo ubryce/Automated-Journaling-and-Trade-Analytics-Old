@@ -109,6 +109,7 @@ const TradeAdd = () => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log(threads);
+        const allTags = [...selectedSetupTags, ...selectedMistakeTags];
         const tradeData = {
             user: user._id,
             journalId: selectedJournal._id,
@@ -133,11 +134,16 @@ const TradeAdd = () => {
             plannedRisk: data.get("plannedRisk"),
             finalRisk: data.get("finalRisk"),
             isOpen: data.get("isOpen"),
-            tags: selectedTags,
+            tags: allTags,
             thread: threads,
         };
-        console.log(selectedSetupTags)
-        console.log(selectedMistakeTags)
+
+        const filteredTags = allTags.filter((obj1) => {
+            const exists = tags.some(obj2 => obj2.tag === obj1.tag);
+            return !exists;
+        });
+
+        console.log(filteredTags);
 
         const config = {
             headers: {
