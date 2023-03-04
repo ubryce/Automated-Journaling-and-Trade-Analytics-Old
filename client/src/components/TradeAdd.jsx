@@ -22,11 +22,8 @@ const theme = createTheme();
 
 // TODO change required
 // TODO Check data types
-// TODO add tags to database
 // TODO do not allow user to add nothing to a thread
 // TODO remove thread
-// TODO fix when tags already have tags but not updated
-// TODO bug where all input changes in tags field is listed
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
@@ -134,34 +131,34 @@ const TradeAdd = () => {
             const tagsData = {
                 tags: filteredTags
             }
-            const data3 = await axios.post(
+            await axios.post(
                 "/api/tag", tagsData, config
             ).then((response) => {
                 console.log(response.data)
             }, (error) => {
                 console.log(error.message)
-            }) || {}
+            })
         }
 
         console.log(tradeData);
-        const data2 = await axios.post(
+        await axios.post(
             "/api/trade", tradeData, config
         ).then((response) => {
             console.log(response.data)
             navigate(`/dashboard/journal/${selectedJournal._id}`);
         }, (error) => {
             console.log(error.message)
-        }) || {}
+        })
     };
 
-    const setTradeTags = async (event) => {
+    const setTradeTags = async () => {
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
             },
         };
 
-        const data2 = await axios.get(
+        await axios.get(
             "/api/tag", config
         ).then((response) => {
             console.log(response.data)
@@ -172,7 +169,7 @@ const TradeAdd = () => {
             setTags(response.data)
         }, (error) => {
             console.log(error.message)
-        }) || {}
+        })
     };
 
     useEffect(() => {
