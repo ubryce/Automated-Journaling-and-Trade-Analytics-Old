@@ -24,23 +24,42 @@ const fetchTags = asyncHandler( async (req, res) => {
 });
 
 const createTag = asyncHandler( async (req, res) => {
-    const tagData = {
-        tag: req.body.tag,
-        tagType: req.body.tagType,
-        user: req.user
-    };
+
+    const {tags} = req.body;
 
     try {
-        // TODO check if tag already exists
-        const createdTag = await Tag.create(tagData);
-        const fullTag = await Tag.findOne({_id: createdTag._id})
+        const createdTags = await Tag.insertMany(tags.map(tag => ({
+            tag: tag.tag,
+            tagType: tag.tagType,
+            user: req.user,
+        })));
+
+        const fullTags = await Tag.find({ _id: { $in: createdTags.map(tag => tag._id) } })
             .populate("user", "-password");
 
-        res.status(200).json(fullTag);
+        res.status(200).json(fullTags);
     } catch (error) {
         res.status(400);
         throw new Error(error.message);
     }
+
+    // const tagData = {
+    //     tag: req.body.tag,
+    //     tagType: req.body.tagType,
+    //     user: req.user
+    // };
+    //
+    // try {
+    //     // TODO check if tag already exists
+    //     const createdTag = await Tag.create(tagData);
+    //     const fullTag = await Tag.findOne({_id: createdTag._id})
+    //         .populate("user", "-password");
+    //
+    //     res.status(200).json(fullTag);
+    // } catch (error) {
+    //     res.status(400);
+    //     throw new Error(error.message);
+    // }
 });
 
 // TODO make sure no problems here

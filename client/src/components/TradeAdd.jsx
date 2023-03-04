@@ -145,6 +145,11 @@ const TradeAdd = () => {
 
         console.log(filteredTags);
 
+        // TODO if filteredTags != empty then make a post req to create new tags
+        if(filteredTags.length > 0){
+            await axios.post("api/tag")
+        }
+
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
