@@ -30,7 +30,6 @@ const theme = createTheme();
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
-    const [selectedTags, setSelectedTags] = React.useState([]);
     const [setupTags, setSetupTags] = React.useState([]);
     const [mistakeTags, setMistakeTags] = React.useState([]);
     const [selectedSetupTags, setSelectedSetupTags] = React.useState([]);
@@ -72,7 +71,6 @@ const TradeAdd = () => {
     };
 
     const handleDeleteTag = (tag) => {
-        console.log(selectedTags)
         setTags(tags.filter((t) => t._id !== tag._id));
     };
 
@@ -86,23 +84,6 @@ const TradeAdd = () => {
         } else {
             setSelectedMistakeTags(newTags)
         }
-    };
-
-    const handleTagsInputChange = (event, value, tagType) => {
-
-        // //
-        // // Check if the value is not empty and is not already in the tags array
-        // if (value && !tags.some((tag) => tag.tag === value)) {
-        //     const newTag = {
-        //         tag: value,
-        //         tagType: tagType,
-        //     };
-        //     // Add the new tag to the tags array in state
-        //     setTags([...tags, newTag]);
-        //     // Set the selected tags to include the new tag
-        //     setSelectedTags([...selectedTags, newTag]);
-        // }
-        console.log(selectedTags)
     };
 
     const handleSubmit = async (event) => {
@@ -142,9 +123,6 @@ const TradeAdd = () => {
             const exists = tags.some(obj2 => obj2.tag === obj1.tag);
             return !exists;
         });
-
-        console.log(filteredTags);
-
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
@@ -166,7 +144,6 @@ const TradeAdd = () => {
         }
 
         console.log(tradeData);
-
         const data2 = await axios.post(
             "/api/trade", tradeData, config
         ).then((response) => {
