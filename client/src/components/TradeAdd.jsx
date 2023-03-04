@@ -31,6 +31,7 @@ const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
     const [selectedTags, setSelectedTags] = React.useState([]);
+    const [selectedSetupTags, setSelectedSetupTags] = React.useState([]);
     const [threads, setThreads] = React.useState([
         {
             content: "",
@@ -72,29 +73,28 @@ const TradeAdd = () => {
         setTags(tags.filter((t) => t._id !== tag._id));
     };
 
-    const handleTagsChange = (event, newValue) => {
-        console.log(selectedTags)
-        // Remove any tags that are not in the options list
-        newValue = newValue.filter((tag) => {
-            return tags.find((option) => option.tag === tag.tag && option.tagType === tag.tagType);
-        });
+    const handleTagsChange = (event, value, tagType) => {
+        console.log("handletagschange")
 
-        setSelectedTags([...selectedTags, newValue]);
+        setSelectedSetupTags(value);
+        console.log(value)
+        console.log(selectedSetupTags)
     };
 
     const handleTagsInputChange = (event, value, tagType) => {
-
-        // Check if the value is not empty and is not already in the tags array
-        if (value && !tags.some((tag) => tag.tag === value)) {
-            const newTag = {
-                tag: value,
-                tagType: tagType,
-            };
-            // Add the new tag to the tags array in state
-            setTags([...tags, newTag]);
-            // Set the selected tags to include the new tag
-            setSelectedTags([...selectedTags, newTag]);
-        }
+        
+        // //
+        // // Check if the value is not empty and is not already in the tags array
+        // if (value && !tags.some((tag) => tag.tag === value)) {
+        //     const newTag = {
+        //         tag: value,
+        //         tagType: tagType,
+        //     };
+        //     // Add the new tag to the tags array in state
+        //     setTags([...tags, newTag]);
+        //     // Set the selected tags to include the new tag
+        //     setSelectedTags([...selectedTags, newTag]);
+        // }
         console.log(selectedTags)
     };
 
@@ -447,8 +447,8 @@ const TradeAdd = () => {
                                                     options={tags.filter((tag) => tag.tagType === 'setup')}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
-                                                    onChange={handleTagsChange}
-                                                    onInputChange={(event, value) => handleTagsInputChange(event, value, 'setup')}
+                                                    onChange={(event, value) => handleTagsChange(event, value, 'setup')}
+                                                    onInputChange={handleTagsInputChange}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
