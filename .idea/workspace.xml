@@ -7,7 +7,6 @@
     <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/tagControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/tagControllers.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +61,7 @@
       <workItem from="1676640213241" duration="26797000" />
       <workItem from="1677168460260" duration="2092000" />
       <workItem from="1677466749616" duration="7591000" />
-      <workItem from="1677905262433" duration="9629000" />
+      <workItem from="1677905262433" duration="10825000" />
     </task>
     <servers />
   </component>

@@ -145,16 +145,25 @@ const TradeAdd = () => {
 
         console.log(filteredTags);
 
-        // TODO if filteredTags != empty then make a post req to create new tags
-        if(filteredTags.length > 0){
-            await axios.post("api/tag")
-        }
-
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
             },
         };
+
+        // TODO only send this request if it for sure passes
+        if(filteredTags.length > 0){
+            const tagsData = {
+                tags: filteredTags
+            }
+            const data3 = await axios.post(
+                "/api/tag", tagsData, config
+            ).then((response) => {
+                console.log(response.data)
+            }, (error) => {
+                console.log(error.message)
+            }) || {}
+        }
 
         console.log(tradeData);
 
@@ -190,6 +199,7 @@ const TradeAdd = () => {
     };
 
     useEffect(() => {
+        // TODO bug where after creating a new tag it doesnt automatically upload
         setTradeTags();
     }, []);
 
