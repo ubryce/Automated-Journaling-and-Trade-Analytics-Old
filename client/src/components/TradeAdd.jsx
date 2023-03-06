@@ -24,6 +24,7 @@ const theme = createTheme();
 // TODO Check data types
 // TODO do not allow user to add nothing to a thread
 // TODO remove thread
+// TODO remove tag
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
