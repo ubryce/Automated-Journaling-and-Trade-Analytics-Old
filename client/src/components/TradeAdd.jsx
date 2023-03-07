@@ -249,7 +249,12 @@ const TradeAdd = () => {
                                                     label="Side"
                                                     id="side"
                                                     autoComplete="side"
-                                                />
+                                                    select
+                                                    defaultValue=""
+                                                >
+                                                    <MenuItem value="long">Long</MenuItem>
+                                                    <MenuItem value="short">Short</MenuItem>
+                                                </TextField>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <TextField
