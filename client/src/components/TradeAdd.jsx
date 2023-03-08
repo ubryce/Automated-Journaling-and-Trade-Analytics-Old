@@ -520,6 +520,11 @@ const TradeAdd = () => {
                                                             />
                                                         </Grid>
                                                         <Grid item xs={12}>
+                                                            <input
+                                                                type="file"
+                                                                accept="image/*"
+                                                                onChange={event => handleThreadPictureChange(event, index)}
+                                                            />
                                                             <TextField
                                                                 fullWidth
                                                                 name="threadPicture"
