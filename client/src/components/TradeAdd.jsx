@@ -77,7 +77,7 @@ const TradeAdd = () => {
             tag: tag,
             tagType: tagType
         }))
-        if(tagType === 'setup'){
+        if (tagType === 'setup') {
             setSelectedSetupTags(newTags)
         } else {
             setSelectedMistakeTags(newTags)
@@ -128,7 +128,7 @@ const TradeAdd = () => {
         };
 
         // TODO only send this request if it for sure passes
-        if(filteredTags.length > 0){
+        if (filteredTags.length > 0) {
             const tagsData = {
                 tags: filteredTags
             }
