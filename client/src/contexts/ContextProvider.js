@@ -20,18 +20,15 @@ export const ContextProvider = ({ children }) => {
     // we can take this and 
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        // store into our state
         setUser(userInfo);
 
         // // if user not logged in redirect to homepage
         // if (!userInfo) {
         //     navigate('/');
         // }
-        // brackets for whenever navigate changes the useEffect is called
     }, [navigate])
 
     return (
-        // eslint-disable-next-line react/jsx-no-constructed-context-values
         <StateContext.Provider value={{ tags, setTags, selectedTrades, setSelectedTrades, user, setUser, visability, setVisability, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange, selectedTrade, setSelectedTrade }}>
         {children}
         </StateContext.Provider>
