@@ -13,11 +13,8 @@ export const ContextProvider = ({ children }) => {
     const [exchanges, setExchanges] = useState([]);
     const [selectedTrade, setSelectedTrade] = useState();
     const [tags, setTags] = useState([]);
-
     const navigate = useNavigate();
 
-    // Whenever a user logs in the user info is stored into the local storage
-    // we can take this and 
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         setUser(userInfo);
