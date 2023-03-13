@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
+    // TODO are all of these needed?
     const [user, setUser] = useState();
     const [visability, setVisability] = useState(true);
     const [selectedJournal, setSelectedJournal] = useState();
