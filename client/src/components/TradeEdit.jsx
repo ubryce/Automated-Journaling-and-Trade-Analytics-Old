@@ -1,7 +1,6 @@
 ﻿import React, {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import Switch from '@mui/material/Switch';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import {useStateContext} from '../contexts/ContextProvider';
@@ -26,24 +25,19 @@ const theme = createTheme();
 // TODO do not allow user to add nothing to a thread
 // TODO remove thread
 // TODO remove tag
-const TradeAdd = () => {
-    const {selectedJournal, user, tags, setTags} = useStateContext();
+const TradeEdit = () => {
+    const {selectedJournal, user, tags, setTags, selectedTrade} = useStateContext();
     const navigate = useNavigate();
     const [setupTags, setSetupTags] = React.useState([]);
     const [mistakeTags, setMistakeTags] = React.useState([]);
     const [selectedSetupTags, setSelectedSetupTags] = React.useState([]);
     const [selectedMistakeTags, setSelectedMistakeTags] = React.useState([]);
-    const [isOpen, setIsOpen] = React.useState(false);
     const [threads, setThreads] = React.useState([
         {
             content: "",
             picture: ""
         }
     ]);
-
-    const handleSwitchChange = (event) => {
-        setIsOpen(event.target.checked);
-    };
 
     const menuItems = [
         {value: 1, label: "1"},
@@ -95,6 +89,33 @@ const TradeAdd = () => {
         const data = new FormData(event.currentTarget);
         console.log(threads);
         const allTags = [...selectedSetupTags, ...selectedMistakeTags];
+        const tradeData = {
+            user: user._id,
+            journalId: selectedJournal._id,
+            openDate: new Date(data.get("openDate")),
+            closeDate: new Date(data.get("closeDate")),
+            side: data.get("side"),
+            exchange: data.get("exchange"),
+            symbol: data.get("symbol"),
+            avgEntry: data.get("avgEntry"),
+            stop: data.get("stop"),
+            target: data.get("target"),
+            exit: data.get("exit"),
+            size: data.get("size"),
+            sizeFiat: data.get("sizeFiat"),
+            walletBalance: data.get("walletBalance"),
+            accRisk: data.get("accRisk"),
+            confidence: data.get("confidence"),
+            execution: data.get("execution"),
+            entryRating: data.get("entryRating"),
+            management: data.get("management"),
+            exitRating: data.get("exitRating"),
+            plannedRisk: data.get("plannedRisk"),
+            finalRisk: data.get("finalRisk"),
+            isOpen: data.get("isOpen"),
+            tags: allTags,
+            thread: threads,
+        };
 
         const filteredTags = allTags.filter((obj1) => {
             const exists = tags.some(obj2 => obj2.tag === obj1.tag);
@@ -119,34 +140,6 @@ const TradeAdd = () => {
                 console.log(error.message)
             })
         }
-
-        const tradeData = {
-            user: user._id,
-            journalId: selectedJournal._id,
-            openDate: new Date(data.get("openDate")),
-            closeDate: new Date(data.get("closeDate")),
-            side: data.get("side"),
-            exchange: data.get("exchange"),
-            symbol: data.get("symbol"),
-            avgEntry: data.get("avgEntry"),
-            stop: data.get("stop"),
-            target: data.get("target"),
-            exit: data.get("exit"),
-            size: data.get("size"),
-            sizeFiat: data.get("sizeFiat"),
-            walletBalance: data.get("walletBalance"),
-            accRisk: data.get("accRisk"),
-            confidence: data.get("confidence"),
-            execution: data.get("execution"),
-            entryRating: data.get("entryRating"),
-            management: data.get("management"),
-            exitRating: data.get("exitRating"),
-            plannedRisk: data.get("plannedRisk"),
-            finalRisk: data.get("finalRisk"),
-            isOpen: isOpen,
-            tags: allTags,
-            thread: threads,
-        };
 
         console.log(tradeData);
         await axios.post(
@@ -452,13 +445,13 @@ const TradeAdd = () => {
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <Switch
-                                                    checked={isOpen}
-                                                    onChange={handleSwitchChange}
+                                                <TextField
+                                                    fullWidth
                                                     name="isOpen"
+                                                    label="Open"
                                                     id="isOpen"
+                                                    autoComplete="isOpen"
                                                 />
-                                                <label htmlFor="isOpen">Open</label>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Autocomplete
@@ -566,4 +559,4 @@ const TradeAdd = () => {
     )
 }
 
-export default TradeAdd
+export default TradeEdit
