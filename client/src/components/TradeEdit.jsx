@@ -274,6 +274,7 @@ const TradeEdit = () => {
                                                     label="Entry"
                                                     id="avgEntry"
                                                     autoComplete="avgEntry"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -283,6 +284,7 @@ const TradeEdit = () => {
                                                     label="Stop"
                                                     id="stop"
                                                     autoComplete="stop"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -292,6 +294,7 @@ const TradeEdit = () => {
                                                     label="Target"
                                                     id="target"
                                                     autoComplete="target"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -301,6 +304,7 @@ const TradeEdit = () => {
                                                     label="Exit"
                                                     id="exit"
                                                     autoComplete="exit"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -311,6 +315,7 @@ const TradeEdit = () => {
                                                     label="Size"
                                                     id="size"
                                                     autoComplete="size"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -320,6 +325,7 @@ const TradeEdit = () => {
                                                     label="Size Fiat"
                                                     id="sizeFiat"
                                                     autoComplete="sizeFiat"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -329,6 +335,7 @@ const TradeEdit = () => {
                                                     label="Wallet Balance"
                                                     id="walletBalance"
                                                     autoComplete="walletBalance"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -338,6 +345,7 @@ const TradeEdit = () => {
                                                     label="Account Risk"
                                                     id="accRisk"
                                                     autoComplete="accRisk"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -350,6 +358,7 @@ const TradeEdit = () => {
                                                     autoComplete="confidence"
                                                     select
                                                     defaultValue=""
+                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -367,6 +376,7 @@ const TradeEdit = () => {
                                                     autoComplete="execution"
                                                     select
                                                     defaultValue=""
+                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -384,6 +394,7 @@ const TradeEdit = () => {
                                                     autoComplete="entryRating"
                                                     select
                                                     defaultValue=""
+                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -401,6 +412,7 @@ const TradeEdit = () => {
                                                     autoComplete="management"
                                                     select
                                                     defaultValue=""
+                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -418,6 +430,7 @@ const TradeEdit = () => {
                                                     autoComplete="exitRating"
                                                     select
                                                     defaultValue=""
+                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -433,6 +446,7 @@ const TradeEdit = () => {
                                                     label="Planned Risk"
                                                     id="plannedRisk"
                                                     autoComplete="plannedRisk"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -442,6 +456,7 @@ const TradeEdit = () => {
                                                     label="Final Risk"
                                                     id="finalRisk"
                                                     autoComplete="finalRisk"
+                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>

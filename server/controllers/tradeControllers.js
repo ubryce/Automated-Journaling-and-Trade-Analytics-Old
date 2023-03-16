@@ -11,6 +11,7 @@ const sendTrade = asyncHandler( async (req, res) => {
     //     console.log("Invalid data passed into request");
     //     return res.sendStatus(400);
     // }
+    console.log(req)
 
     const newTrade = {
         user: req.user._id,
@@ -20,21 +21,21 @@ const sendTrade = asyncHandler( async (req, res) => {
         side: req.body.side,
         exchange: req.body.exchange,
         symbol: req.body.symbol,
-        avgEntry: req.body.avgEntry,
-        stop: req.body.stop,
-        target: req.body.target,
-        exit: req.body.exit,
-        size: req.body.size,
-        sizeFiat: req.body.sizeFiat,
-        walletBalance: req.body.walletBalance,
-        accRisk: req.body.accRisk,
-        confidence: req.body.confidence,
-        execution: req.body.execution,
-        entryRating: req.body.entryRating,
-        management: req.body.management,
-        exitRating: req.body.exitRating,
-        plannedRisk: req.body.plannedRisk,
-        finalRisk: req.body.finalRisk,
+        avgEntry: parseInt(req.body.avgEntry),
+        stop: parseInt(req.body.stop),
+        target: parseInt(req.body.target),
+        exit: parseInt(req.body.exit),
+        size: parseInt(req.body.size),
+        sizeFiat: parseInt(req.body.sizeFiat),
+        walletBalance: parseInt(req.body.walletBalance),
+        accRisk: parseInt(req.body.accRisk),
+        confidence: parseInt(req.body.confidence),
+        execution: parseInt(req.body.execution),
+        entryRating: parseInt(req.body.entryRating),
+        management: parseInt(req.body.management),
+        exitRating: parseInt(req.body.exitRating),
+        plannedRisk: parseInt(req.body.plannedRisk),
+        finalRisk: parseInt(req.body.finalRisk),
         isOpen: req.body.isOpen,
         tags: req.body.tags,
         thread: req.body.thread,
@@ -43,7 +44,10 @@ const sendTrade = asyncHandler( async (req, res) => {
     console.log(newTrade);
 
     try {
+
+        console.log("ran1")
         var trade = await Trade.create(newTrade);
+        console.log("ran2")
 
         trade = await trade.populate("user", "name");
         trade = await trade.populate("journal");
@@ -55,6 +59,7 @@ const sendTrade = asyncHandler( async (req, res) => {
         await Journal.findByIdAndUpdate(req.body.journalId, {
             latestTrade: trade,
         });
+        console.log(trade);
 
         res.json(trade);
     } catch (error) {
