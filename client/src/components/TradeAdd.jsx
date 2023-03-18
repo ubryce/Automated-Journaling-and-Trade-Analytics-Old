@@ -27,6 +27,7 @@ const theme = createTheme();
 // TODO remove thread
 // TODO remove tag
 // TODO bug when tags is long
+// TODO use useeffect to update rendertags in order to get updated setuptags
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
@@ -80,7 +81,19 @@ const TradeAdd = () => {
     };
 
     const handleTagsChange = (event, value, tagType) => {
-        console.log(value)
+        const newTags = value.map((tag) => {
+            if (!tag.tagType) { // if the tag does not have a tagType key
+                console.log('hjere')
+                const newTag = {
+                    tag: tag,
+                    tagType: tagType
+                };
+                setSetupTags([...setupTags, newTag])
+                return newTag
+            }
+            return tag; // if the tag already has a tagType key, return it as is
+        });
+        console.log(newTags)
         // const newTags = value.map((tag) => ({
         //     tag: tag,
         //     tagType: tagType
@@ -95,7 +108,6 @@ const TradeAdd = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log(threads);
         const allTags = [...selectedSetupTags, ...selectedMistakeTags];
         console.log(allTags)
 
