@@ -26,6 +26,7 @@ const theme = createTheme();
 // TODO do not allow user to add nothing to a thread
 // TODO remove thread
 // TODO remove tag
+// TODO bug when tags is long
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
@@ -79,14 +80,15 @@ const TradeAdd = () => {
     };
 
     const handleTagsChange = (event, value, tagType) => {
-        const newTags = value.map((tag) => ({
-            tag: tag,
-            tagType: tagType
-        }))
+        console.log(value)
+        // const newTags = value.map((tag) => ({
+        //     tag: tag,
+        //     tagType: tagType
+        // }))
         if (tagType === 'setup') {
-            setSelectedSetupTags(newTags)
+            setSelectedSetupTags(value)
         } else {
-            setSelectedMistakeTags(newTags)
+            setSelectedMistakeTags(value)
         }
     };
 
@@ -95,6 +97,7 @@ const TradeAdd = () => {
         const data = new FormData(event.currentTarget);
         console.log(threads);
         const allTags = [...selectedSetupTags, ...selectedMistakeTags];
+        console.log(allTags)
 
         const filteredTags = allTags.filter((obj1) => {
             const exists = tags.some(obj2 => obj2.tag === obj1.tag);
@@ -107,21 +110,20 @@ const TradeAdd = () => {
         };
 
         // TODO only send this request if it for sure passes
-        if (filteredTags.length > 0) {
-            const tagsData = {
-                tags: filteredTags
-            }
-            await axios.post(
-                "/api/tag", tagsData, config
-            ).then((response) => {
-                console.log(response.data)
-            }, (error) => {
-                console.log(error.message)
-            })
-        }
+        // if (filteredTags.length > 0) {
+        //     const tagsData = {
+        //         tags: filteredTags
+        //     }
+        //     await axios.post(
+        //         "/api/tag", tagsData, config
+        //     ).then((response) => {
+        //         console.log(response.data)
+        //     }, (error) => {
+        //         console.log(error.message)
+        //     })
+        // }
 
         const tradeData = {
-            user: user._id,
             journalId: selectedJournal._id,
             openDate: new Date(data.get("openDate")),
             closeDate: new Date(data.get("closeDate")),
@@ -148,6 +150,7 @@ const TradeAdd = () => {
             thread: threads,
         };
 
+        // TODO add object id for each tag
         console.log(tradeData);
         await axios.post(
             "/api/trade", tradeData, config
@@ -171,9 +174,9 @@ const TradeAdd = () => {
         ).then((response) => {
             console.log(response.data)
             const setupTags = tags.filter((tag) => tag.tagType === 'setup')
-            setSetupTags(setupTags.map(tag => tag.tag))
+            setSetupTags(setupTags)
             const mistakeTags = tags.filter((tag) => tag.tagType === 'mistake')
-            setMistakeTags(mistakeTags.map(tag => tag.tag))
+            setMistakeTags(mistakeTags)
             setTags(response.data)
         }, (error) => {
             console.log(error.message)
@@ -466,13 +469,13 @@ const TradeAdd = () => {
                                                     name="setupTags"
                                                     id="setupTags"
                                                     options={setupTags}
-                                                    getOptionLabel={(option) => option}
+                                                    getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'setup')}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option}
+                                                                  label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
                                                         ))
@@ -492,13 +495,13 @@ const TradeAdd = () => {
                                                     name="mistakeTags"
                                                     id="mistakeTags"
                                                     options={mistakeTags}
-                                                    getOptionLabel={(option) => option}
+                                                    getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'mistake')}
                                                     renderTags={(value, getTagProps) =>
                                                         value.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option}
+                                                                  label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
                                                         ))
