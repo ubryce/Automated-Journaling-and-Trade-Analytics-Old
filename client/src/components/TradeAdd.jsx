@@ -94,10 +94,7 @@ const TradeAdd = () => {
             return tag; // if the tag already has a tagType key, return it as is
         });
         console.log(newTags)
-        // const newTags = value.map((tag) => ({
-        //     tag: tag,
-        //     tagType: tagType
-        // }))
+        
         if (tagType === 'setup') {
             setSelectedSetupTags(value)
         } else {
