@@ -72,7 +72,8 @@ const allTrades = asyncHandler( async (req, res) => {
     try {
         const trades = await Trade.find({journal:req.params.journalId})
             .populate("user", "name email")
-            .populate("journal");
+            .populate("journal")
+            .populate("tags");
 
         res.json(trades);
     } catch (error) {
