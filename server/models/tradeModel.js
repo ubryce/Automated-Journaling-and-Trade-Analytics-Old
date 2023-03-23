@@ -21,6 +21,7 @@ const tradeModel = mongoose.Schema(
         exit:{type: Number},
         size:{type: Number},
         sizeFiat:{type: Number},
+        pnl:{type: Number},
         walletBalance:{type: Number},
         accRisk:{type: Number},
         confidence:{type: Number},

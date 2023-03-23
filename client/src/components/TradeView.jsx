@@ -46,7 +46,9 @@ const TradeView = () => {
                                 <TableCell>Symbol</TableCell>
                                 <TableCell>Avg Entry</TableCell>
                                 <TableCell>Exit</TableCell>
-                                <TableCell>Tags</TableCell>
+                                <TableCell>PnL</TableCell>
+                                <TableCell>Setup Tags</TableCell>
+                                <TableCell>Mistake Tags</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -57,7 +59,21 @@ const TradeView = () => {
                                 <TableCell>{`${selectedTrade.symbol}`}</TableCell>
                                 <TableCell>{`${selectedTrade.avgEntry}`}</TableCell>
                                 <TableCell>{`${selectedTrade.exit}`}</TableCell>
-                                <TableCell>{`${selectedTrade.tags}`}</TableCell>
+                                <TableCell>{`${selectedTrade.pnl}`}</TableCell>
+                                <TableCell>
+                                    {selectedTrade.tags
+                                        .filter((tag) => tag.tagType === 'setup')
+                                        .map((tag, index) => (
+                                            <span key={index}>{`${tag.tag}, `}</span>
+                                        ))}
+                                </TableCell>
+                                <TableCell>
+                                    {selectedTrade.tags
+                                        .filter((tag) => tag.tagType === 'mistake')
+                                        .map((tag, index) => (
+                                            <span key={index}>{`${tag.tag}, `}</span>
+                                        ))}
+                                </TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

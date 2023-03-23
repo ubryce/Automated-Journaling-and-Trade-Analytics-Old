@@ -6,6 +6,7 @@ const User = require('../models/userModel');
 const sendTrade = asyncHandler( async (req, res) => {
 
     // TODO Check if all required inputs are sent with proper data types
+    // TODO check if trade is closed, if so then calculate the pnl and append it to trade
     // Remove latest trade
     // if (!thread || !journalId) {
     //     console.log("Invalid data passed into request");
