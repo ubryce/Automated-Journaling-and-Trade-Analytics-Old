@@ -90,7 +90,12 @@ const JournalView = () => {
                                     <TableCell>{`${trades.symbol}`}</TableCell>
                                     <TableCell>{`${trades.avgEntry}`}</TableCell>
                                     <TableCell>{`${trades.exit}`}</TableCell>
-                                    <TableCell>{`${trades.tags}`}</TableCell>
+                                    <TableCell>
+                                        {/*{`${trades.tags.tag}`}*/}
+                                        {trades.tags.map((tag, index) => (
+                                            <span key={index}>{`${tag.tag}, `}</span>
+                                        ))}
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
