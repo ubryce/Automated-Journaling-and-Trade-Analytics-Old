@@ -1,12 +1,8 @@
 ﻿import React from 'react'
-import {useEffect} from 'react';
-import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom';
-
+import {useNavigate} from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
 import {useStateContext} from '../contexts/ContextProvider';
-
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from '@mui/icons-material/Edit';
@@ -18,9 +14,8 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 
 const TradeView = () => {
-    const {user, selectedTrade, selectedJournal} = useStateContext();
+    const {selectedTrade, selectedJournal} = useStateContext();
     const navigate = useNavigate();
-    
 
     return (
         <Grid container spacing={3}>
