@@ -78,7 +78,8 @@ const JournalView = () => {
                                 <TableCell>Symbol</TableCell>
                                 <TableCell>Avg Entry</TableCell>
                                 <TableCell>Exit</TableCell>
-                                <TableCell>Tags</TableCell>
+                                <TableCell>Setup Tags</TableCell>
+                                <TableCell>Mistake Tags</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -91,10 +92,18 @@ const JournalView = () => {
                                     <TableCell>{`${trades.avgEntry}`}</TableCell>
                                     <TableCell>{`${trades.exit}`}</TableCell>
                                     <TableCell>
-                                        {/*{`${trades.tags.tag}`}*/}
-                                        {trades.tags.map((tag, index) => (
+                                        {trades.tags
+                                            .filter((tag) => tag.tagType === 'setup')
+                                            .map((tag, index) => (
                                             <span key={index}>{`${tag.tag}, `}</span>
                                         ))}
+                                    </TableCell>
+                                    <TableCell>
+                                        {trades.tags
+                                            .filter((tag) => tag.tagType === 'mistake')
+                                            .map((tag, index) => (
+                                                <span key={index}>{`${tag.tag}, `}</span>
+                                            ))}
                                     </TableCell>
                                 </TableRow>
                             ))}
