@@ -484,9 +484,10 @@ const TradeAdd = () => {
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'setup')}
                                                     renderTags={(value, getTagProps) =>
-                                                        selectedSetupTags.map((option, index) => (
+                                                        value.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option.tag}
+                                                                  // TODO bug where we add two of the same after clicking the same
+                                                                  label={option.tag ? option.tag : option}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
                                                         ))
@@ -512,7 +513,7 @@ const TradeAdd = () => {
                                                     renderTags={(value, getTagProps) =>
                                                         selectedMistakeTags.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option.tag}
+                                                                  label={option.tag ? option.tag : option}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
                                                         ))
