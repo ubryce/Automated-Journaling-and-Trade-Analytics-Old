@@ -82,8 +82,7 @@ const TradeAdd = () => {
 
     const handleTagsChange = (event, value, tagType) => {
         const newTags = value.map((tag) => {
-            if (!tag.tagType) { // if the tag does not have a tagType key
-                console.log('hjere')
+            if (!tag.tagType) {
                 const newTag = {
                     tag: tag,
                     tagType: tagType
@@ -91,10 +90,9 @@ const TradeAdd = () => {
                 setSetupTags([...setupTags, newTag])
                 return newTag
             }
-            return tag; // if the tag already has a tagType key, return it as is
+            return tag;
         });
         console.log(newTags)
-
         if (tagType === 'setup') {
             setSelectedSetupTags(value)
         } else {
@@ -102,35 +100,39 @@ const TradeAdd = () => {
         }
     };
 
+    // TODO only send this request if it for sure passes
+    const handleAddNewTags = async (allTags, config) => {
+        const tagsData = {
+            tags: filteredTags
+        }
+        await axios.post(
+            "/api/tag", tagsData, config
+        ).then((response) => {
+            console.log(response.data)
+        }, (error) => {
+            console.log(error.message)
+        })
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const allTags = [...selectedSetupTags, ...selectedMistakeTags];
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+        };
         console.log(allTags)
 
         const filteredTags = allTags.filter((obj1) => {
             const exists = tags.some(obj2 => obj2.tag === obj1.tag);
             return !exists;
         });
-        const config = {
-            headers: {
-                Authorization: `Bearer ${user.token}`,
-            },
-        };
-
-        // TODO only send this request if it for sure passes
-        // if (filteredTags.length > 0) {
-        //     const tagsData = {
-        //         tags: filteredTags
-        //     }
-        //     await axios.post(
-        //         "/api/tag", tagsData, config
-        //     ).then((response) => {
-        //         console.log(response.data)
-        //     }, (error) => {
-        //         console.log(error.message)
-        //     })
-        // }
+        if (filteredTags.length > 0) {
+            // await handleAddNewTags(filteredTags, config)
+            console.log("filtered tags exist")
+        }
 
         const tradeData = {
             journalId: selectedJournal._id,
