@@ -135,8 +135,7 @@ const TradeAdd = () => {
             return !exists;
         });
         if (filteredTags.length > 0) {
-            // await handleAddNewTags(filteredTags, config)
-            console.log(filteredTags)
+            await handleAddNewTags(filteredTags, config)
         }
 
         const tradeData = {

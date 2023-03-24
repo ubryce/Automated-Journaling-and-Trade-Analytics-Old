@@ -12,7 +12,6 @@ const sendTrade = asyncHandler( async (req, res) => {
     //     console.log("Invalid data passed into request");
     //     return res.sendStatus(400);
     // }
-    console.log(req)
 
     const newTrade = {
         user: req.user._id,
@@ -46,9 +45,7 @@ const sendTrade = asyncHandler( async (req, res) => {
 
     try {
 
-        console.log("ran1")
         var trade = await Trade.create(newTrade);
-        console.log("ran2")
 
         trade = await trade.populate("user", "name");
         trade = await trade.populate("journal");

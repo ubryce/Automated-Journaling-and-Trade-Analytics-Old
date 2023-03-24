@@ -42,24 +42,6 @@ const createTag = asyncHandler( async (req, res) => {
         res.status(400);
         throw new Error(error.message);
     }
-
-    // const tagData = {
-    //     tag: req.body.tag,
-    //     tagType: req.body.tagType,
-    //     user: req.user
-    // };
-    //
-    // try {
-    //     // TODO check if tag already exists
-    //     const createdTag = await Tag.create(tagData);
-    //     const fullTag = await Tag.findOne({_id: createdTag._id})
-    //         .populate("user", "-password");
-    //
-    //     res.status(200).json(fullTag);
-    // } catch (error) {
-    //     res.status(400);
-    //     throw new Error(error.message);
-    // }
 });
 
 // TODO make sure no problems here
