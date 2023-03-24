@@ -101,7 +101,7 @@ const TradeAdd = () => {
     };
 
     // TODO only send this request if it for sure passes
-    const handleAddNewTags = async (allTags, config) => {
+    const handleAddNewTags = async (filteredTags, config) => {
         const tagsData = {
             tags: filteredTags
         }
@@ -173,7 +173,7 @@ const TradeAdd = () => {
         })
     };
 
-    const setTradeTags = async () => {
+    const fetchTradeTagsFromDataBase = async () => {
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
@@ -196,7 +196,7 @@ const TradeAdd = () => {
 
     useEffect(() => {
         // TODO bug where after creating a new tag it doesnt automatically upload
-        setTradeTags();
+        fetchTradeTagsFromDataBase();
     }, []);
 
     return (
@@ -484,7 +484,7 @@ const TradeAdd = () => {
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'setup')}
                                                     renderTags={(value, getTagProps) =>
-                                                        value.map((option, index) => (
+                                                        selectedSetupTags.map((option, index) => (
                                                             <Chip variant="outlined"
                                                                   label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
@@ -510,7 +510,7 @@ const TradeAdd = () => {
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'mistake')}
                                                     renderTags={(value, getTagProps) =>
-                                                        value.map((option, index) => (
+                                                        selectedMistakeTags.map((option, index) => (
                                                             <Chip variant="outlined"
                                                                   label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
