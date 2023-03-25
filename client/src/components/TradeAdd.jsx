@@ -31,8 +31,8 @@ const theme = createTheme();
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
-    const [setupTags, setSetupTags] = React.useState([]);
-    const [mistakeTags, setMistakeTags] = React.useState([]);
+    const [initSetupTags, setInitInitSetupTags] = React.useState([]);
+    const [initMistakeTags, setInitMinitMistakeTags] = React.useState([]);
     const [selectedSetupTags, setSelectedSetupTags] = React.useState([]);
     const [selectedMistakeTags, setSelectedMistakeTags] = React.useState([]);
     const [isOpen, setIsOpen] = React.useState(false);
@@ -88,10 +88,10 @@ const TradeAdd = () => {
                     tagType: tagType
                 };
                 if(tagType == 'setup'){
-                    setSetupTags([...setupTags, newTag])
+                    setInitInitSetupTags([...initSetupTags, newTag])
                 }
                 else {
-                    setMistakeTags([...mistakeTags, newTag])
+                    setInitMinitMistakeTags([...initMistakeTags, newTag])
                 }
                 return newTag
             }
@@ -122,20 +122,20 @@ const TradeAdd = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const allTags = [...selectedSetupTags, ...selectedMistakeTags];
+        const allTagsToSend = [...selectedSetupTags, ...selectedMistakeTags];
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
             },
         };
-        console.log(allTags)
+        console.log(allTagsToSend)
 
-        const filteredTags = allTags.filter((obj1) => {
+        const newTagsToCreate = allTagsToSend.filter((obj1) => {
             const exists = tags.some(obj2 => obj2.tag === obj1.tag);
             return !exists;
         });
-        if (filteredTags.length > 0) {
-            await handleAddNewTags(filteredTags, config)
+        if (newTagsToCreate.length > 0) {
+            await handleAddNewTags(newTagsToCreate, config)
         }
 
         const tradeData = {
@@ -161,7 +161,7 @@ const TradeAdd = () => {
             plannedRisk: data.get("plannedRisk"),
             finalRisk: data.get("finalRisk"),
             isOpen: isOpen,
-            tags: allTags,
+            tags: allTagsToSend,
             thread: threads,
         };
 
@@ -188,10 +188,8 @@ const TradeAdd = () => {
             "/api/tag", config
         ).then((response) => {
             console.log(response.data)
-            const setupTags = tags.filter((tag) => tag.tagType === 'setup')
-            setSetupTags(setupTags)
-            const mistakeTags = tags.filter((tag) => tag.tagType === 'mistake')
-            setMistakeTags(mistakeTags)
+            setInitInitSetupTags(tags.filter((tag) => tag.tagType === 'setup'))
+            setInitMinitMistakeTags(tags.filter((tag) => tag.tagType === 'mistake'))
             setTags(response.data)
         }, (error) => {
             console.log(error.message)
@@ -483,7 +481,7 @@ const TradeAdd = () => {
                                                     multiple
                                                     name="setupTags"
                                                     id="setupTags"
-                                                    options={setupTags}
+                                                    options={initSetupTags}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'setup')}
@@ -510,7 +508,7 @@ const TradeAdd = () => {
                                                     multiple
                                                     name="mistakeTags"
                                                     id="mistakeTags"
-                                                    options={mistakeTags}
+                                                    options={initMistakeTags}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'mistake')}
