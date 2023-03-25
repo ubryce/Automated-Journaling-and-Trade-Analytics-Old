@@ -24,7 +24,6 @@ const fetchTags = asyncHandler( async (req, res) => {
 });
 
 const createTag = asyncHandler( async (req, res) => {
-
     const {tags} = req.body;
 
     try {
@@ -33,7 +32,6 @@ const createTag = asyncHandler( async (req, res) => {
             tagType: tag.tagType,
             user: req.user,
         })));
-
         const fullTags = await Tag.find({ _id: { $in: createdTags.map(tag => tag._id) } })
             .populate("user", "-password");
 
