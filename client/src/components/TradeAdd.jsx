@@ -27,12 +27,11 @@ const theme = createTheme();
 // TODO remove thread
 // TODO remove tag
 // TODO bug when tags is long
-// TODO use useeffect to update rendertags in order to get updated setuptags
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
-    const [initSetupTags, setInitInitSetupTags] = React.useState([]);
-    const [initMistakeTags, setInitMinitMistakeTags] = React.useState([]);
+    const [initSetupTags, setInitSetupTags] = React.useState([]);
+    const [initMistakeTags, setInitMistakeTags] = React.useState([]);
     const [selectedSetupTags, setSelectedSetupTags] = React.useState([]);
     const [selectedMistakeTags, setSelectedMistakeTags] = React.useState([]);
     const [isOpen, setIsOpen] = React.useState(false);
@@ -88,10 +87,10 @@ const TradeAdd = () => {
                     tagType: tagType
                 };
                 if(tagType == 'setup'){
-                    setInitInitSetupTags([...initSetupTags, newTag])
+                    setInitSetupTags([...initSetupTags, newTag])
                 }
                 else {
-                    setInitMinitMistakeTags([...initMistakeTags, newTag])
+                    setInitMistakeTags([...initMistakeTags, newTag])
                 }
                 return newTag
             }
@@ -188,8 +187,8 @@ const TradeAdd = () => {
             "/api/tag", config
         ).then((response) => {
             console.log(response.data)
-            setInitInitSetupTags(tags.filter((tag) => tag.tagType === 'setup'))
-            setInitMinitMistakeTags(tags.filter((tag) => tag.tagType === 'mistake'))
+            setInitSetupTags(tags.filter((tag) => tag.tagType === 'setup'))
+            setInitMistakeTags(tags.filter((tag) => tag.tagType === 'mistake'))
             setTags(response.data)
         }, (error) => {
             console.log(error.message)
