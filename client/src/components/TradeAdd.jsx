@@ -86,10 +86,9 @@ const TradeAdd = () => {
                     tag: tag,
                     tagType: tagType
                 };
-                if(tagType == 'setup'){
+                if (tagType == 'setup') {
                     setInitSetupTags([...initSetupTags, newTag])
-                }
-                else {
+                } else {
                     setInitMistakeTags([...initMistakeTags, newTag])
                 }
                 return newTag
@@ -487,7 +486,7 @@ const TradeAdd = () => {
                                                     renderTags={(value, getTagProps) =>
                                                         selectedSetupTags.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  // TODO bug where we add two of the same after clicking the same
+                                                                // TODO bug where we add two of the same after clicking the same
                                                                   label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
