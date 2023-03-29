@@ -20,7 +20,6 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Tooltip from "@mui/material/Tooltip";
 
 const theme = createTheme();
-
 // TODO change required
 // TODO Check data types
 // TODO do not allow user to add nothing to a thread
