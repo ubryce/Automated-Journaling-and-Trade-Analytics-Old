@@ -127,6 +127,7 @@ const TradeAdd = () => {
         };
         console.log(allTagsToSend)
 
+        // TODO use new tags with old tags and add into trade data
         const newTagsToCreate = allTagsToSend.filter((obj1) => {
             const exists = tags.some(obj2 => obj2.tag === obj1.tag);
             return !exists;
@@ -162,7 +163,6 @@ const TradeAdd = () => {
             thread: threads,
         };
 
-        // TODO add object id for each tag
         console.log(tradeData);
         await axios.post(
             "/api/trade", tradeData, config
