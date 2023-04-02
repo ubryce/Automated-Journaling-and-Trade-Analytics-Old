@@ -27,6 +27,7 @@ const sendTrade = asyncHandler( async (req, res) => {
         exit: parseInt(req.body.exit),
         size: parseInt(req.body.size),
         sizeFiat: parseInt(req.body.sizeFiat),
+        pnl: parseInt(req.body.pnl),
         walletBalance: parseInt(req.body.walletBalance),
         accRisk: parseInt(req.body.accRisk),
         confidence: parseInt(req.body.confidence),
@@ -40,8 +41,13 @@ const sendTrade = asyncHandler( async (req, res) => {
         tags: req.body.tags,
         thread: req.body.thread,
     };
-    
     console.log(newTrade);
+
+    if(!newTrade.isOpen){
+        if(newTrade.side == "long"){
+
+        }
+    }
 
     try {
 
