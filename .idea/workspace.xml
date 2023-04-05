@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +44,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "project.propDebugger",
     "vue.rearranger.settings.migration": "true"
   }
@@ -84,7 +88,7 @@
       <workItem from="1678497552974" duration="1004000" />
       <workItem from="1678638418185" duration="19274000" />
       <workItem from="1679285371739" duration="21687000" />
-      <workItem from="1679865627124" duration="9499000" />
+      <workItem from="1679865627124" duration="10137000" />
     </task>
     <servers />
   </component>
