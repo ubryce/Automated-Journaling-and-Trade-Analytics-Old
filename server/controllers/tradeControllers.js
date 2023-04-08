@@ -43,12 +43,6 @@ const sendTrade = asyncHandler( async (req, res) => {
     };
     console.log(newTrade);
 
-    if(!newTrade.isOpen){
-        if(newTrade.side == "long"){
-
-        }
-    }
-
     try {
 
         var trade = await Trade.create(newTrade);
