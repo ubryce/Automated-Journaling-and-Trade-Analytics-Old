@@ -68,7 +68,7 @@ const sendTrade = asyncHandler( async (req, res) => {
 const updateOrCreateTrade = asyncHandler(async (req, res) => {
     const tradeId = req.body.tradeId;
 
-    const newTrade = {
+    const tradeData = {
         user: req.user._id,
         journal: req.body.journalId,
         openDate: req.body.openDate,
@@ -96,7 +96,7 @@ const updateOrCreateTrade = asyncHandler(async (req, res) => {
         tags: req.body.tags,
         thread: req.body.thread,
     };
-    console.log(newTrade);
+    console.log(tradeData);
 
     try {
         let trade;
@@ -106,22 +106,24 @@ const updateOrCreateTrade = asyncHandler(async (req, res) => {
                 new: true,
             });
         } else {
+            console.log("ran")
             // Create new trade
             trade = await Trade.create(tradeData);
+            console.log("afr")
         }
 
         trade = await trade.populate("user", "name");
         trade = await trade.populate("journal");
-        trade = await User.populate(trade, {
-            path: "journal.users",
-            select: "name email",
-        });
-
-        if (!tradeId) {
-            await Journal.findByIdAndUpdate(req.body.journalId, {
-                latestTrade: trade,
-            });
-        }
+        // trade = await User.populate(trade, {
+        //     path: "journal.users",
+        //     select: "name email",
+        // });
+        //
+        // if (!tradeId) {
+        //     await Journal.findByIdAndUpdate(req.body.journalId, {
+        //         latestTrade: trade,
+        //     });
+        // }
 
         res.json(trade);
     } catch (error) {
