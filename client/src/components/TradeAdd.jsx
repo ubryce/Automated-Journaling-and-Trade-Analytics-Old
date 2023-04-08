@@ -40,6 +40,11 @@ const TradeAdd = () => {
             picture: ""
         }
     ]);
+    const [entry, setEntry] = React.useState();
+    const [exit, setExit] = React.useState();
+    const [side, setSide] = React.useState();
+    const [size, setSize] = React.useState();
+    const [pnl, setPnl] = React.useState();
 
     const handleSwitchChange = (event) => {
         setIsOpen(event.target.checked);
@@ -149,6 +154,7 @@ const TradeAdd = () => {
             exit: data.get("exit"),
             size: data.get("size"),
             sizeFiat: data.get("sizeFiat"),
+            pnl: data.get("pnl"),
             walletBalance: data.get("walletBalance"),
             accRisk: data.get("accRisk"),
             confidence: data.get("confidence"),
@@ -270,6 +276,7 @@ const TradeAdd = () => {
                                                     autoComplete="side"
                                                     select
                                                     defaultValue=""
+                                                    onChange={(e) => setSide(e.target.value)}
                                                 >
                                                     <MenuItem value="long">Long</MenuItem>
                                                     <MenuItem value="short">Short</MenuItem>
@@ -293,6 +300,7 @@ const TradeAdd = () => {
                                                     label="Entry"
                                                     id="avgEntry"
                                                     autoComplete="avgEntry"
+                                                    onChange={(e) => setEntry(e.target.value)}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -320,6 +328,7 @@ const TradeAdd = () => {
                                                     label="Exit"
                                                     id="exit"
                                                     autoComplete="exit"
+                                                    onChange={(e) => setExit(e.target.value)}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -330,6 +339,7 @@ const TradeAdd = () => {
                                                     label="Size"
                                                     id="size"
                                                     autoComplete="size"
+                                                    onChange={(e) => setSize(e.target.value)}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -339,6 +349,17 @@ const TradeAdd = () => {
                                                     label="Size Fiat"
                                                     id="sizeFiat"
                                                     autoComplete="sizeFiat"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    fullWidth
+                                                    name="pnl"
+                                                    label="PnL"
+                                                    id="pnl"
+                                                    autoComplete="pnl"
+                                                    value={pnl}
+                                                    InputProps={{ readOnly: true}}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
