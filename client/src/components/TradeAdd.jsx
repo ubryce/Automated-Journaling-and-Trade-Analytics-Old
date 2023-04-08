@@ -42,7 +42,7 @@ const TradeAdd = () => {
     ]);
     const [entry, setEntry] = React.useState();
     const [exit, setExit] = React.useState();
-    const [side, setSide] = React.useState();
+    const [side, setSide] = React.useState('');
     const [size, setSize] = React.useState();
     const [pnl, setPnl] = React.useState();
 
@@ -198,10 +198,24 @@ const TradeAdd = () => {
         })
     };
 
+    const calculatePnl = () => {
+        if (entry && exit && side && size) {
+            const result = side === 'long'
+                ? (exit - entry) * size
+                : (entry - exit) * size;
+
+            setPnl(result.toFixed(2));
+        }
+    }
+
     useEffect(() => {
         // TODO bug where after creating a new tag it doesnt automatically upload
         fetchTradeTagsFromDataBase();
     }, []);
+
+    useEffect(() => {
+        calculatePnl();
+    }, [entry, exit, side, size]);
 
     return (
         <div>
@@ -360,6 +374,7 @@ const TradeAdd = () => {
                                                     autoComplete="pnl"
                                                     value={pnl}
                                                     InputProps={{ readOnly: true}}
+                                                    InputLabelProps={{ shrink: true }}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
