@@ -131,9 +131,23 @@ const updateOrCreateTrade = asyncHandler(async (req, res) => {
     }
 });
 
-const allTrades = asyncHandler( async (req, res) => {
+const allTrades = asyncHandler(async (req, res) => {
     try {
-        const trades = await Trade.find({journal:req.params.journalId})
+        const journal = await Journal.findById(req.params.journalId);
+
+        // Check if the journal exists
+        if (!journal) {
+            res.status(404);
+            throw new Error("Journal not found");
+        }
+
+        // Check if the user making the request owns the journal
+        if (req.user._id !== journal.user) {
+            res.status(403);
+            throw new Error("You do not have permission to access this journal");
+        }
+
+        const trades = await Trade.find({ journal: req.params.journalId })
             .populate("user", "name email")
             .populate("journal")
             .populate("tags");
@@ -144,6 +158,7 @@ const allTrades = asyncHandler( async (req, res) => {
         throw new Error(error.message);
     }
 });
+
 
 const accessTrade = asyncHandler(async (req, res) => {
     try {
