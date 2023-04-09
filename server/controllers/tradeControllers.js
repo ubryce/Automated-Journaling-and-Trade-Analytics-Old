@@ -48,6 +48,12 @@ const updateOrCreateTrade = asyncHandler(async (req, res) => {
                 throw new Error("Trade not found");
             }
 
+            // Check if the user making the request is the owner of the trade
+            if (trade.user.toString() !== req.user._id.toString()) {
+                res.status(403);
+                throw new Error("You do not have permission to update this trade");
+            }
+
             // Update trade fields with tradeData
             Object.assign(trade, tradeData);
 
