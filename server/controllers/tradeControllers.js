@@ -107,7 +107,6 @@ const updateOrCreateTrade = asyncHandler(async (req, res) => {
             });
         } else {
             console.log("ran")
-            // Create new trade
             trade = await Trade.create(tradeData);
             console.log("afr")
         }

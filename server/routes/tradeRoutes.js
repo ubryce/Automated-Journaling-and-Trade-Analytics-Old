@@ -5,6 +5,7 @@ const { sendTrade, updateOrCreateTrade, allTrades, accessTrade } = require('../c
 const router = express.Router();
 
 router.route('/').post(protect, updateOrCreateTrade);
+router.route('/:tradeId').put(protect, updateOrCreateTrade);
 router.route('/:journalId').get(protect, allTrades);
 router.route('/single/:tradeId').get(protect, accessTrade);
 
