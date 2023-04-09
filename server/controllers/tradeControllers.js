@@ -142,7 +142,7 @@ const allTrades = asyncHandler(async (req, res) => {
         }
 
         // Check if the user making the request owns the journal
-        if (req.user._id !== journal.user) {
+        if (req.user._id.toString() !== journal.journalAdmin.toString()) {
             res.status(403);
             throw new Error("You do not have permission to access this journal");
         }
