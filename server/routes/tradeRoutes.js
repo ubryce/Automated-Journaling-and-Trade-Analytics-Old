@@ -1,6 +1,6 @@
 const express = require('express');
 const { protect } = require('../middleware/authMiddleware');
-const { sendTrade, updateOrCreateTrade, allTrades, accessTrade } = require('../controllers/tradeControllers')
+const { updateOrCreateTrade, allTrades, accessTrade } = require('../controllers/tradeControllers')
 
 const router = express.Router();
 

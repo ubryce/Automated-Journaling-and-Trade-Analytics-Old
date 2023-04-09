@@ -125,4 +125,4 @@ const accessTrade = asyncHandler(async (req, res) => {
     } 
 })
 
-module.exports = { sendTrade, updateOrCreateTrade, allTrades, accessTrade };
+module.exports = { updateOrCreateTrade, allTrades, accessTrade };
