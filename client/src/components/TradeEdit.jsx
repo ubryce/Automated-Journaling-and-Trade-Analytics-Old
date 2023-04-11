@@ -1,6 +1,7 @@
 ﻿import React, {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom';
 import Grid from '@mui/material/Grid';
+import Switch from '@mui/material/Switch';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import {useStateContext} from '../contexts/ContextProvider';
@@ -19,25 +20,35 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Tooltip from "@mui/material/Tooltip";
 
 const theme = createTheme();
-
 // TODO change required
 // TODO Check data types
 // TODO do not allow user to add nothing to a thread
 // TODO remove thread
 // TODO remove tag
+// TODO bug when tags is long
 const TradeEdit = () => {
-    const {selectedJournal, user, tags, setTags, selectedTrade} = useStateContext();
+    const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
-    const [setupTags, setSetupTags] = React.useState([]);
-    const [mistakeTags, setMistakeTags] = React.useState([]);
+    const [initSetupTags, setInitSetupTags] = React.useState([]);
+    const [initMistakeTags, setInitMistakeTags] = React.useState([]);
     const [selectedSetupTags, setSelectedSetupTags] = React.useState([]);
     const [selectedMistakeTags, setSelectedMistakeTags] = React.useState([]);
+    const [isOpen, setIsOpen] = React.useState(false);
     const [threads, setThreads] = React.useState([
         {
             content: "",
             picture: ""
         }
     ]);
+    const [entry, setEntry] = React.useState();
+    const [exit, setExit] = React.useState();
+    const [side, setSide] = React.useState('');
+    const [size, setSize] = React.useState();
+    const [pnl, setPnl] = React.useState();
+
+    const handleSwitchChange = (event) => {
+        setIsOpen(event.target.checked);
+    };
 
     const menuItems = [
         {value: 1, label: "1"},
@@ -73,10 +84,22 @@ const TradeEdit = () => {
     };
 
     const handleTagsChange = (event, value, tagType) => {
-        const newTags = value.map((tag) => ({
-            tag: tag,
-            tagType: tagType
-        }))
+        const newTags = value.map((tag) => {
+            if (!tag.tagType) {
+                const newTag = {
+                    tag: tag,
+                    tagType: tagType
+                };
+                if (tagType == 'setup') {
+                    setInitSetupTags([...initSetupTags, newTag])
+                } else {
+                    setInitMistakeTags([...initMistakeTags, newTag])
+                }
+                return newTag
+            }
+            return tag;
+        });
+        console.log(newTags)
         if (tagType === 'setup') {
             setSelectedSetupTags(newTags)
         } else {
@@ -84,13 +107,41 @@ const TradeEdit = () => {
         }
     };
 
+    // TODO only send this request if it for sure passes
+    const handleAddNewTags = async (filteredTags, config) => {
+        const tagsData = {
+            tags: filteredTags
+        }
+        await axios.post(
+            "/api/tag", tagsData, config
+        ).then((response) => {
+            console.log(response.data)
+        }, (error) => {
+            console.log(error.message)
+        })
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log(threads);
-        const allTags = [...selectedSetupTags, ...selectedMistakeTags];
+        const allTagsToSend = [...selectedSetupTags, ...selectedMistakeTags];
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+        };
+        console.log(allTagsToSend)
+
+        // TODO use new tags with old tags and add into trade data
+        const newTagsToCreate = allTagsToSend.filter((obj1) => {
+            const exists = tags.some(obj2 => obj2.tag === obj1.tag);
+            return !exists;
+        });
+        if (newTagsToCreate.length > 0) {
+            await handleAddNewTags(newTagsToCreate, config)
+        }
+
         const tradeData = {
-            user: user._id,
             journalId: selectedJournal._id,
             openDate: new Date(data.get("openDate")),
             closeDate: new Date(data.get("closeDate")),
@@ -103,6 +154,7 @@ const TradeEdit = () => {
             exit: data.get("exit"),
             size: data.get("size"),
             sizeFiat: data.get("sizeFiat"),
+            pnl: data.get("pnl"),
             walletBalance: data.get("walletBalance"),
             accRisk: data.get("accRisk"),
             confidence: data.get("confidence"),
@@ -112,34 +164,10 @@ const TradeEdit = () => {
             exitRating: data.get("exitRating"),
             plannedRisk: data.get("plannedRisk"),
             finalRisk: data.get("finalRisk"),
-            isOpen: data.get("isOpen"),
-            tags: allTags,
+            isOpen: isOpen,
+            tags: allTagsToSend,
             thread: threads,
         };
-
-        const filteredTags = allTags.filter((obj1) => {
-            const exists = tags.some(obj2 => obj2.tag === obj1.tag);
-            return !exists;
-        });
-        const config = {
-            headers: {
-                Authorization: `Bearer ${user.token}`,
-            },
-        };
-
-        // TODO only send this request if it for sure passes
-        if (filteredTags.length > 0) {
-            const tagsData = {
-                tags: filteredTags
-            }
-            await axios.post(
-                "/api/tag", tagsData, config
-            ).then((response) => {
-                console.log(response.data)
-            }, (error) => {
-                console.log(error.message)
-            })
-        }
 
         console.log(tradeData);
         await axios.post(
@@ -152,7 +180,7 @@ const TradeEdit = () => {
         })
     };
 
-    const setTradeTags = async () => {
+    const fetchTradeTagsFromDataBase = async () => {
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
@@ -162,21 +190,32 @@ const TradeEdit = () => {
         await axios.get(
             "/api/tag", config
         ).then((response) => {
-            console.log(response.data)
-            const setupTags = tags.filter((tag) => tag.tagType === 'setup')
-            setSetupTags(setupTags.map(tag => tag.tag))
-            const mistakeTags = tags.filter((tag) => tag.tagType === 'mistake')
-            setMistakeTags(mistakeTags.map(tag => tag.tag))
+            setInitSetupTags(tags.filter((tag) => tag.tagType === 'setup'))
+            setInitMistakeTags(tags.filter((tag) => tag.tagType === 'mistake'))
             setTags(response.data)
         }, (error) => {
             console.log(error.message)
         })
     };
 
+    const calculatePnl = () => {
+        if (entry && exit && side && size) {
+            const result = side === 'long'
+                ? (exit - entry) * size
+                : (entry - exit) * size;
+
+            setPnl(result.toFixed(2));
+        }
+    }
+
     useEffect(() => {
         // TODO bug where after creating a new tag it doesnt automatically upload
-        setTradeTags();
+        fetchTradeTagsFromDataBase();
     }, []);
+
+    useEffect(() => {
+        calculatePnl();
+    }, [entry, exit, side, size]);
 
     return (
         <div>
@@ -251,6 +290,7 @@ const TradeEdit = () => {
                                                     autoComplete="side"
                                                     select
                                                     defaultValue=""
+                                                    onChange={(e) => setSide(e.target.value)}
                                                 >
                                                     <MenuItem value="long">Long</MenuItem>
                                                     <MenuItem value="short">Short</MenuItem>
@@ -274,7 +314,7 @@ const TradeEdit = () => {
                                                     label="Entry"
                                                     id="avgEntry"
                                                     autoComplete="avgEntry"
-                                                    type="number"
+                                                    onChange={(e) => setEntry(e.target.value)}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -284,7 +324,6 @@ const TradeEdit = () => {
                                                     label="Stop"
                                                     id="stop"
                                                     autoComplete="stop"
-                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -294,7 +333,6 @@ const TradeEdit = () => {
                                                     label="Target"
                                                     id="target"
                                                     autoComplete="target"
-                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -304,7 +342,7 @@ const TradeEdit = () => {
                                                     label="Exit"
                                                     id="exit"
                                                     autoComplete="exit"
-                                                    type="number"
+                                                    onChange={(e) => setExit(e.target.value)}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -315,7 +353,7 @@ const TradeEdit = () => {
                                                     label="Size"
                                                     id="size"
                                                     autoComplete="size"
-                                                    type="number"
+                                                    onChange={(e) => setSize(e.target.value)}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -325,7 +363,18 @@ const TradeEdit = () => {
                                                     label="Size Fiat"
                                                     id="sizeFiat"
                                                     autoComplete="sizeFiat"
-                                                    type="number"
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    fullWidth
+                                                    name="pnl"
+                                                    label="PnL"
+                                                    id="pnl"
+                                                    autoComplete="pnl"
+                                                    value={pnl}
+                                                    InputProps={{ readOnly: true}}
+                                                    InputLabelProps={{ shrink: true }}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -335,7 +384,6 @@ const TradeEdit = () => {
                                                     label="Wallet Balance"
                                                     id="walletBalance"
                                                     autoComplete="walletBalance"
-                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -345,7 +393,6 @@ const TradeEdit = () => {
                                                     label="Account Risk"
                                                     id="accRisk"
                                                     autoComplete="accRisk"
-                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -358,7 +405,6 @@ const TradeEdit = () => {
                                                     autoComplete="confidence"
                                                     select
                                                     defaultValue=""
-                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -376,7 +422,6 @@ const TradeEdit = () => {
                                                     autoComplete="execution"
                                                     select
                                                     defaultValue=""
-                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -394,7 +439,6 @@ const TradeEdit = () => {
                                                     autoComplete="entryRating"
                                                     select
                                                     defaultValue=""
-                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -412,7 +456,6 @@ const TradeEdit = () => {
                                                     autoComplete="management"
                                                     select
                                                     defaultValue=""
-                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -430,7 +473,6 @@ const TradeEdit = () => {
                                                     autoComplete="exitRating"
                                                     select
                                                     defaultValue=""
-                                                    type="number"
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -446,7 +488,6 @@ const TradeEdit = () => {
                                                     label="Planned Risk"
                                                     id="plannedRisk"
                                                     autoComplete="plannedRisk"
-                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -456,31 +497,31 @@ const TradeEdit = () => {
                                                     label="Final Risk"
                                                     id="finalRisk"
                                                     autoComplete="finalRisk"
-                                                    type="number"
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
+                                                <Switch
+                                                    checked={isOpen}
+                                                    onChange={handleSwitchChange}
                                                     name="isOpen"
-                                                    label="Open"
                                                     id="isOpen"
-                                                    autoComplete="isOpen"
                                                 />
+                                                <label htmlFor="isOpen">Open</label>
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Autocomplete
                                                     multiple
                                                     name="setupTags"
                                                     id="setupTags"
-                                                    options={setupTags}
-                                                    getOptionLabel={(option) => option}
+                                                    options={initSetupTags}
+                                                    getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'setup')}
                                                     renderTags={(value, getTagProps) =>
-                                                        value.map((option, index) => (
+                                                        selectedSetupTags.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option}
+                                                                // TODO bug where we add two of the same after clicking the same
+                                                                  label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
                                                         ))
@@ -499,14 +540,14 @@ const TradeEdit = () => {
                                                     multiple
                                                     name="mistakeTags"
                                                     id="mistakeTags"
-                                                    options={mistakeTags}
-                                                    getOptionLabel={(option) => option}
+                                                    options={initMistakeTags}
+                                                    getOptionLabel={(option) => option.tag}
                                                     freeSolo
                                                     onChange={(event, value) => handleTagsChange(event, value, 'mistake')}
                                                     renderTags={(value, getTagProps) =>
-                                                        value.map((option, index) => (
+                                                        selectedMistakeTags.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                  label={option}
+                                                                  label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
                                                         ))

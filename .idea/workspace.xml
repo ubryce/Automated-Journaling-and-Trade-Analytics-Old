@@ -9,7 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/tradeControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/tradeControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TradeEdit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeEdit.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +90,7 @@
       <workItem from="1678638418185" duration="19274000" />
       <workItem from="1679285371739" duration="21687000" />
       <workItem from="1679865627124" duration="10723000" />
-      <workItem from="1680973438173" duration="13807000" />
+      <workItem from="1680973438173" duration="15385000" />
     </task>
     <servers />
   </component>
