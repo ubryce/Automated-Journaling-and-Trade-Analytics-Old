@@ -26,6 +26,7 @@ const theme = createTheme();
 // TODO remove thread
 // TODO remove tag
 // TODO bug when tags is long
+// TODO allow trade view
 const TradeAdd = () => {
     const {selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
