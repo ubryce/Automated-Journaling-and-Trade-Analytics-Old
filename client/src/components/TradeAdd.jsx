@@ -28,7 +28,7 @@ const theme = createTheme();
 // TODO bug when tags is long
 // TODO allow trade view
 const TradeAdd = () => {
-    const {selectedJournal, user, tags, setTags} = useStateContext();
+    const {selectedTrade, selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
     const [initSetupTags, setInitSetupTags] = React.useState([]);
     const [initMistakeTags, setInitMistakeTags] = React.useState([]);
