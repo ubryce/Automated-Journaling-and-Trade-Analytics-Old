@@ -27,7 +27,7 @@ const TradeView = () => {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Edit">
-                        <IconButton>
+                        <IconButton onClick={() => navigate(`/dashboard/journal/${selectedJournal._id}/${selectedTrade._id}/edit`)}>
                             <EditIcon/>
                         </IconButton>
                     </Tooltip>

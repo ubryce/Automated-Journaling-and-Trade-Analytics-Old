@@ -16,6 +16,7 @@ const Journal = () => {
         <Route path={'/:id'} element={<JournalView/>} />
         <Route path={'/:id/add'} element={<TradeAdd/>} />
         <Route path={'/:id/:id'} element={<TradeView/>} />
+        <Route path={'/:id/:id/edit'} element={<TradeAdd/>} />
     </Routes>
   )
 }
