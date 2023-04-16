@@ -581,7 +581,8 @@ const TradeAdd = () => {
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
-                                                {threads.map((thread, index) => (
+                                                {selectedTrade && selectedTrade.thread
+                                                    ? selectedTrade.thread.map((thread, index) => (
                                                     <>
                                                         <Grid item xs={12} key={index}>
                                                             <TextField
@@ -591,7 +592,7 @@ const TradeAdd = () => {
                                                                 id="threadContent"
                                                                 autoComplete="threadContent"
                                                                 value={thread.content}
-                                                                defaultValue={selectedTrade && selectedTrade.threadContent ? selectedTrade.threadContent : ""}
+                                                                defaultValue=""
                                                                 onChange={event => handleThreadContentChange(event, index)}
                                                             />
                                                         </Grid>
@@ -612,9 +613,10 @@ const TradeAdd = () => {
                                                             />
                                                         </Grid>
                                                     </>
-                                                ))}
+                                                    ))
+                                                    : null}
                                             </Grid>
-                                            <Button onClick={handleAddThread}>Add Thread</Button>
+                                                <Button onClick={handleAddThread}>Add Thread</Button>
                                         </Grid>
                                         <Button
                                             type="submit"
