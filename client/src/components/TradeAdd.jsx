@@ -253,6 +253,7 @@ const TradeAdd = () => {
                                                     label="Exchange"
                                                     name="exchange"
                                                     autoComplete="exchange"
+                                                    defaultValue={selectedTrade && selectedTrade.exchange ? selectedTrade.exchange : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -266,6 +267,7 @@ const TradeAdd = () => {
                                                     InputLabelProps={{
                                                         shrink: true,
                                                     }}
+                                                    defaultValue={selectedTrade && selectedTrade.openDate ? selectedTrade.openDate : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -279,6 +281,7 @@ const TradeAdd = () => {
                                                     InputLabelProps={{
                                                         shrink: true,
                                                     }}
+                                                    defaultValue={selectedTrade && selectedTrade.closeDate ? selectedTrade.closeDate : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -290,7 +293,7 @@ const TradeAdd = () => {
                                                     id="side"
                                                     autoComplete="side"
                                                     select
-                                                    defaultValue=""
+                                                    defaultValue={selectedTrade && selectedTrade.side ? selectedTrade.side : ""}
                                                     onChange={(e) => setSide(e.target.value)}
                                                 >
                                                     <MenuItem value="long">Long</MenuItem>
@@ -305,6 +308,7 @@ const TradeAdd = () => {
                                                     label="Symbol"
                                                     id="symbol"
                                                     autoComplete="symbol"
+                                                    defaultValue={selectedTrade && selectedTrade.symbol ? selectedTrade.symbol : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -316,6 +320,7 @@ const TradeAdd = () => {
                                                     id="avgEntry"
                                                     autoComplete="avgEntry"
                                                     onChange={(e) => setEntry(e.target.value)}
+                                                    defaultValue={selectedTrade && selectedTrade.avgEntry ? selectedTrade.avgEntry : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -325,6 +330,7 @@ const TradeAdd = () => {
                                                     label="Stop"
                                                     id="stop"
                                                     autoComplete="stop"
+                                                    defaultValue={selectedTrade && selectedTrade.stop ? selectedTrade.stop : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -334,6 +340,7 @@ const TradeAdd = () => {
                                                     label="Target"
                                                     id="target"
                                                     autoComplete="target"
+                                                    defaultValue={selectedTrade && selectedTrade.target ? selectedTrade.target : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -344,6 +351,7 @@ const TradeAdd = () => {
                                                     id="exit"
                                                     autoComplete="exit"
                                                     onChange={(e) => setExit(e.target.value)}
+                                                    defaultValue={selectedTrade && selectedTrade.exit ? selectedTrade.exit : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -355,6 +363,7 @@ const TradeAdd = () => {
                                                     id="size"
                                                     autoComplete="size"
                                                     onChange={(e) => setSize(e.target.value)}
+                                                    defaultValue={selectedTrade && selectedTrade.size ? selectedTrade.side : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -364,6 +373,7 @@ const TradeAdd = () => {
                                                     label="Size Fiat"
                                                     id="sizeFiat"
                                                     autoComplete="sizeFiat"
+                                                    defaultValue={selectedTrade && selectedTrade.sizeFiat ? selectedTrade.sizeFiat : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -376,6 +386,7 @@ const TradeAdd = () => {
                                                     value={pnl}
                                                     InputProps={{ readOnly: true}}
                                                     InputLabelProps={{ shrink: true }}
+                                                    defaultValue={selectedTrade && selectedTrade.pnl ? selectedTrade.pnl : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -385,6 +396,7 @@ const TradeAdd = () => {
                                                     label="Wallet Balance"
                                                     id="walletBalance"
                                                     autoComplete="walletBalance"
+                                                    defaultValue={selectedTrade && selectedTrade.walletBalance ? selectedTrade.walletBalance : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -394,6 +406,7 @@ const TradeAdd = () => {
                                                     label="Account Risk"
                                                     id="accRisk"
                                                     autoComplete="accRisk"
+                                                    defaultValue={selectedTrade && selectedTrade.accRisk ? selectedTrade.accRisk : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -405,7 +418,7 @@ const TradeAdd = () => {
                                                     id="confidence"
                                                     autoComplete="confidence"
                                                     select
-                                                    defaultValue=""
+                                                    defaultValue={selectedTrade && selectedTrade.confidence ? selectedTrade.confidence : ""}
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -422,7 +435,7 @@ const TradeAdd = () => {
                                                     id="execution"
                                                     autoComplete="execution"
                                                     select
-                                                    defaultValue=""
+                                                    defaultValue={selectedTrade && selectedTrade.execution ? selectedTrade.execution : ""}
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -439,7 +452,7 @@ const TradeAdd = () => {
                                                     id="entryRating"
                                                     autoComplete="entryRating"
                                                     select
-                                                    defaultValue=""
+                                                    defaultValue={selectedTrade && selectedTrade.entryRating ? selectedTrade.entryRating : ""}
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -456,7 +469,7 @@ const TradeAdd = () => {
                                                     id="management"
                                                     autoComplete="management"
                                                     select
-                                                    defaultValue=""
+                                                    defaultValue={selectedTrade && selectedTrade.management ? selectedTrade.management : ""}
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -473,7 +486,7 @@ const TradeAdd = () => {
                                                     id="exitRating"
                                                     autoComplete="exitRating"
                                                     select
-                                                    defaultValue=""
+                                                    defaultValue={selectedTrade && selectedTrade.exitRating ? selectedTrade.exitRating : ""}
                                                 >
                                                     {menuItems.map((item) => (
                                                         <MenuItem key={item.value} value={item.value}>
@@ -489,6 +502,7 @@ const TradeAdd = () => {
                                                     label="Planned Risk"
                                                     id="plannedRisk"
                                                     autoComplete="plannedRisk"
+                                                    defaultValue={selectedTrade && selectedTrade.plannedRisk ? selectedTrade.plannedRisk : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -498,6 +512,7 @@ const TradeAdd = () => {
                                                     label="Final Risk"
                                                     id="finalRisk"
                                                     autoComplete="finalRisk"
+                                                    defaultValue={selectedTrade && selectedTrade.finalRisk ? selectedTrade.finalRisk : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -506,6 +521,7 @@ const TradeAdd = () => {
                                                     onChange={handleSwitchChange}
                                                     name="isOpen"
                                                     id="isOpen"
+                                                    defaultValue={selectedTrade && selectedTrade.isOpen ? selectedTrade.isOpen : ""}
                                                 />
                                                 <label htmlFor="isOpen">Open</label>
                                             </Grid>
@@ -517,6 +533,7 @@ const TradeAdd = () => {
                                                     options={initSetupTags}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
+                                                    defaultValue={selectedTrade && selectedTrade.setupTags ? selectedTrade.setupTags : ""}
                                                     onChange={(event, value) => handleTagsChange(event, value, 'setup')}
                                                     renderTags={(value, getTagProps) =>
                                                         selectedSetupTags.map((option, index) => (
@@ -544,6 +561,7 @@ const TradeAdd = () => {
                                                     options={initMistakeTags}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
+                                                    defaultValue={selectedTrade && selectedTrade.mistakeTags ? selectedTrade.mistakeTags : ""}
                                                     onChange={(event, value) => handleTagsChange(event, value, 'mistake')}
                                                     renderTags={(value, getTagProps) =>
                                                         selectedMistakeTags.map((option, index) => (
@@ -573,6 +591,7 @@ const TradeAdd = () => {
                                                                 id="threadContent"
                                                                 autoComplete="threadContent"
                                                                 value={thread.content}
+                                                                defaultValue={selectedTrade && selectedTrade.threadContent ? selectedTrade.threadContent : ""}
                                                                 onChange={event => handleThreadContentChange(event, index)}
                                                             />
                                                         </Grid>
