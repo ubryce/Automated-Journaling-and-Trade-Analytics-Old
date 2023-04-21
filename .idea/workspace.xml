@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,6 +90,7 @@
       <workItem from="1680973438173" duration="16539000" />
       <workItem from="1681259594258" duration="3200000" />
       <workItem from="1681519915942" duration="6673000" />
+      <workItem from="1681876681534" duration="158000" />
     </task>
     <servers />
   </component>
