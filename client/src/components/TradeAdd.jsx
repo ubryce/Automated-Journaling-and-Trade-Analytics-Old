@@ -616,7 +616,37 @@ const TradeAdd = () => {
                                                         </Grid>
                                                     </>
                                                     ))
-                                                    : null}
+                                                    : threads.map((thread, index) => (
+                                                        <>
+                                                            <Grid item xs={12} key={index}>
+                                                                <TextField
+                                                                    fullWidth
+                                                                    name="threadContent"
+                                                                    label="Thread Content"
+                                                                    id="threadContent"
+                                                                    autoComplete="threadContent"
+                                                                    defaultValue=""
+                                                                    onChange={event => handleThreadContentChange(event, index)}
+                                                                />
+                                                            </Grid>
+                                                            <Grid item xs={12}>
+                                                                <input
+                                                                    type="file"
+                                                                    accept="image/*"
+                                                                    onChange={event => handleThreadPictureChange(event, index)}
+                                                                />
+                                                                <TextField
+                                                                    fullWidth
+                                                                    name="threadPicture"
+                                                                    label="Thread Picture"
+                                                                    id="threadPicture"
+                                                                    autoComplete="threadPicture"
+                                                                    defaultValue=""
+                                                                    onChange={event => handleThreadPictureChange(event, index)}
+                                                                />
+                                                            </Grid>
+                                                        </>
+                                                    ))}
                                             </Grid>
                                                 <Button onClick={handleAddThread}>Add Thread</Button>
                                         </Grid>
