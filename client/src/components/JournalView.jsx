@@ -59,7 +59,7 @@ const JournalView = () => {
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Add Trade">
-                        <Link to={`/dashboard/journal/${selectedJournal._id}/add`}>
+                        <Link to={`/dashboard/journal/${selectedJournal._id}/add`} onClick={() => setSelectedTrade(null)}>
                             <IconButton>
                                 <AddIcon/>
                             </IconButton>
