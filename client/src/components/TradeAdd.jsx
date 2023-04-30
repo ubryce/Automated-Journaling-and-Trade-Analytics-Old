@@ -192,6 +192,8 @@ const TradeAdd = () => {
         await axios.get(
             "/api/tag", config
         ).then((response) => {
+            console.log("ran")
+            console.log(response.data)
             setInitSetupTags(tags.filter((tag) => tag.tagType === 'setup'))
             setInitMistakeTags(tags.filter((tag) => tag.tagType === 'mistake'))
             setTags(response.data)

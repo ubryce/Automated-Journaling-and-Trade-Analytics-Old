@@ -6,7 +6,7 @@ const Journal = require("../models/journalModel");
 const fetchTags = asyncHandler( async (req, res) => {
     try {
         // TODO fix request
-        const tags = await Tag.find({$eq: req.user._id})
+        const tags = await Tag.find({user: req.user._id})
             .populate("tag")
             .then( async (results) => {
                 results = await User.populate(results, {
