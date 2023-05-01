@@ -536,12 +536,11 @@ const TradeAdd = () => {
                                                     options={initSetupTags}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
-                                                    defaultValue={selectedTrade && selectedTrade.setupTags ? selectedTrade.setupTags : ""}
                                                     onChange={(event, value) => handleTagsChange(event, value, 'setup')}
                                                     renderTags={(value, getTagProps) =>
                                                         selectedSetupTags.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                // TODO bug where we add two of the same after clicking the same
+                                                                    // TODO fix default value
                                                                   label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
@@ -564,7 +563,6 @@ const TradeAdd = () => {
                                                     options={initMistakeTags}
                                                     getOptionLabel={(option) => option.tag}
                                                     freeSolo
-                                                    defaultValue={selectedTrade && selectedTrade.mistakeTags ? selectedTrade.mistakeTags : ""}
                                                     onChange={(event, value) => handleTagsChange(event, value, 'mistake')}
                                                     renderTags={(value, getTagProps) =>
                                                         selectedMistakeTags.map((option, index) => (
