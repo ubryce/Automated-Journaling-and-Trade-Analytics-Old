@@ -8,8 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TradeEdit/RatingTextField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeEdit/RatingTextField.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +98,7 @@
       <workItem from="1682218355079" duration="1275000" />
       <workItem from="1682275938409" duration="2689000" />
       <workItem from="1682650542791" duration="1995000" />
-      <workItem from="1682891852197" duration="4707000" />
+      <workItem from="1682891852197" duration="5005000" />
     </task>
     <servers />
   </component>
