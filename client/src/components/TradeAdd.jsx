@@ -18,7 +18,7 @@ import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Tooltip from "@mui/material/Tooltip";
-import RatingTextField from './TradeEdit/RatingTextField';
+import RatingTextField from './TradeForm/RatingTextField';
 
 const theme = createTheme();
 // TODO change required

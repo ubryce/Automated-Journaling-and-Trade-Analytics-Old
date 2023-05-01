@@ -9,7 +9,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeAdd.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/TradeEdit/RatingTextField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeEdit/RatingTextField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TradeEdit/RatingTextField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeForm/RatingTextField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TradeEdit/TradeForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeForm/TradeForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TradeEdit/TradeTags.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeForm/TradeTags.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TradeEdit/TradeThread.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeForm/TradeThread.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/TradeEdit/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeForm/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +32,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2Li4BZrluRjYxNATjs6OeAtL0bq" />
   <component name="ProjectViewState">
@@ -98,7 +105,7 @@
       <workItem from="1682218355079" duration="1275000" />
       <workItem from="1682275938409" duration="2689000" />
       <workItem from="1682650542791" duration="1995000" />
-      <workItem from="1682891852197" duration="5005000" />
+      <workItem from="1682891852197" duration="5327000" />
     </task>
     <servers />
   </component>
