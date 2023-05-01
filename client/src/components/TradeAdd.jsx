@@ -18,6 +18,7 @@ import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Tooltip from "@mui/material/Tooltip";
+import RatingTextField from './TradeEdit/RatingTextField';
 
 const theme = createTheme();
 // TODO change required
@@ -52,7 +53,7 @@ const TradeAdd = () => {
         setIsOpen(event.target.checked);
     };
 
-    const menuItems = [
+    const ratingItems = [
         {value: 1, label: "1"},
         {value: 2, label: "2"},
         {value: 3, label: "3"},
@@ -64,6 +65,14 @@ const TradeAdd = () => {
         {value: 9, label: "9"},
         {value: 10, label: "10"},
     ]
+
+    const ratingTypes = [
+        { name: "confidence", label: "Confidence" },
+        { name: "execution", label: "Execution Rating" },
+        { name: "entryRating", label: "Entry Rating" },
+        { name: "management", label: "Management Rating" },
+        { name: "exitRating", label: "Exit Rating" },
+    ];
 
     const handleThreadContentChange = (event, index) => {
         const newThreads = [...threads];
@@ -412,92 +421,19 @@ const TradeAdd = () => {
                                                     defaultValue={selectedTrade && selectedTrade.accRisk ? selectedTrade.accRisk : ""}
                                                 />
                                             </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    required
-                                                    fullWidth
-                                                    name="confidence"
-                                                    label="Confidence"
-                                                    id="confidence"
-                                                    autoComplete="confidence"
-                                                    select
-                                                    defaultValue={selectedTrade && selectedTrade.confidence ? selectedTrade.confidence : ""}
-                                                >
-                                                    {menuItems.map((item) => (
-                                                        <MenuItem key={item.value} value={item.value}>
-                                                            {item.label}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="execution"
-                                                    label="Execution Rating"
-                                                    id="execution"
-                                                    autoComplete="execution"
-                                                    select
-                                                    defaultValue={selectedTrade && selectedTrade.execution ? selectedTrade.execution : ""}
-                                                >
-                                                    {menuItems.map((item) => (
-                                                        <MenuItem key={item.value} value={item.value}>
-                                                            {item.label}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="entryRating"
-                                                    label="Entry Rating"
-                                                    id="entryRating"
-                                                    autoComplete="entryRating"
-                                                    select
-                                                    defaultValue={selectedTrade && selectedTrade.entryRating ? selectedTrade.entryRating : ""}
-                                                >
-                                                    {menuItems.map((item) => (
-                                                        <MenuItem key={item.value} value={item.value}>
-                                                            {item.label}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="management"
-                                                    label="Management Rating"
-                                                    id="management"
-                                                    autoComplete="management"
-                                                    select
-                                                    defaultValue={selectedTrade && selectedTrade.management ? selectedTrade.management : ""}
-                                                >
-                                                    {menuItems.map((item) => (
-                                                        <MenuItem key={item.value} value={item.value}>
-                                                            {item.label}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="exitRating"
-                                                    label="Exit Rating"
-                                                    id="exitRating"
-                                                    autoComplete="exitRating"
-                                                    select
-                                                    defaultValue={selectedTrade && selectedTrade.exitRating ? selectedTrade.exitRating : ""}
-                                                >
-                                                    {menuItems.map((item) => (
-                                                        <MenuItem key={item.value} value={item.value}>
-                                                            {item.label}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                            </Grid>
+                                            {ratingTypes.map((rating) => (
+                                                <RatingTextField
+                                                    key={rating.name}
+                                                    name={rating.name}
+                                                    label={rating.label}
+                                                    defaultValue={
+                                                        selectedTrade && selectedTrade[rating.name]
+                                                            ? selectedTrade[rating.name]
+                                                            : ""
+                                                    }
+                                                    menuItems={ratingItems}
+                                                />
+                                            ))}
                                             <Grid item xs={12}>
                                                 <TextField
                                                     fullWidth
