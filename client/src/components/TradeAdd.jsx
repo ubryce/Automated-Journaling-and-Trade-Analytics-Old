@@ -6,7 +6,6 @@ import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import {useStateContext} from '../contexts/ContextProvider';
 import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
@@ -19,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Tooltip from "@mui/material/Tooltip";
 import RatingTextField from './TradeForm/RatingTextField';
+import CustomTextField from './TradeForm/CustomTextField';
 
 const theme = createTheme();
 // TODO change required
@@ -52,6 +52,33 @@ const TradeAdd = () => {
     const handleSwitchChange = (event) => {
         setIsOpen(event.target.checked);
     };
+
+    const textFields = [
+        { name: "exchange", label: "Exchange", required: true },
+        {
+            name: "side",
+            label: "Side",
+            required: true,
+            select: true,
+            menuItems: [
+                { value: "long", label: "Long" },
+                { value: "short", label: "Short" },
+            ],
+            onChange: (e) => setSide(e.target.value),
+        },
+        { name: "symbol", label: "Symbol", required: true },
+        { name: "avgEntry", label: "Entry", required: true, onChange: (e) => setEntry(e.target.value) },
+        { name: "stop", label: "Stop" },
+        { name: "target", label: "Target" },
+        { name: "exit", label: "Exit", onChange: (e) => setExit(e.target.value) },
+        { name: "size", label: "Size", required: true, onChange: (e) => setSize(e.target.value) },
+        { name: "sizeFiat", label: "Size Fiat" },
+        { name: "pnl", label: "PnL", readOnly: true, value: pnl },
+        { name: "walletBalance", label: "Wallet Balance" },
+        { name: "accRisk", label: "Account Risk" },
+        { name: "plannedRisk", label: "Planned Risk", required: false },
+        { name: "finalRisk", label: "Final Risk", required: false },
+    ];
 
     const ratingTypes = [
         { name: "confidence", label: "Confidence" },
@@ -246,17 +273,6 @@ const TradeAdd = () => {
                                         <Grid container spacing={2}>
                                             <Grid item xs={12}>
                                                 <TextField
-                                                    required
-                                                    fullWidth
-                                                    id="exchange"
-                                                    label="Exchange"
-                                                    name="exchange"
-                                                    autoComplete="exchange"
-                                                    defaultValue={selectedTrade && selectedTrade.exchange ? selectedTrade.exchange : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
                                                     fullWidth
                                                     name="opendate"
                                                     label="Open Date"
@@ -283,131 +299,26 @@ const TradeAdd = () => {
                                                     defaultValue={selectedTrade && selectedTrade.closeDate ? selectedTrade.closeDate : ""}
                                                 />
                                             </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    required
-                                                    fullWidth
-                                                    name="side"
-                                                    label="Side"
-                                                    id="side"
-                                                    autoComplete="side"
-                                                    select
-                                                    defaultValue={selectedTrade && selectedTrade.side ? selectedTrade.side : ""}
-                                                    onChange={(e) => setSide(e.target.value)}
-                                                >
-                                                    <MenuItem value="long">Long</MenuItem>
-                                                    <MenuItem value="short">Short</MenuItem>
-                                                </TextField>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    required
-                                                    fullWidth
-                                                    name="symbol"
-                                                    label="Symbol"
-                                                    id="symbol"
-                                                    autoComplete="symbol"
-                                                    defaultValue={selectedTrade && selectedTrade.symbol ? selectedTrade.symbol : ""}
+                                            {textFields.map((field) => (
+                                                <CustomTextField
+                                                    key={field.name}
+                                                    required={field.required}
+                                                    name={field.name}
+                                                    label={field.label}
+                                                    id={field.name}
+                                                    autoComplete={field.name}
+                                                    defaultValue={
+                                                        selectedTrade && selectedTrade[field.name]
+                                                            ? selectedTrade[field.name]
+                                                            : ""
+                                                    }
+                                                    onChange={field.onChange}
+                                                    readOnly={field.readOnly}
+                                                    value={field.value}
+                                                    select={field.select}
+                                                    menuItems={field.menuItems}
                                                 />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    required
-                                                    fullWidth
-                                                    name="avgEntry"
-                                                    label="Entry"
-                                                    id="avgEntry"
-                                                    autoComplete="avgEntry"
-                                                    onChange={(e) => setEntry(e.target.value)}
-                                                    defaultValue={selectedTrade && selectedTrade.avgEntry ? selectedTrade.avgEntry : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="stop"
-                                                    label="Stop"
-                                                    id="stop"
-                                                    autoComplete="stop"
-                                                    defaultValue={selectedTrade && selectedTrade.stop ? selectedTrade.stop : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="target"
-                                                    label="Target"
-                                                    id="target"
-                                                    autoComplete="target"
-                                                    defaultValue={selectedTrade && selectedTrade.target ? selectedTrade.target : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="exit"
-                                                    label="Exit"
-                                                    id="exit"
-                                                    autoComplete="exit"
-                                                    onChange={(e) => setExit(e.target.value)}
-                                                    defaultValue={selectedTrade && selectedTrade.exit ? selectedTrade.exit : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    required
-                                                    fullWidth
-                                                    name="size"
-                                                    label="Size"
-                                                    id="size"
-                                                    autoComplete="size"
-                                                    onChange={(e) => setSize(e.target.value)}
-                                                    defaultValue={selectedTrade && selectedTrade.size ? selectedTrade.side : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="sizeFiat"
-                                                    label="Size Fiat"
-                                                    id="sizeFiat"
-                                                    autoComplete="sizeFiat"
-                                                    defaultValue={selectedTrade && selectedTrade.sizeFiat ? selectedTrade.sizeFiat : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="pnl"
-                                                    label="PnL"
-                                                    id="pnl"
-                                                    autoComplete="pnl"
-                                                    value={pnl}
-                                                    InputProps={{ readOnly: true}}
-                                                    InputLabelProps={{ shrink: true }}
-                                                    defaultValue={selectedTrade && selectedTrade.pnl ? selectedTrade.pnl : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="walletBalance"
-                                                    label="Wallet Balance"
-                                                    id="walletBalance"
-                                                    autoComplete="walletBalance"
-                                                    defaultValue={selectedTrade && selectedTrade.walletBalance ? selectedTrade.walletBalance : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="accRisk"
-                                                    label="Account Risk"
-                                                    id="accRisk"
-                                                    autoComplete="accRisk"
-                                                    defaultValue={selectedTrade && selectedTrade.accRisk ? selectedTrade.accRisk : ""}
-                                                />
-                                            </Grid>
+                                            ))}
                                             {ratingTypes.map((rating) => (
                                                 <RatingTextField
                                                     key={rating.name}
@@ -420,26 +331,6 @@ const TradeAdd = () => {
                                                     }
                                                 />
                                             ))}
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="plannedRisk"
-                                                    label="Planned Risk"
-                                                    id="plannedRisk"
-                                                    autoComplete="plannedRisk"
-                                                    defaultValue={selectedTrade && selectedTrade.plannedRisk ? selectedTrade.plannedRisk : ""}
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                    fullWidth
-                                                    name="finalRisk"
-                                                    label="Final Risk"
-                                                    id="finalRisk"
-                                                    autoComplete="finalRisk"
-                                                    defaultValue={selectedTrade && selectedTrade.finalRisk ? selectedTrade.finalRisk : ""}
-                                                />
-                                            </Grid>
                                             <Grid item xs={12}>
                                                 <Switch
                                                     checked={isOpen}
