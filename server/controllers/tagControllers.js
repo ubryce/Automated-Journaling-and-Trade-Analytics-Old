@@ -23,6 +23,7 @@ const fetchTags = asyncHandler( async (req, res) => {
     }
 });
 
+// TODO do not allow user to create already existing tag
 const createTag = asyncHandler( async (req, res) => {
     const {tags} = req.body;
 
