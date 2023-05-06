@@ -141,6 +141,7 @@ const TradeAdd = () => {
             "/api/tag", tagsData, config
         ).then((response) => {
             console.log(response.data)
+            return response.data
         }, (error) => {
             console.log(error.message)
         })
@@ -149,7 +150,7 @@ const TradeAdd = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const allTagsToSend = [...selectedSetupTags, ...selectedMistakeTags];
+        let allTagsToSend = [...selectedSetupTags, ...selectedMistakeTags];
         const config = {
             headers: {
                 Authorization: `Bearer ${user.token}`,
@@ -162,9 +163,18 @@ const TradeAdd = () => {
             const exists = tags.some(obj2 => obj2.tag === obj1.tag);
             return !exists;
         });
+        console.log(newTagsToCreate)
         if (newTagsToCreate.length > 0) {
-            await handleAddNewTags(newTagsToCreate, config)
+            const newTagsToAdd = await handleAddNewTags(newTagsToCreate, config)
+            newTagsToAdd.forEach((newTag) => {
+                const index = allTagsToSend.findIndex((oldTag) => oldTag.tag === newTag.tag && !oldTag.id);
+                if (index !== -1) {
+                    allTagsToSend.splice(index, 1, newTag);
+                }
+            });
+            console.log(newTagsToAdd)
         }
+        console.log(allTagsToSend)
 
         const tradeData = {
             journalId: selectedJournal._id,
@@ -353,7 +363,7 @@ const TradeAdd = () => {
                                                     renderTags={(value, getTagProps) =>
                                                         selectedSetupTags.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                    // TODO fix default value
+                                                                    // TODO fix default value for edit trade
                                                                   label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
