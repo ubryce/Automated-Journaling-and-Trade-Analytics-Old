@@ -88,6 +88,12 @@ const TradeAdd = () => {
         { name: "exitRating", label: "Exit Rating" },
     ];
 
+    const handleRemoveThread = (index) => {
+        const newThreads = [...threads];
+        newThreads.splice(index, 1);
+        setThreads(newThreads);
+    };
+
     const handleThreadContentChange = (event, index) => {
         const newThreads = [...threads];
         newThreads[index].content = event.target.value;
@@ -410,6 +416,7 @@ const TradeAdd = () => {
                                                 handleThreadContentChange={handleThreadContentChange}
                                                 handleThreadPictureChange={handleThreadPictureChange}
                                                 handleAddThread={handleAddThread}
+                                                handleRemoveThread={handleRemoveThread}
                                             />
                                         </Grid>
                                         <Button

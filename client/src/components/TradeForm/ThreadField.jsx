@@ -73,6 +73,7 @@ const ThreadComponent = ({
                                 defaultValue=""
                                 onChange={(event) => handleThreadPictureChange(event, index)}
                             />
+                            <Button onClick={() => handleRemoveThread(index)}>Remove Thread</Button>
                         </Grid>
                     </>
                 ))}
