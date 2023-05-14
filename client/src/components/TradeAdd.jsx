@@ -22,7 +22,6 @@ import CustomTextField from './TradeForm/CustomTextField';
 import ThreadField from './TradeForm/ThreadField';
 
 const theme = createTheme();
-// TODO change required
 // TODO do not allow user to add nothing to a thread
 // TODO remove tag
 // TODO bug when tags is long
