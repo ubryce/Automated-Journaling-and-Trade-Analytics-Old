@@ -2,10 +2,8 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-// TODO fix when thread is added then typing into the first and remove that thread then add another thread then the text moves to the second thread but the values arent there
 const ThreadComponent = ({
                              threads,
-                             selectedTrade,
                              handleThreadContentChange,
                              handleThreadPictureChange,
                              handleAddThread,
@@ -13,71 +11,38 @@ const ThreadComponent = ({
                          }) => {
     return (
         <Grid item xs={12}>
-            {selectedTrade && selectedTrade.thread
-                ? selectedTrade.thread.map((thread, index) => (
-                    <>
-                        <Grid item xs={12} key={index}>
-                            <TextField
-                                fullWidth
-                                name="threadContent"
-                                label="Thread Content"
-                                id="threadContent"
-                                autoComplete="threadContent"
-                                value={thread.content}
-                                defaultValue=""
-                                onChange={(event) => handleThreadContentChange(event, index)}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(event) => handleThreadPictureChange(event, index)}
-                            />
-                            <TextField
-                                fullWidth
-                                name="threadPicture"
-                                label="Thread Picture"
-                                id="threadPicture"
-                                autoComplete="threadPicture"
-                                value={thread.picture}
-                                onChange={(event) => handleThreadPictureChange(event, index)}
-                            />
-                        </Grid>
-                    </>
-                ))
-                : threads.map((thread, index) => (
-                    <>
-                        <Grid item xs={12} key={index}>
-                            <TextField
-                                fullWidth
-                                name="threadContent"
-                                label="Thread Content"
-                                id="threadContent"
-                                autoComplete="threadContent"
-                                defaultValue=""
-                                onChange={(event) => handleThreadContentChange(event, index)}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(event) => handleThreadPictureChange(event, index)}
-                            />
-                            <TextField
-                                fullWidth
-                                name="threadPicture"
-                                label="Thread Picture"
-                                id="threadPicture"
-                                autoComplete="threadPicture"
-                                defaultValue=""
-                                onChange={(event) => handleThreadPictureChange(event, index)}
-                            />
-                            <Button onClick={() => handleRemoveThread(index)}>Remove Thread</Button>
-                        </Grid>
-                    </>
-                ))}
+            {threads.map((thread) => (
+                <React.Fragment key={thread.id}>
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            name="threadContent"
+                            label="Thread Content"
+                            id={`threadContent-${thread.id}`}
+                            autoComplete="threadContent"
+                            value={thread.content}
+                            onChange={(event) => handleThreadContentChange(event, thread.id)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => handleThreadPictureChange(event, thread.id)}
+                        />
+                        <TextField
+                            fullWidth
+                            name="threadPicture"
+                            label="Thread Picture"
+                            id={`threadPicture-${thread.id}`}
+                            autoComplete="threadPicture"
+                            value={thread.picture}
+                            onChange={(event) => handleThreadPictureChange(event, thread.id)}
+                        />
+                        <Button onClick={() => handleRemoveThread(thread.id)}>Remove Thread</Button>
+                    </Grid>
+                </React.Fragment>
+            ))}
             <Button onClick={handleAddThread}>Add Thread</Button>
         </Grid>
     );

@@ -36,10 +36,6 @@ const TradeAdd = () => {
     const [selectedMistakeTags, setSelectedMistakeTags] = React.useState([]);
     const [isOpen, setIsOpen] = React.useState(false);
     const [threads, setThreads] = React.useState([
-        {
-            content: "",
-            picture: ""
-        }
     ]);
     const [entry, setEntry] = React.useState();
     const [exit, setExit] = React.useState();
@@ -86,26 +82,43 @@ const TradeAdd = () => {
         { name: "exitRating", label: "Exit Rating" },
     ];
 
-    const handleRemoveThread = (index) => {
-        const newThreads = [...threads];
-        newThreads.splice(index, 1);
+    const handleRemoveThread = (id) => {
+        setThreads(threads.filter(thread => thread.id !== id));
+    };
+
+    const handleThreadContentChange = (event, id) => {
+        const newThreads = threads.map((thread) => {
+            if (thread.id === id) {
+                return {
+                    ...thread,
+                    content: event.target.value
+                };
+            }
+            return thread;
+        });
         setThreads(newThreads);
     };
 
-    const handleThreadContentChange = (event, index) => {
-        const newThreads = [...threads];
-        newThreads[index].content = event.target.value;
-        setThreads(newThreads);
-    };
-
-    const handleThreadPictureChange = (event, index) => {
-        const newThreads = [...threads];
-        newThreads[index].picture = event.target.value;
+    const handleThreadPictureChange = (event, id) => {
+        const newThreads = threads.map((thread) => {
+            if (thread.id === id) {
+                return {
+                    ...thread,
+                    picture: event.target.value
+                };
+            }
+            return thread;
+        });
         setThreads(newThreads);
     };
 
     const handleAddThread = () => {
-        setThreads([...threads, {content: '', picture: ''}]);
+        const newThread = {
+            id: new Date().getTime(), // This will create a new timestamp which is unique for each thread
+            content: '',
+            picture: ''
+        };
+        setThreads([...threads, newThread]);
     };
 
     const handleDeleteTag = (tag) => {
