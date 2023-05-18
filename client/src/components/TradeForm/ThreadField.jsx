@@ -2,13 +2,14 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+// TODO fix when thread is added then typing into the first and remove that thread then add another thread then the text moves to the second thread but the values arent there
 const ThreadComponent = ({
                              threads,
                              selectedTrade,
                              handleThreadContentChange,
                              handleThreadPictureChange,
                              handleAddThread,
+                             handleRemoveThread
                          }) => {
     return (
         <Grid item xs={12}>
