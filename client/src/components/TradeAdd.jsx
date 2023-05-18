@@ -22,8 +22,6 @@ import CustomTextField from './TradeForm/CustomTextField';
 import ThreadField from './TradeForm/ThreadField';
 
 const theme = createTheme();
-// TODO do not allow user to add nothing to a thread
-// TODO remove tag
 // TODO bug when tags is long
 // TODO trade tag edit bug
 // TODO fix trade tags
@@ -113,6 +111,15 @@ const TradeAdd = () => {
     };
 
     const handleAddThread = () => {
+        // Check if the last thread in the array has content or picture
+        if (threads.length > 0) {
+            const lastThread = threads[threads.length - 1];
+            if (lastThread.content === '' && lastThread.picture === '') {
+                alert("Cannot add a new thread until the last one has content or picture.");
+                return;
+            }
+        }
+
         const newThread = {
             id: new Date().getTime(), // This will create a new timestamp which is unique for each thread
             content: '',
