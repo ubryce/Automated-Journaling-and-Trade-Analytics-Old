@@ -33,8 +33,7 @@ const TradeAdd = () => {
     const [selectedSetupTags, setSelectedSetupTags] = React.useState([]);
     const [selectedMistakeTags, setSelectedMistakeTags] = React.useState([]);
     const [isOpen, setIsOpen] = React.useState(false);
-    const [threads, setThreads] = React.useState([
-    ]);
+    const [threads, setThreads] = React.useState([]);
     const [entry, setEntry] = React.useState();
     const [exit, setExit] = React.useState();
     const [side, setSide] = React.useState('');
@@ -46,38 +45,38 @@ const TradeAdd = () => {
     };
 
     const textFields = [
-        { name: "exchange", label: "Exchange", required: true },
+        {name: "exchange", label: "Exchange", required: true},
         {
             name: "side",
             label: "Side",
             required: true,
             select: true,
             menuItems: [
-                { value: "long", label: "Long" },
-                { value: "short", label: "Short" },
+                {value: "long", label: "Long"},
+                {value: "short", label: "Short"},
             ],
             onChange: (e) => setSide(e.target.value),
         },
-        { name: "symbol", label: "Symbol", required: true },
-        { name: "avgEntry", label: "Entry", required: true, onChange: (e) => setEntry(e.target.value) },
-        { name: "stop", label: "Stop" },
-        { name: "target", label: "Target" },
-        { name: "exit", label: "Exit", onChange: (e) => setExit(e.target.value) },
-        { name: "size", label: "Size", required: true, onChange: (e) => setSize(e.target.value) },
-        { name: "sizeFiat", label: "Size Fiat" },
-        { name: "pnl", label: "PnL", readOnly: true, value: pnl },
-        { name: "walletBalance", label: "Wallet Balance" },
-        { name: "accRisk", label: "Account Risk" },
-        { name: "plannedRisk", label: "Planned Risk", required: false },
-        { name: "finalRisk", label: "Final Risk", required: false },
+        {name: "symbol", label: "Symbol", required: true},
+        {name: "avgEntry", label: "Entry", required: true, onChange: (e) => setEntry(e.target.value)},
+        {name: "stop", label: "Stop"},
+        {name: "target", label: "Target"},
+        {name: "exit", label: "Exit", onChange: (e) => setExit(e.target.value)},
+        {name: "size", label: "Size", required: true, onChange: (e) => setSize(e.target.value)},
+        {name: "sizeFiat", label: "Size Fiat"},
+        {name: "pnl", label: "PnL", readOnly: true, value: pnl},
+        {name: "walletBalance", label: "Wallet Balance"},
+        {name: "accRisk", label: "Account Risk"},
+        {name: "plannedRisk", label: "Planned Risk", required: false},
+        {name: "finalRisk", label: "Final Risk", required: false},
     ];
 
     const ratingTypes = [
-        { name: "confidence", label: "Confidence" },
-        { name: "execution", label: "Execution Rating" },
-        { name: "entryRating", label: "Entry Rating" },
-        { name: "management", label: "Management Rating" },
-        { name: "exitRating", label: "Exit Rating" },
+        {name: "confidence", label: "Confidence"},
+        {name: "execution", label: "Execution Rating"},
+        {name: "entryRating", label: "Entry Rating"},
+        {name: "management", label: "Management Rating"},
+        {name: "exitRating", label: "Exit Rating"},
     ];
 
     const handleRemoveThread = (id) => {
@@ -387,7 +386,7 @@ const TradeAdd = () => {
                                                     renderTags={(value, getTagProps) =>
                                                         selectedSetupTags.map((option, index) => (
                                                             <Chip variant="outlined"
-                                                                    // TODO fix default value for edit trade
+                                                                // TODO fix default value for edit trade
                                                                   label={option.tag}
                                                                   onDelete={() => handleDeleteTag(option)}
                                                                   {...getTagProps({index})} />
