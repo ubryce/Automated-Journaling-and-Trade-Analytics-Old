@@ -423,8 +423,7 @@ const TradeAdd = () => {
                                                 />
                                             </Grid>
                                             <ThreadField
-                                                threads={threads}
-                                                selectedTrade={selectedTrade}
+                                                threads={ selectedTrade && selectedTrade.thread ? selectedTrade.thread : threads}
                                                 handleThreadContentChange={handleThreadContentChange}
                                                 handleThreadPictureChange={handleThreadPictureChange}
                                                 handleAddThread={handleAddThread}
