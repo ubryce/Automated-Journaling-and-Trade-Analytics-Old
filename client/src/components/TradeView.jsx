@@ -14,7 +14,7 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 
 const TradeView = () => {
-    const {selectedTrade, selectedJournal} = useStateContext();
+    const {selectedTrade, selectedJournal, visibility} = useStateContext();
     const navigate = useNavigate();
 
     return (
@@ -54,7 +54,7 @@ const TradeView = () => {
                                 <TableCell>{`${selectedTrade.symbol}`}</TableCell>
                                 <TableCell>{`${selectedTrade.avgEntry}`}</TableCell>
                                 <TableCell>{`${selectedTrade.exit}`}</TableCell>
-                                <TableCell>{`${selectedTrade.pnl}`}</TableCell>
+                                <TableCell>{visibility ? `${selectedTrade.pnl}` : "Hidden"}</TableCell>
                                 <TableCell>
                                     {selectedTrade.tags
                                         .filter((tag) => tag.tagType === 'setup')

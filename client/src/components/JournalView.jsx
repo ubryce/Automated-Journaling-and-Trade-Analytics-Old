@@ -21,7 +21,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 // TODO Add filtering
 const JournalView = () => {
-    const {selectedJournal, selectedTrades, setSelectedTrades, user, setSelectedTrade} = useStateContext()
+    const {selectedJournal, selectedTrades, setSelectedTrades, user, setSelectedTrade, visibility} = useStateContext()
     const navigate = useNavigate();
 
     const fetchTrades = async () => {
@@ -92,7 +92,7 @@ const JournalView = () => {
                                     <TableCell>{`${trades.symbol}`}</TableCell>
                                     <TableCell>{`${trades.avgEntry}`}</TableCell>
                                     <TableCell>{`${trades.exit}`}</TableCell>
-                                    <TableCell>{`${trades.pnl}`}</TableCell>
+                                    <TableCell>{visibility ? `${trades.pnl}` : "Hidden"}</TableCell>
                                     <TableCell>
                                         {trades.tags
                                             .filter((tag) => tag.tagType === 'setup')
