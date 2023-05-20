@@ -156,18 +156,17 @@ const TradeAdd = () => {
     };
 
     // TODO only send this request if it for sure passes
-    const handleAddNewTags = async (filteredTags, config) => {
+    const handleAddNewTags = (filteredTags, config) => {
         const tagsData = {
             tags: filteredTags
-        }
-        await axios.post(
-            "/api/tag", tagsData, config
-        ).then((response) => {
-            console.log(response.data)
-            return response.data
-        }, (error) => {
-            console.log(error.message)
-        })
+        };
+        return axios.post("/api/tag", tagsData, config)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     }
 
     const handleSubmit = async (event) => {
@@ -179,14 +178,11 @@ const TradeAdd = () => {
                 Authorization: `Bearer ${user.token}`,
             },
         };
-        console.log(allTagsToSend)
 
-        // TODO use new tags with old tags and add into trade data
         const newTagsToCreate = allTagsToSend.filter((obj1) => {
             const exists = tags.some(obj2 => obj2.tag === obj1.tag);
             return !exists;
         });
-        console.log(newTagsToCreate)
         if (newTagsToCreate.length > 0) {
             const newTagsToAdd = await handleAddNewTags(newTagsToCreate, config)
             newTagsToAdd.forEach((newTag) => {
@@ -195,7 +191,6 @@ const TradeAdd = () => {
                     allTagsToSend.splice(index, 1, newTag);
                 }
             });
-            console.log(newTagsToAdd)
         }
         console.log(allTagsToSend)
 
