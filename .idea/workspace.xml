@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/TradeForm/ThreadField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/TradeForm/ThreadField.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="ba6792d4-2ae2-4373-aae9-2e9d21e741fc" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +108,7 @@
       <workItem from="1684380960319" duration="3395000" />
       <workItem from="1684465386205" duration="1643000" />
       <workItem from="1684544208624" duration="3166000" />
-      <workItem from="1684601046441" duration="5461000" />
+      <workItem from="1684601046441" duration="5823000" />
     </task>
     <servers />
   </component>

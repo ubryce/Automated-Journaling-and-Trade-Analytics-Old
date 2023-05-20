@@ -25,6 +25,7 @@ const theme = createTheme();
 // TODO bug when tags is long
 // TODO trade tag edit bug
 // TODO fix trade tags
+// TODO fix edit trade
 const TradeAdd = () => {
     const {selectedTrade, selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
