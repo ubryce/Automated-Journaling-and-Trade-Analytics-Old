@@ -6,7 +6,7 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
     // TODO are all of these needed?
     const [user, setUser] = useState();
-    const [visability, setVisability] = useState(true);
+    const [visibility, setVisibility] = useState(true);
     const [selectedJournal, setSelectedJournal] = useState();
     const [journals, setJournals] = useState([]);
     const [selectedExchange, setSelectedExchange] = useState();
@@ -27,7 +27,7 @@ export const ContextProvider = ({ children }) => {
     }, [navigate])
 
     return (
-        <StateContext.Provider value={{ tags, setTags, selectedTrades, setSelectedTrades, user, setUser, visability, setVisability, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange, selectedTrade, setSelectedTrade }}>
+        <StateContext.Provider value={{ tags, setTags, selectedTrades, setSelectedTrades, user, setUser, visibility, setVisibility, journals, setJournals, exchanges, setExchanges, selectedJournal, setSelectedJournal, selectedExchange, setSelectedExchange, selectedTrade, setSelectedTrade }}>
         {children}
         </StateContext.Provider>
     );

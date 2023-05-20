@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import Dash from '../components/Dash';
@@ -98,6 +99,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 const Dashboard = () => {
+  const { visibility, setVisibility } = useStateContext();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -108,6 +110,11 @@ const Dashboard = () => {
     navigate('/')
     console.log("logged out")
   }
+
+  const toggleVisibility = () => {
+    setVisibility(!visibility);
+    console.log(visibility)
+  };
 
   useEffect(() => {
       const user = JSON.parse(localStorage.getItem("userInfo"));
@@ -149,9 +156,9 @@ const Dashboard = () => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton color="inherit" onClick={toggleVisibility}>
               <Badge color="secondary">
-                <VisibilityIcon />
+                { visibility ? <VisibilityIcon /> : <VisibilityOffIcon /> }
               </Badge>
             </IconButton>
             <IconButton color="inherit" onClick={logoutHandler}>
