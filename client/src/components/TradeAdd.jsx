@@ -244,8 +244,6 @@ const TradeAdd = () => {
         await axios.get(
             "/api/tag", config
         ).then((response) => {
-            console.log("ran")
-            console.log(response.data)
             setInitSetupTags(tags.filter((tag) => tag.tagType === 'setup'))
             setInitMistakeTags(tags.filter((tag) => tag.tagType === 'mistake'))
             setTags(response.data)
@@ -255,16 +253,31 @@ const TradeAdd = () => {
     };
 
     const calculatePnl = () => {
-        if (entry && exit && side && size) {
+        if (entry && exit && side && size && !isNaN(entry) && !isNaN(exit) && !isNaN(size)) {
             const result = side === 'long'
                 ? (exit - entry) * size
                 : (entry - exit) * size;
+            console.log(result)
+            console.log("result")
 
             setPnl(result.toFixed(2));
+        } else {
+            setPnl("0.00");
         }
+        console.log(pnl)
     }
 
     useEffect(() => {
+        if (selectedTrade) {
+            // Assuming selectedTrade object has properties: entry, exit, side, size
+            setEntry(selectedTrade.avgEntry);
+            setExit(selectedTrade.exit);
+            setSide(selectedTrade.side);
+            setSize(selectedTrade.size);
+
+            // After setting the state, calculate the pnl
+            calculatePnl();
+        }
         // TODO bug where after creating a new tag it doesnt automatically upload
         fetchTradeTagsFromDataBase();
     }, []);
@@ -336,14 +349,11 @@ const TradeAdd = () => {
                                                     label={field.label}
                                                     id={field.name}
                                                     autoComplete={field.name}
-                                                    defaultValue={
-                                                        selectedTrade && selectedTrade[field.name]
-                                                            ? selectedTrade[field.name]
-                                                            : ""
-                                                    }
                                                     onChange={field.onChange}
                                                     readOnly={field.readOnly}
-                                                    value={field.value}
+                                                    value={field.name === "pnl" ? pnl : (selectedTrade && selectedTrade[field.name]
+                                                        ? selectedTrade[field.name]
+                                                        : "")}
                                                     select={field.select}
                                                     menuItems={field.menuItems}
                                                 />
