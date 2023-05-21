@@ -224,14 +224,23 @@ const TradeAdd = () => {
         };
 
         console.log(tradeData);
-        await axios.post(
-            "/api/trade", tradeData, config
-        ).then((response) => {
-            console.log(response.data)
+        // TODO empty selected trade if navigate away form this page
+        try {
+            if (selectedTrade) {
+                // If selectedTrade exists, update it
+                await axios.put(
+                    `/api/trade/${selectedTrade._id}`, tradeData, config
+                );
+            } else {
+                // If selectedTrade doesn't exist, create a new trade
+                await axios.post(
+                    "/api/trade", tradeData, config
+                );
+            }
             navigate(`/dashboard/journal/${selectedJournal._id}`);
-        }, (error) => {
-            console.log(error.message)
-        })
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     const fetchTradeTagsFromDataBase = async () => {
