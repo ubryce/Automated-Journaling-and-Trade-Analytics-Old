@@ -24,8 +24,8 @@ import ThreadField from './TradeForm/ThreadField';
 const theme = createTheme();
 // TODO bug when tags is long
 // TODO trade tag edit bug
-// TODO fix trade tags
-// TODO fix edit trade
+// TODO fix edit trade tags
+// TODO fix edit trade textfields
 const TradeAdd = () => {
     const {selectedTrade, selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
@@ -261,8 +261,6 @@ const TradeAdd = () => {
             const result = side === 'long'
                 ? (exit - entry) * size
                 : (entry - exit) * size;
-            console.log(result)
-            console.log("result")
 
             setPnl(result.toFixed(2));
         } else {
