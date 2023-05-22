@@ -8,6 +8,7 @@ const CustomTextField = ({
                              label,
                              id,
                              autoComplete,
+                             defaultValue,
                              onChange,
                              readOnly,
                              value,
@@ -22,6 +23,7 @@ const CustomTextField = ({
             label={label}
             id={id}
             autoComplete={autoComplete}
+            defaultValue={defaultValue}
             onChange={onChange}
             value={value}
             InputProps={{ readOnly }}

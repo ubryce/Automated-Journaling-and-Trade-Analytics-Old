@@ -1,24 +1,28 @@
 ﻿import React, {useEffect} from 'react'
-import {useNavigate} from 'react-router-dom';
-import Grid from '@mui/material/Grid';
-import Switch from '@mui/material/Switch';
-import Paper from '@mui/material/Paper';
-import axios from 'axios';
-import {useStateContext} from '../contexts/ContextProvider';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+import {
+    Box,
+    Button,
+    Container,
+    CssBaseline,
+    Grid,
+    IconButton,
+    Paper,
+    Switch,
+    TextField,
+    ThemeProvider,
+    Tooltip,
+    Typography
+} from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
-import Button from '@mui/material/Button';
-import IconButton from "@mui/material/IconButton";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import Tooltip from "@mui/material/Tooltip";
-import RatingTextField from './TradeForm/RatingTextField';
+
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import { useStateContext } from '../contexts/ContextProvider';
 import CustomTextField from './TradeForm/CustomTextField';
+import RatingTextField from './TradeForm/RatingTextField';
 import ThreadField from './TradeForm/ThreadField';
 
 const theme = createTheme();
@@ -46,30 +50,31 @@ const TradeAdd = () => {
     };
 
     const textFields = [
-        {name: "exchange", label: "Exchange", required: true},
+        {name: "exchange", label: "Exchange", required: true, readOnly: false},
         {
             name: "side",
             label: "Side",
             required: true,
             select: true,
+            readOnly: false,
             menuItems: [
                 {value: "long", label: "Long"},
                 {value: "short", label: "Short"},
             ],
             onChange: (e) => setSide(e.target.value),
         },
-        {name: "symbol", label: "Symbol", required: true},
-        {name: "avgEntry", label: "Entry", required: true, onChange: (e) => setEntry(e.target.value)},
-        {name: "stop", label: "Stop"},
-        {name: "target", label: "Target"},
-        {name: "exit", label: "Exit", onChange: (e) => setExit(e.target.value)},
-        {name: "size", label: "Size", required: true, onChange: (e) => setSize(e.target.value)},
-        {name: "sizeFiat", label: "Size Fiat"},
+        {name: "symbol", label: "Symbol", required: true, readOnly: false},
+        {name: "avgEntry", label: "Entry", required: true, onChange: (e) => setEntry(e.target.value), readOnly: false},
+        {name: "stop", label: "Stop", readOnly: false},
+        {name: "target", label: "Target", readOnly: false},
+        {name: "exit", label: "Exit", onChange: (e) => setExit(e.target.value), readOnly: false},
+        {name: "size", label: "Size", required: true, onChange: (e) => setSize(e.target.value), readOnly: false},
+        {name: "sizeFiat", label: "Size Fiat", readOnly: false},
         {name: "pnl", label: "PnL", readOnly: true, value: pnl},
-        {name: "walletBalance", label: "Wallet Balance"},
-        {name: "accRisk", label: "Account Risk"},
-        {name: "plannedRisk", label: "Planned Risk", required: false},
-        {name: "finalRisk", label: "Final Risk", required: false},
+        {name: "walletBalance", label: "Wallet Balance", readOnly: false},
+        {name: "accRisk", label: "Account Risk", readOnly: false},
+        {name: "plannedRisk", label: "Planned Risk", required: false, readOnly: false},
+        {name: "finalRisk", label: "Final Risk", required: false, readOnly: false},
     ];
 
     const ratingTypes = [
@@ -349,11 +354,14 @@ const TradeAdd = () => {
                                                     label={field.label}
                                                     id={field.name}
                                                     autoComplete={field.name}
+                                                    defaultValue={
+                                                        selectedTrade && selectedTrade[field.name]
+                                                            ? selectedTrade[field.name]
+                                                            : ""
+                                                    }
                                                     onChange={field.onChange}
                                                     readOnly={field.readOnly}
-                                                    value={field.name === "pnl" ? pnl : (selectedTrade && selectedTrade[field.name]
-                                                        ? selectedTrade[field.name]
-                                                        : "")}
+                                                    value={field.value}
                                                     select={field.select}
                                                     menuItems={field.menuItems}
                                                 />
