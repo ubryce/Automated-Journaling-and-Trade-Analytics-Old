@@ -85,6 +85,12 @@ const TradeAdd = () => {
         {name: "exitRating", label: "Exit Rating"},
     ];
 
+    const formatDate = (date) => {
+        let formattedDate = new Date(date).toISOString();
+        formattedDate = formattedDate.slice(0,16);
+        return formattedDate;
+    }
+
     const handleRemoveThread = (id) => {
         setThreads(threads.filter(thread => thread.id !== id));
     };
@@ -271,7 +277,6 @@ const TradeAdd = () => {
         } else {
             setPnl("0.00");
         }
-        console.log(pnl)
     }
 
     useEffect(() => {
@@ -329,7 +334,7 @@ const TradeAdd = () => {
                                                     InputLabelProps={{
                                                         shrink: true,
                                                     }}
-                                                    defaultValue={selectedTrade && selectedTrade.openDate ? selectedTrade.openDate : ""}
+                                                    defaultValue={selectedTrade && selectedTrade.openDate ? formatDate(selectedTrade.openDate) : ""}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -343,7 +348,7 @@ const TradeAdd = () => {
                                                     InputLabelProps={{
                                                         shrink: true,
                                                     }}
-                                                    defaultValue={selectedTrade && selectedTrade.closeDate ? selectedTrade.closeDate : ""}
+                                                    defaultValue={selectedTrade && selectedTrade.closeDate ? formatDate(selectedTrade.closeDate) : ""}
                                                 />
                                             </Grid>
                                             {textFields.map((field) => (
