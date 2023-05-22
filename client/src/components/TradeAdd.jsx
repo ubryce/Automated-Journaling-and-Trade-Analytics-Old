@@ -45,6 +45,9 @@ const TradeAdd = () => {
     const [size, setSize] = React.useState();
     const [pnl, setPnl] = React.useState();
 
+    const [openDate, setOpenDate] = React.useState();
+    const [closeDate, setCloseDate] = React.useState();
+
     const handleSwitchChange = (event) => {
         setIsOpen(event.target.checked);
     };
@@ -205,8 +208,8 @@ const TradeAdd = () => {
 
         const tradeData = {
             journalId: selectedJournal._id,
-            openDate: new Date(data.get("openDate")),
-            closeDate: new Date(data.get("closeDate")),
+            openDate: openDate,
+            closeDate: closeDate,
             side: data.get("side"),
             exchange: data.get("exchange"),
             symbol: data.get("symbol"),
@@ -335,6 +338,7 @@ const TradeAdd = () => {
                                                         shrink: true,
                                                     }}
                                                     defaultValue={selectedTrade && selectedTrade.openDate ? formatDate(selectedTrade.openDate) : ""}
+                                                    onChange={(event) => setOpenDate(new Date(event.target.value))}
                                                 />
                                             </Grid>
                                             <Grid item xs={12}>
@@ -349,6 +353,7 @@ const TradeAdd = () => {
                                                         shrink: true,
                                                     }}
                                                     defaultValue={selectedTrade && selectedTrade.closeDate ? formatDate(selectedTrade.closeDate) : ""}
+                                                    onChange={(event) => setCloseDate(new Date(event.target.value))}
                                                 />
                                             </Grid>
                                             {textFields.map((field) => (
