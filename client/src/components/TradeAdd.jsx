@@ -111,7 +111,6 @@ const TradeAdd = () => {
     };
 
     const handleAddThread = () => {
-        // Check if the last thread in the array has content or picture
         if (threads.length > 0) {
             const lastThread = threads[threads.length - 1];
             if (lastThread.content === '' && lastThread.picture === '') {
@@ -121,7 +120,7 @@ const TradeAdd = () => {
         }
 
         const newThread = {
-            id: new Date().getTime(), // This will create a new timestamp which is unique for each thread
+            id: new Date().getTime(),
             content: '',
             picture: ''
         };
@@ -148,7 +147,6 @@ const TradeAdd = () => {
             }
             return tag;
         });
-        console.log(newTags)
         if (tagType === 'setup') {
             setSelectedSetupTags(newTags)
         } else {
@@ -193,7 +191,6 @@ const TradeAdd = () => {
                 }
             });
         }
-        console.log(allTagsToSend)
 
         const tradeData = {
             journalId: selectedJournal._id,
@@ -227,12 +224,10 @@ const TradeAdd = () => {
         // TODO empty selected trade if navigate away form this page
         try {
             if (selectedTrade) {
-                // If selectedTrade exists, update it
                 await axios.put(
                     `/api/trade/${selectedTrade._id}`, tradeData, config
                 );
             } else {
-                // If selectedTrade doesn't exist, create a new trade
                 await axios.post(
                     "/api/trade", tradeData, config
                 );
@@ -278,13 +273,11 @@ const TradeAdd = () => {
 
     useEffect(() => {
         if (selectedTrade) {
-            // Assuming selectedTrade object has properties: entry, exit, side, size
             setEntry(selectedTrade.avgEntry);
             setExit(selectedTrade.exit);
             setSide(selectedTrade.side);
             setSize(selectedTrade.size);
 
-            // After setting the state, calculate the pnl
             calculatePnl();
         }
         // TODO bug where after creating a new tag it doesnt automatically upload
