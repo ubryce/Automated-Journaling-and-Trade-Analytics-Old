@@ -27,9 +27,8 @@ import ThreadField from './TradeForm/ThreadField';
 
 const theme = createTheme();
 // TODO bug when tags is long
-// TODO trade tag edit bug
-// TODO fix edit trade tags
-// TODO fix edit trade textfields
+// TODO fix edit trade add thread doesnt work
+// TODO fix edit trade not displaying tags
 const TradeAdd = () => {
     const {selectedTrade, selectedJournal, user, tags, setTags} = useStateContext();
     const navigate = useNavigate();
@@ -265,6 +264,7 @@ const TradeAdd = () => {
             setInitSetupTags(tags.filter((tag) => tag.tagType === 'setup'))
             setInitMistakeTags(tags.filter((tag) => tag.tagType === 'mistake'))
             setTags(response.data)
+            console.log(response.data)
         }, (error) => {
             console.log(error.message)
         })
