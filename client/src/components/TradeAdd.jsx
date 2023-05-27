@@ -26,7 +26,6 @@ import RatingTextField from './TradeForm/RatingTextField';
 import ThreadField from './TradeForm/ThreadField';
 
 const theme = createTheme();
-// TODO bug when tags is long
 // TODO fix edit trade add thread doesnt work
 // TODO fix edit trade not displaying tags
 const TradeAdd = () => {
