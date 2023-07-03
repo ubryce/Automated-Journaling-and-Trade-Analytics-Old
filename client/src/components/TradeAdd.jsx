@@ -17,7 +17,6 @@ import { createTheme } from '@mui/material/styles';
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
-
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import { useStateContext } from '../contexts/ContextProvider';
@@ -42,7 +41,6 @@ const TradeAdd = () => {
     const [side, setSide] = React.useState('');
     const [size, setSize] = React.useState();
     const [pnl, setPnl] = React.useState();
-
     const [openDate, setOpenDate] = React.useState();
     const [closeDate, setCloseDate] = React.useState();
 
